@@ -30,10 +30,10 @@
   </tr>
   <tr>
       <td valign="top"><h2 align="center">Eric Saldivar</h2></td>
-      <td valign="top"><h2 align="center">Charles Malave</h2></td>
+      <td valign="top"><h2 align="center">Sergey Zeygerman</h2></td>
       <td valign="top"><h2 align="center">Cameron Walls</h2></td>
-      <td valign="top"><h2 align="center">Miklos Kertesz </h2></td>
-      <td valign="top"><h2 align="center">Miklos Kertesz </h2></td>
+      <td valign="top"><h2 align="center">Adam Blackwell</h2></td>
+      <td valign="top"><h2 align="center">Randy Diebold </h2></td>
   </tr>
    <tr>
       <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="ericGitHub" width="50" height="50"/></a></td>
