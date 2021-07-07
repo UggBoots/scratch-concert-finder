@@ -36,11 +36,11 @@
       <td valign="top"><h2 align="center">Randy Diebold </h2></td>
   </tr>
    <tr>
-      <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="ericGitHub" width="50" height="50"/></a></td>
-      <td align="center"><a href="https://github.com/Sergey01" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="sergeyGitHub" width="50" height="50"/></a></td>
-      <td align="center"><a href="https://github.com/cwalls45" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="cameronGitHub" width="50" height="50"/></a></td>
-      <td align="center"><a href="https://github.com/mikloska" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="miklosGitHub" width="50" height="50"/></a></td>
-       <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="ericGitHub" width="50" height="50"/></a></td>
+      <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="githubIcon1.png" alt="ericGitHub" width="50" height="50"/></a></td>
+      <td align="center"><a href="https://github.com/Sergey01" target="_blank" align="center"> <img src="githubIcon1.png" alt="sergeyGitHub" width="50" height="50"/></a></td>
+      <td align="center"><a href="https://github.com/cwalls45" target="_blank" align="center"> <img src="githubIcon1.png" alt="cameronGitHub" width="50" height="50"/></a></td>
+      <td align="center"><a href="https://github.com/mikloska" target="_blank" align="center"> <img src="githubIcon1.png" alt="miklosGitHub" width="50" height="50"/></a></td>
+       <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="githubIcon1.png" alt="ericGitHub" width="50" height="50"/></a></td>
   </tr>
 </table>
 <h2 href="#License" >License</h2>
