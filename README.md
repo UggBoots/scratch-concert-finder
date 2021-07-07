@@ -26,11 +26,13 @@
     <td valign="top"> <img src="./docs/charlie git.png" width="250"/></td>
     <td valign="top"> <img src="./docs/camerongit.jpeg" width="250"/></td>
     <td valign="top"> <img src="./docs/miklosgit.jpeg" width="250"/></td>
+    <td valign="top"> <img src="./docs/miklosgit.jpeg" width="250"/></td>
   </tr>
   <tr>
       <td valign="top"><h2 align="center">Eric Saldivar</h2></td>
       <td valign="top"><h2 align="center">Charles Malave</h2></td>
       <td valign="top"><h2 align="center">Cameron Walls</h2></td>
+      <td valign="top"><h2 align="center">Miklos Kertesz </h2></td>
       <td valign="top"><h2 align="center">Miklos Kertesz </h2></td>
   </tr>
    <tr>
@@ -38,6 +40,7 @@
       <td align="center"><a href="https://github.com/cmalave13" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="charlieGitHub" width="50" height="50"/></a></td>
       <td align="center"><a href="https://github.com/cwalls45" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="cameronGitHub" width="50" height="50"/></a></td>
       <td align="center"><a href="https://github.com/mikloska" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="miklosGitHub" width="50" height="50"/></a></td>
+       <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="ericGitHub" width="50" height="50"/></a></td>
   </tr>
 </table>
 <h2 href="#License" >License</h2>
