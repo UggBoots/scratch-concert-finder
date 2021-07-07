@@ -22,9 +22,9 @@
 
 <table align="center">
   <tr>
-    <td valign="top"> <img src="./docs/eric git.jpeg" width="250"/></td>
+    <td valign="top"> <img src="eric git.jpeg" width="250"/></td>
     <td valign="top"> <img src="./docs/charlie git.png" width="250"/></td>
-    <td valign="top"> <img src="./docs/camerongit.jpeg" width="250"/></td>
+    <td valign="top"> <img src="camerongit.jpeg" width="250"/></td>
     <td valign="top"> <img src="./docs/miklosgit.jpeg" width="250"/></td>
     <td valign="top"> <img src="./docs/miklosgit.jpeg" width="250"/></td>
   </tr>
