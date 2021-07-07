@@ -39,7 +39,7 @@
       <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="githubIcon1.png" alt="ericGitHub" width="50" height="50"/></a></td>
       <td align="center"><a href="https://github.com/Sergey01" target="_blank" align="center"> <img src="githubIcon1.png" alt="sergeyGitHub" width="50" height="50"/></a></td>
       <td align="center"><a href="https://github.com/cwalls45" target="_blank" align="center"> <img src="githubIcon1.png" alt="cameronGitHub" width="50" height="50"/></a></td>
-      <td align="center"><a href="https://github.com/mikloska" target="_blank" align="center"> <img src="githubIcon1.png" alt="miklosGitHub" width="50" height="50"/></a></td>
+      <td align="center"><a href="https://github.com/atb2119" target="_blank" align="center"> <img src="githubIcon1.png" alt="miklosGitHub" width="50" height="50"/></a></td>
        <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="githubIcon1.png" alt="ericGitHub" width="50" height="50"/></a></td>
   </tr>
 </table>
