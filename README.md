@@ -20,7 +20,7 @@
 
 <h2 href="#Contributors" >Contributors</h2>
 
-<table >
+<table align="center">
   <tr>
     <td valign="top"> <img src="./docs/eric git.jpeg" width="250"/></td>
     <td valign="top"> <img src="./docs/charlie git.png" width="250"/></td>
