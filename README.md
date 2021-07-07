@@ -37,7 +37,7 @@
   </tr>
    <tr>
       <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="ericGitHub" width="50" height="50"/></a></td>
-      <td align="center"><a href="https://github.com/cmalave13" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="charlieGitHub" width="50" height="50"/></a></td>
+      <td align="center"><a href="https://github.com/Sergey01" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="sergeyGitHub" width="50" height="50"/></a></td>
       <td align="center"><a href="https://github.com/cwalls45" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="cameronGitHub" width="50" height="50"/></a></td>
       <td align="center"><a href="https://github.com/mikloska" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="miklosGitHub" width="50" height="50"/></a></td>
        <td align="center"><a href="https://github.com/esaldivar" target="_blank" align="center"> <img src="./docs/githubIcon.png" alt="ericGitHub" width="50" height="50"/></a></td>
