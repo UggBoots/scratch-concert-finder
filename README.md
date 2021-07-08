@@ -19,7 +19,7 @@
 * [License]()
 
 <h2 href="#Wireframe" >Wireframe</h2>
-<img src="./docs/ntheloop.png" width="800"/>
+<img src="./docs/ntheloopwireframe.png" width="800"/>
  
 <h2 href="#Contributors" >Contributors</h2>
 
