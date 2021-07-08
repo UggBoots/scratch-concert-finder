@@ -13,7 +13,6 @@
 * [FolderStructure]()
 * [Wireframe]()
 * [Database Structure and Overview]()
-* [Google Maps API Usage Information]()
 * [Collaboration Approach: Scrum]()
 * [Contributors]()
 * [License]()
