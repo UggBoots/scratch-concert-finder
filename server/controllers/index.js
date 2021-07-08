@@ -111,7 +111,6 @@ const sendSpotifyOAuthToken = async (req, res, next) => {
 };
 
 module.exports = {
-  createUser,
   handleToken,
   sendPlaylist,
   sendPotentialLocations,

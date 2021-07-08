@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { user, User } = require('../db/index');
+const { User } = require('../db/index');
 
 const createUser = async (req, res, next) => {
     const { name, email, password } = req.query;
