@@ -14,7 +14,7 @@ const Profile = () => {
   }, []);
 
   const handleFetchUser = async () => {
-    setUser(await FetchUserDetails({ id: '60d7870b938dce51e194dc4c' }));
+    setUser(await FetchUserDetails({ id: '60e64e5b841c21fce419eb0b' }));
     setLoading(false);
   };
 

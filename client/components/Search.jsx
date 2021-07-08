@@ -19,17 +19,18 @@ import Player from './Player';
 import SearchResults from './SearchResults';
 import Footer from './Footer'
 import style from './Map.css'
+
 const Search = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [playlist, setPlaylist] = useState([]);
   const [spotifyToken, setSpotifyToken] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    handleFetchSpotifyAccessToken();
-  }, []);
+  // useEffect(() => {
+  //   handleFetchSpotifyAccessToken();
+  // }, []);
 
   const handleFetchSpotifyAccessToken = async () => {
     const code = extractQueryParams('code');
@@ -55,51 +56,51 @@ const Search = () => {
       <Map />
       <div className='box overlay'>
         <div className='title'>In The Loop ∞
-        <InfoOutlineIcon 
-        onClick={onOpen} 
-        mt={2} 
-        ml={5} 
-        mr={5}
-        mb={2} 
-        cursor="pointer" 
-        w={5} 
-        h={5}
-        />
+          <InfoOutlineIcon
+            onClick={onOpen}
+            mt={2}
+            ml={5}
+            mr={5}
+            mb={2}
+            cursor="pointer"
+            w={5}
+            h={5}
+          />
         </div>
         <div className="searchbar">
-        <Input
-          mt={2}
-          ml={10}
-          mr={7}
-          bg="white"
-          placeholder="Enter your Zip Code to hear artists playing near you"
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleSearchForLocation();
-            }
-          }}
-        />
+          <Input
+            mt={2}
+            ml={10}
+            mr={7}
+            bg="white"
+            placeholder="Enter your Zip Code to hear artists playing near you"
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSearchForLocation();
+              }
+            }}
+          />
         </div>
+      </div>
+
+      <Drawer placement="right" onClose={onClose} isOpen={isOpen} w={'25%'}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader borderBottomWidth="1px">Your Profile</DrawerHeader>
+          <DrawerBody>
+            <Profile />
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+      <div className="placesPanel">
+        <div className="places">Search for concerts and events near you!
         </div>
 
-        <Drawer placement="right" onClose={onClose} isOpen={isOpen} w={'25%'}>
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerHeader borderBottomWidth="1px">Your Profile</DrawerHeader>
-            <DrawerBody>
-              <Profile />
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
-        <div className="placesPanel">
-          <div className="places">Search for concerts and events near you!
-          </div>
-          
-      {searchResults.length > 0 && playlist.length === 0 && (
-        <SearchResults searchResults={searchResults} handlePlaylist={handlePlaylist} className="place-item"/>
-      )}
-      {playlist.length > 0 && <Player spotifyToken={spotifyToken} playlist={playlist} />}
+        {searchResults.length > 0 && playlist.length === 0 && (
+          <SearchResults searchResults={searchResults} handlePlaylist={handlePlaylist} className="place-item" />
+        )}
+        {playlist.length > 0 && <Player spotifyToken={spotifyToken} playlist={playlist} />}
       </div>
       <Footer />
     </div>

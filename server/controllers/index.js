@@ -5,19 +5,19 @@ const spotifyAccessToken = require('../services/spotifyAccessToken');
 const spotifyAccessTokenOAuth = require('../services/spotifyAccessTokenOAuth');
 const { Token, User } = require('../db/index');
 
-const createUser = async (req, res, next) => {
-  const { name, email, password } = req.query;
-  try {
-    const newUser = await new User({ name, email, password });
-    newUser.save();
-    res.locals.id = newUser._doc._id;
-    res.status(200).json(newUser);
-    next();
-  } catch (e) {
-    console.log('createUser error: ', e.message);
-    res.sendStatus(500) && next(e);
-  }
-};
+// const createUser = async (req, res, next) => {
+//   const { name, email, password } = req.query;
+//   try {
+//     const newUser = await new User({ name, email, password });
+//     newUser.save();
+//     res.locals.id = newUser._doc._id;
+//     res.status(200).json(newUser);
+//     next();
+//   } catch (e) {
+//     console.log('createUser error: ', e.message);
+//     res.sendStatus(500) && next(e);
+//   }
+// };
 
 const handleToken = async (req, res, next) => {
   let { tokenId } = req.query;
