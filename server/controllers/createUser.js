@@ -1,13 +1,17 @@
 const bcrypt = require('bcrypt');
 const { User } = require('../db/index');
 
-const createUser = async (req, res, next) => {
-    const { name, email, password } = req.query;
+const saltRounds = 10;
+
+const createUser = async (req, res) => {
     try {
-        const salt = await genSalt();
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const newUser = await new User({name, email, hashedPassword});
-        newUser.save();
+        const { name, email, password } = req.query;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const newUser = await User.create({
+            'name': name, 
+            'email':email, 
+            'password':hashedPassword
+        });
         return res.status(200).send('You successfully created a user')
     } catch(err) {
         console.log('createUser error', err);
