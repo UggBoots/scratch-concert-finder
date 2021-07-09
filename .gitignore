@@ -2,6 +2,4 @@ node_modules
 build
 .DS_Store
 .env
-package.json
-package-lock.json
 
