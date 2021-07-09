@@ -6,7 +6,7 @@ import {
   Container 
 } from '@material-ui/core';
 
-const Search = () => {
+const Search = (props) => {
 
   return (
   <Container className = 'SearchOverlay'>
@@ -19,6 +19,14 @@ const Search = () => {
       name="search"
       autoComplete="Search for an area..."
       autoFocus
+      color="primary"
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          console.log('hello there');
+          //props.testSearchResultsDisplay();
+          props.handleSearchForLocation();
+        }
+      }}
     />
   </Container>
   )

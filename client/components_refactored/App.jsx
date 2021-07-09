@@ -1,10 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core';
+import { pink, indigo } from '@material-ui/core/colors';
 import MainContainer from './MainContainer'
 
 
-const theme = createTheme({});
+const theme = createTheme({
+  palette:{
+    primary: pink,
+    secondary: indigo
+  }
+});
 
 const App = () => (
   <ThemeProvider theme={theme}>

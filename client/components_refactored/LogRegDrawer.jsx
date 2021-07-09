@@ -14,7 +14,7 @@ function LogRegDrawer(props) {
           <ListItemText primary={'Log In'} />
         </ListItem>
         <Divider />
-        <ListItem button component="a" >
+        <ListItem button component="a" onClick={()=>props.showRegister()}>
           <ListItemText primary={'Sign Up'} />
         </ListItem>
       </List>

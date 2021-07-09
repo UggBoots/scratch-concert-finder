@@ -35,7 +35,7 @@ const Login = React.forwardRef((props, ref) => {
   return (
     <div ref={ref} className={classes.paper}>
       <Typography component="h1" variant="h5">
-            Sign in
+            Log In
           </Typography>
           <form>
             <TextField
@@ -71,7 +71,7 @@ const Login = React.forwardRef((props, ref) => {
               color="primary"
               // className={classes.submit}
             >
-              Sign In
+              Log In
             </Button>
             <Grid container>
               <Grid item xs>
