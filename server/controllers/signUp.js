@@ -1,22 +1,24 @@
 const bcrypt = require('bcrypt');
 const { User } = require('../db/index');
 
+// signup middleware 
+
 const saltRounds = 10;
 
-const createUser = async (req, res) => {
+const signUp = async (req, res, next) => {
     try {
         const { name, email, password } = req.query;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         const newUser = await User.create({
             'name': name, 
-            'email':email, 
-            'password':hashedPassword
+            'email': email, 
+            'password': hashedPassword
         });
-        return res.status(200).send('You successfully created a user')
+        return next();
     } catch(err) {
         console.log('createUser error', err);
-        return res.status(500).send('Failed to create user');
+        return res.status(500).json({message: 'Failed to create user'});
     }
 };
 
-module.exports = createUser;
+module.exports = signUp;
