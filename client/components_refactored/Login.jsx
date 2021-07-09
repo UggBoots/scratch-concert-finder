@@ -9,6 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+/*
+TODO:
+-Make these functional (grab data and send to BE)
+-Rig up the link to the signup route
+*/
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
