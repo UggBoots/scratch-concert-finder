@@ -4,7 +4,7 @@
   "description": "A project to find live music nearby &amp; choose shows by ear.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack serve --open\"",
     "build": "webpack --node-env production",
     "start": "NODE_ENV=production node server/server.js"
