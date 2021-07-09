@@ -14,7 +14,7 @@ const signUp = async (req, res, next) => {
             'email': email, 
             'password': hashedPassword
         });
-        return next();
+        return nnext();
     } catch(err) {
         console.log('createUser error', err);
         return res.status(500).json({message: 'Failed to create user'});

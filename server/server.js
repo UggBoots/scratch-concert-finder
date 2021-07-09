@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const config = require('./config');
 const routes = require('./routes');
+const session = require('express-session');
+const { sessionSecret } = require('./config');
 
 const { port } = config;
 
@@ -18,6 +20,16 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(session({
+  key: 'userId',
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 900000
+  }
+}))
 
 app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));
 

@@ -9,8 +9,12 @@ const verifyUser =  async (req, res, next) => {
         const { email, password } = req.query;
         const findUserInDB = await User.findOne({email: email});
         if (!findUserInDB) return res.status(400).json({message: 'User does not exsist'});
-        if (await bcrypt.compare(password, findUserInDB.password )) return next();
-        else return res.status(400).json({message: 'Incorrect email/password combination'});
+        const validatePassword = await bcrypt.compare(password, findUserInDB.password);
+        if (validatePassword) {
+            req.session.user = validatePassword;
+            console.log(req.session.user);
+            return next();
+        } else return res.status(400).json({message: 'Incorrect email/password combination'});
     } catch (err) {
         return res.status(500).json({message: 'Incorrect email/password combination'})
     }
