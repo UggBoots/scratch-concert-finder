@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -32,12 +32,27 @@ const useStyles = makeStyles((theme) => ({
 const Login = React.forwardRef((props, ref) => {
   const classes = useStyles();
 
+  //state to store input field values
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  //function to handle login request to BE
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('/api/signin', {
+      email,
+      password
+    })
+    .then((response) => console.log(response))
+    .catch((err) => console.log(err))
+  };
+
   return (
     <div ref={ref} className={classes.paper}>
       <Typography component="h1" variant="h5">
             Log In
           </Typography>
-          <form>
+          <form onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -48,6 +63,9 @@ const Login = React.forwardRef((props, ref) => {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <TextField
               variant="outlined"
@@ -59,6 +77,9 @@ const Login = React.forwardRef((props, ref) => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

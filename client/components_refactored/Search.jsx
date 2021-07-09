@@ -23,7 +23,6 @@ const Search = (props) => {
       onKeyDown={(e) => {
         if (e.key === 'Enter') {
           console.log('hello there');
-          //props.testSearchResultsDisplay();
           props.handleSearchForLocation();
         }
       }}

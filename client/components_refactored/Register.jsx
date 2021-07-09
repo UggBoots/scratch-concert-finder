@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,6 +8,7 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 /*
 TODO:
@@ -29,15 +30,48 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 const Register = React.forwardRef((props, ref) => {
   const classes = useStyles();
+
+  //state to store input field values
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  //submit fxn to make http call to BE
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('/api/signup', {
+      name,
+      email,
+      password
+    })
+    .then((response) => console.log(response))
+    .catch((err) => console.log(err))
+  };
 
   return (
     <div ref={ref} className={classes.paper}>
       <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <form>
+          <form onSubmit={handleSubmit}>
+          <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="name"
+              name="name"
+              autoComplete="Name"
+              autoFocus
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
             <TextField
               variant="outlined"
               margin="normal"
@@ -48,6 +82,9 @@ const Register = React.forwardRef((props, ref) => {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <TextField
               variant="outlined"
@@ -59,6 +96,9 @@ const Register = React.forwardRef((props, ref) => {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

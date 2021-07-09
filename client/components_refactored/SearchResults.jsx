@@ -24,20 +24,6 @@ Location Name
 Location Address
 */
 
-//temp function to extract data from dummy obj - refactor to use w/ real data
-const createData = (id, artist, art, date, venue, address) => {
-  return {id, artist, art, date, venue, address}
-}
-//putting data into row of objs to render it to table
-const rows = [
-  createData(0, 'Rage Against The Machine', 'temp', '20 July, 2021', 'Madison Square Garden', '4 Pennsylvania Plaza, New York, NY 10001'),
-  createData(1, 'Tyler, The Creator', 'temp', '22 July, 2021', 'Music Hall of Williamsburg', '66 N 6th St, Brooklyn, NY 11211'),
-  createData(2, 'James Brown', 'temp', '5 May, 2042', 'Madison Square Garden', '4 Pennsylvania Plaza, New York, NY 10001'),
-  createData(3, 'The Strokes', 'temp', '26 July, 2021', 'Terminal 5', '610 W 56th St, New York, NY 10019'),
-  createData(4, 'Weird Al Yankovic', 'temp', '1 August, 2021', 'Giants Stadium', '1 MetLife Stadium Dr, East Rutherford, NJ 07073')
-]
-
-
 const SearchResults = (props) => {
 
   return (

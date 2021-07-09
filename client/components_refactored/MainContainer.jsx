@@ -20,6 +20,7 @@ const MainContainer = () => {
   const [drawerOpen, showDrawer] = useState(false)
   const [signInOpen, showSignIn] = useState(false);
   const [registerOpen, showRegister] = useState(false);
+  const [profileOpen, showProfile] = useState(false);
   const [searchResultsOpen, showSearchResults] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
 
@@ -47,8 +48,17 @@ const MainContainer = () => {
         <LogRegDrawer 
           showSignIn={()=>showSignIn(true)}
           showRegister={()=>showRegister(true)}
+          showProfile={()=>{showProfile(true); showDrawer(false)}}
           />
       </Drawer>
+      <Drawer className='profileDrawer'
+        anchor={'right'}
+        open={profileOpen}
+        onClose={()=>showProfile(false)}
+        BackdropProps={{ invisible: true }}
+        >
+        <Profile/>
+      </Drawer> 
       <Drawer className='searchResultsDrawer'
         anchor={'bottom'}
         open={searchResultsOpen}

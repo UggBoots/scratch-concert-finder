@@ -17,6 +17,10 @@ function LogRegDrawer(props) {
         <ListItem button component="a" onClick={()=>props.showRegister()}>
           <ListItemText primary={'Sign Up'} />
         </ListItem>
+        <Divider />
+        <ListItem button component="a" onClick={()=>props.showProfile()}>
+          <ListItemText primary={'Test - show profile'} />
+        </ListItem>
       </List>
     </div>
   );
