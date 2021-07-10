@@ -1,0 +1,21 @@
+.SearchOverlay{
+  z-index: 1;
+  position: fixed;
+  width: 40%;
+  max-width: 40%;
+  height: 10%;
+  max-height: 20%;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: '10px';
+  top: 2%;
+  left: 15% 
+}
+
+.MenuButton{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  z-index: 1;
+  };
+
