@@ -4,8 +4,6 @@ const path = require('path');
 const config = require('./config');
 const routes = require('./routes');
 const session = require('express-session');
-const { sessionSecret, database } = require('./config');
-//const mongoStore = require('connect-mongo');
 const mongoStore = require('connect-mongodb-session')(session);
 
 const { port } = config;
@@ -28,12 +26,9 @@ app.use(session({
   secret: config.sessionSecret,
   resave: false,
   saveUninitialized: false,
-  // store: mongoStore.create({
-  //   client:clientPromise,
-  //   dbName: 'inTheLoop'
-  // }),
   store: new mongoStore({
     uri: 'mongodb+srv://PRTI3UggBoots:Codesmith3@cluster0.1qtmd.mongodb.net',
+    databaseName: 'inTheLoop',
     collection: 'sessions'
   }),
   cookie: {
