@@ -3,7 +3,6 @@ const controllers = require('../controllers');
 const signUp = require('../controllers/signUp');
 const verifyUser = require('../controllers/verifyUser');
 
-router.get('/playlist', controllers.sendPlaylist);
 router.get('/location-search', controllers.sendPotentialLocations);
 
 router.post('/signup', signUp, (req, res) => {
@@ -17,11 +16,6 @@ router.post('/signin', verifyUser, (req, res) => {
 })
 });
 
-router.post('/token', controllers.handleToken);
-// router.post('/login', controllers.verifyUser);
-router.post('/playlist', controllers.sendPlaylist);
 router.post('/location-search', controllers.sendPotentialLocations);
-router.get('/user/:id', controllers.sendUserDetails);
-router.post('/spotify-token', controllers.sendSpotifyOAuthToken);
 
 module.exports = router;
