@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('../config');
-const { database} = config;
+const { database } = config;
 
 mongoose
   .connect(database, {
@@ -31,5 +31,5 @@ const Token = mongoose.model('tokens', tokenSchema);
 
 module.exports = {
   User,
-  Token,
+  Token
 };

@@ -13,7 +13,7 @@ router.post('/signin', verifyUser, (req, res) => {
     return res.status(200).json({
         message:'You succesfully logged in!',
         session: req.session.user
-})
+    });
 });
 
 router.post('/location-search', controllers.sendPotentialLocations);

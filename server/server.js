@@ -25,13 +25,12 @@ app.use((req, res, next) => {
 
 app.use(session({
   key: 'userId',
-  secret: sessionSecret,
+  secret: config.sessionSecret,
   resave: false,
   saveUninitialized: false,
   // store: mongoStore.create({
-  //   mongoUrl: database,
-  //   autoRemove: 'native',
-  //   ttl: 60 * 15
+  //   client:clientPromise,
+  //   dbName: 'inTheLoop'
   // }),
   store: new mongoStore({
     uri: 'mongodb+srv://PRTI3UggBoots:Codesmith3@cluster0.1qtmd.mongodb.net',
