@@ -43,84 +43,87 @@ const Register = React.forwardRef((props, ref) => {
   //submit fxn to make http call to BE
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(name, email, password)
     axios.post('/api/signup', {
-      name,
-      email,
-      password
+      params: {
+        name: name,
+        email: email,
+        password: password
+      }
     })
-    .then((response) => console.log(response))
-    .catch((err) => console.log(err))
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err))
   };
 
   return (
     <div ref={ref} className={classes.paper}>
       <Typography component="h1" variant="h5">
-            Register
-          </Typography>
-          <form onSubmit={handleSubmit}>
-          <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="name"
-              name="name"
-              autoComplete="Name"
-              autoFocus
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              // className={classes.submit}
-            >
-              Register
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Already have an account?  Click here to log in"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
+        Register
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="name"
+          label="name"
+          name="name"
+          autoComplete="Name"
+          autoFocus
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <FormControlLabel
+          control={<Checkbox value="remember" color="primary" />}
+          label="Remember me"
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+        // className={classes.submit}
+        >
+          Register
+        </Button>
+        <Grid container>
+          <Grid item>
+            <Link href="#" variant="body2">
+              {"Already have an account?  Click here to log in"}
+            </Link>
+          </Grid>
+        </Grid>
+      </form>
     </div>
   );
 });

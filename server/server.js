@@ -5,7 +5,7 @@ const config = require('./config');
 const routes = require('./routes');
 const session = require('express-session');
 const { sessionSecret, database } = require('./config');
-//const MongoStore = require('connect-mongo')(session);
+//const mongoStore = require('connect-mongo');
 const mongoStore = require('connect-mongodb-session')(session);
 
 const { port } = config;
@@ -28,13 +28,18 @@ app.use(session({
   secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
+  // store: mongoStore.create({
+  //   mongoUrl: database,
+  //   autoRemove: 'native',
+  //   ttl: 60 * 15
+  // }),
   store: new mongoStore({
     uri: 'mongodb+srv://PRTI3UggBoots:Codesmith3@cluster0.1qtmd.mongodb.net',
     collection: 'sessions'
-  })
-  // cookie: {
-  //   maxAge: 900000
-  // }
+  }),
+  cookie: {
+    maxAge: 900000
+  }
 }))
 
 app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));
