@@ -1,30 +1,36 @@
 const request = require('supertest');
 const server = 'http://localhost:3000';
-//unit testing
-//integration testing
-//end to end testing
 
 
+describe('Route integration', () => {
 
-//supertest --- testing for express 
-//react testing library -- good docs
+  describe('/', () => {
+    describe('GET', () => {
+      it('responds with 200 status and text/html content type', () => request(server)
+        .get('/')
+        .expect('Content-Type', /text\/html/)
+        .expect(200));
+    });
+  });
 
-// test('Check to see if test example works', async () => {
-// 	const userData = await axios.post('/api/signup', {})
-// 	expect(userData).toBe('Failed to create user');
-// });
+//   describe('/api/getFavorites', () => {
+//     describe('GET', () => {
+//       it('responds with 200 status and application/json content type', () => request(server)
+//         .get('/api/getFavorites')
+//         .expect('Content-Type', /application\/json/)
+//         .expect(200));
 
+//       it('stores from the db are in the body of the response', () => request(server)
+//         .get('/api/getFavorites')
+//         .set('Accept', 'application/json')
+//         .expect('Content-Type', /application\/json/)
+//         .expect(200)
+//         .then(response => {
+//           console.log(response.body)
+//           expect(response.body.favorites).toEqual([]);
+//         })
+//         .catch(err => err));
+//     });
+//   });
 
-
-// test('Check to see if test example works version 2',  () => {
-// 	const a = 1;
-// 	const b = 2;
-// 	expect(a + b).toBe(3);
-// });
-
-//check for a middleware
-
-//check outcome after middleware passes
-
-//mocking data --- make some fake data -- to anticipate response
-
+});
