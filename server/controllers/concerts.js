@@ -45,3 +45,6 @@ const getConcerts = (req, res, next) => {
   }
 }
 
+module.exports = {
+  getConcerts,
+};
