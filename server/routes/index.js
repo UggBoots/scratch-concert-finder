@@ -11,7 +11,10 @@ router.post('/signup', signUp, (req, res) => {
 });
 
 router.post('/signin', verifyUser, (req, res) => {
-    return res.status(200).json({message:'You succesfully logged in!'})
+    return res.status(200).json({
+        message:'You succesfully logged in!',
+        session: req.session.user
+})
 });
 
 router.post('/token', controllers.handleToken);
