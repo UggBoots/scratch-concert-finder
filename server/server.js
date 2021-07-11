@@ -31,10 +31,10 @@ app.use(session({
     databaseName: 'inTheLoop',
     collection: 'sessions',
     expires: 60 * 60 * 24
-  })
-  // cookie: {
-  //   maxAge: 900000
-  // }
+  }),
+  cookie: {
+    maxAge: 900000
+  }
 }))
 
 app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const controllers = require('../controllers');
 const signUp = require('../controllers/signUp');
 const verifyUser = require('../controllers/verifyUser');
+const signOut = require('../controllers/signOut');
 
 router.get('/location-search', controllers.sendPotentialLocations);
 
@@ -14,6 +15,10 @@ router.post('/signin', verifyUser, (req, res) => {
         message:'You succesfully logged in!',
         session: req.session.user
     });
+});
+
+router.post('/signout', signOut ,(req, res) => {
+    return res.redirect('/');
 });
 
 router.post('/location-search', controllers.sendPotentialLocations);
