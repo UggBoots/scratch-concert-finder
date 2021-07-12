@@ -23,7 +23,7 @@
  </p>
  <h2 href="#Scrum" >Collaboration Approach: Scrum</h2>
 <p align="center">
-<img src="./docs/scrum.png" width="800"/>
+<img src="./docs/Scrum.png" width="800"/>
  </p>
 <h2 href="#Contributors" >Contributors</h2>
 
