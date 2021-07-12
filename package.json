@@ -70,10 +70,16 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^27.0.6",
     "nodemon": "^2.0.7",
+    "regenerator-runtime": "^0.13.7",
     "source-map-loader": "^3.0.0",
     "style-loader": "^2.0.0",
     "supertest": "^6.1.3",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./__test__/setupTests.js"
+    ]
   }
 }
