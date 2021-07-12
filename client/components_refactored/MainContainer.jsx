@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Map from "./Map";
-import Map2 from "./Map2";
-import Search from "./Search";
-import MenuButton from "./MenuButton";
-import Profile from "./Profile";
-import LogRegDrawer from "./LogRegDrawer";
-import Login from "./Login";
-import Register from "./Register";
-import SearchResults from "./SearchResults";
-import { Grid, Box, Drawer, Modal } from "@material-ui/core";
+import React, { useState, useEffect } from 'react';
+import Map from './Map';
+import Map2 from './Map2';
+import Search from './Search';
+import MenuButton from './MenuButton';
+import Profile from './Profile';
+import LogRegDrawer from './LogRegDrawer';
+import Login from './Login';
+import Register from './Register';
+import SearchResults from './SearchResults';
+import { Grid, Box, Drawer, Modal } from '@material-ui/core';
 //importing dummy data
-import dummy from "./dummyData";
+import dummy from './dummyData';
 
 const MainContainer = () => {
   //hooks
@@ -40,7 +40,7 @@ const MainContainer = () => {
       />
       <Drawer
         className="logRegDrawer"
-        anchor={"left"}
+        anchor={'left'}
         open={drawerOpen}
         onClose={() => showDrawer(false)}
       >
@@ -55,7 +55,7 @@ const MainContainer = () => {
       </Drawer>
       <Drawer
         className="profileDrawer"
-        anchor={"right"}
+        anchor={'right'}
         open={profileOpen}
         onClose={() => showProfile(false)}
         BackdropProps={{ invisible: true }}
@@ -64,7 +64,7 @@ const MainContainer = () => {
       </Drawer>
       <Drawer
         className="searchResultsDrawer"
-        anchor={"bottom"}
+        anchor={'bottom'}
         open={searchResultsOpen}
         onClose={() => showSearchResults(false)}
         BackdropProps={{ invisible: true }}
