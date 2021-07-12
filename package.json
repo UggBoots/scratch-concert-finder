@@ -43,6 +43,8 @@
     "react-datepicker": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
+    "react-map-gl": "^6.1.16",
+    "react-map-gl-geocoder": "^2.1.7",
     "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",
     "react-spotify-web-playback": "^0.8.1",
