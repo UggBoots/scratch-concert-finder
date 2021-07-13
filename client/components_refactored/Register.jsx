@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * ************************************
+ * @module Register
+ * @description MaterialUI component (React) that when Register button is clicked this Modal pops up 
+ * ************************************
+ */
 
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';

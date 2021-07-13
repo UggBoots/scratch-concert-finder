@@ -1,3 +1,12 @@
+/**
+ * ************************************
+ * @module MainContainer
+ * @description React component houses @modules Map, Search, Profile, Drawers, Login, Register, and Search Results
+ * 
+ * ************************************
+ */
+
+
 import React, { useState, useEffect } from 'react';
 import Map from './Map';
 import Map2 from './Map2';

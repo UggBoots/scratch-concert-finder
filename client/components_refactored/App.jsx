@@ -1,3 +1,10 @@
+/**
+ * ************************************
+ * @module App
+ * @description React main component to render on index.html
+ * ************************************
+ */
+
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core';
