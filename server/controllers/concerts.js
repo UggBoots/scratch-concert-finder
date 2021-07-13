@@ -24,11 +24,11 @@ const getConcerts = async (req, res, next) => {
   res.locals.concerts = [];
 
   const {lng, lat, date} = req.body;
-  const radius = 5; // in miles (radius + 'mi')
-  // const limit = 50;
+  const radius = req.body.radius || 5; // in miles (radius + 'mi')
+  const limit = req.body.limit || 100;
   
   // const apiCallQuery = `https://api.predicthq.com/v1/events?category=concerts&location_around.origin=${lat},${lng}&location_around.scale=${radius}mi&limit=${limit}&start.gte=${date}&start.lte=${date}`;
-  const apiCallQuery = `https://api.predicthq.com/v1/events?category=concerts&within=${radius}mi@${lat},${lng}&start.gte=${date}&start.lte=${date}`
+  const apiCallQuery = `https://api.predicthq.com/v1/events?category=concerts&within=${radius}mi@${lat},${lng}&start.gte=${date}&start.lte=${date}&limit=${limit}`
 
   // console.log(apiCallQuery)
   
