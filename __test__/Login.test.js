@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import Login from '../client/components_refactored/Login'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import toJson from 'enzyme-to-json';
 
 configure({ adapter: new Adapter() });
 
