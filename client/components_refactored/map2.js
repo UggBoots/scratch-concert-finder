@@ -12,7 +12,7 @@ import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoicHRyaTN1Z2dib290cyIsImEiOiJja3F1MTJxOXYwMDJrMndwbTUzN2Job3dqIn0._pOvjJBfdKTbopkvRX0Bhg';
 
-const Map2 = () => {
+const Map2 = (props) => {
   const [viewport, setViewport] = useState({
     latitude: 37.7577,
     longitude: -122.4376,
@@ -60,6 +60,8 @@ const Map2 = () => {
     // console.log('Longitude: ', latitude);
     // console.log('Latitude: ', longitude);
     getConcerts(latitude, longitude);
+    //below renders the table - need to work on this.
+    props.handleSearchForLocation();
   };
 
   const handleViewportChange = useCallback((newViewport) => {
@@ -79,7 +81,7 @@ const Map2 = () => {
       <div
         style={{
           position: 'absolute',
-          top: 200,
+          top: 50,
           width: '100%',
           zIndex: 1,
           margin: 'auto',

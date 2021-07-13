@@ -11,8 +11,23 @@ import SearchResults from './SearchResults';
 import { Grid, Box, Drawer, Modal } from '@material-ui/core';
 //importing dummy data
 import dummy from './dummyData';
+import { makeStyles } from '@material-ui/core/styles';
+
+//styling
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+  },
+}));
 
 const MainContainer = () => {
+
+  const classes = useStyles();
+
   //hooks
   const [drawerOpen, showDrawer] = useState(false);
   const [signInOpen, showSignIn] = useState(false);
@@ -21,6 +36,7 @@ const MainContainer = () => {
   const [searchResultsOpen, showSearchResults] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [currUser, setUser] = useState({});
+  
 
   //functions
   //handleSearchForLocation - invoked on enter in search component, currently just a test to render the search results
@@ -58,15 +74,16 @@ const MainContainer = () => {
     setUser(results);
   }
 
-  
   return (
     <Box>
-      <Map2 />
+      <Map2 
+      handleSearchForLocation={() => handleSearchForLocation()}
+      />
       <MenuButton click={() => showDrawer(true)} />
-      <Search
+      {/* <Search
         testSearchResultsDisplay={() => testSearchResultsDisplay()}
         handleSearchForLocation={() => handleSearchForLocation()}
-      />
+      /> */}
       <Drawer
         className="logRegDrawer"
         anchor={'left'}
@@ -77,6 +94,7 @@ const MainContainer = () => {
           showSignIn={() => showSignIn(true)}
           showRegister={() => showRegister(true)}
           showProfile={() => {
+            handleGetUser();
             showProfile(true);
             showDrawer(false);
           }}
@@ -88,8 +106,11 @@ const MainContainer = () => {
         open={profileOpen}
         onClose={() => showProfile(false)}
         BackdropProps={{ invisible: true }}
+        classes={{paper : classes.paper}}
       >
-        <Profile />
+        <Profile 
+          currUser = {currUser}
+        />
       </Drawer>
       <Drawer
         className="searchResultsDrawer"
