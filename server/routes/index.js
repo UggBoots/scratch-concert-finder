@@ -6,6 +6,7 @@ const signOut = require('../controllers/signOut');
 const isAlreadyLoggedIn = require('../controllers/isAlreadyLoggedIn');
 const isAlreadySignedOut = require('../controllers/isAlreadySignedOut');
 const addFavorite = require('../controllers/favorites/addFavorite');
+const getFavorites = require('../controllers/favorites/getFavorites');
 
 router.get('/location-search', controllers.sendPotentialLocations);
 
@@ -26,6 +27,10 @@ router.post('/signout', isAlreadySignedOut, signOut ,(req, res) => {
 
 router.post('/addFavoriteToUser', addFavorite, (req, res) => {
     return res.status(200).json(res.locals.favorite);
+});
+
+router.get('/getFavorites', getFavorites, (req, res) => {
+    return res.status(200).json(res.locals.favorites);
 });
 
 router.post('/location-search', controllers.sendPotentialLocations);
