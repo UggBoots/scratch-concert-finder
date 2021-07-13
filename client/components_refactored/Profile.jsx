@@ -7,7 +7,6 @@ import {
 } from '@material-ui/core'
 
 const Profile = () => {
-  //state stuff goes here
 
   return (
     <Grid
