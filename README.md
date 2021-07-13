@@ -24,7 +24,7 @@
  <h2 href="#Testing" >Test Driven Development</h2>
 <p align="center">
 <img src="./docs/testdrivendev.png" width="800"/>
-  ![End to End Testing with Cypress]("./docs/Cypress_test_intheloop.gif")
+<img src="./docs/Cypress_test_intheloop.gif" width="800"/>
  </p>
  <h2 href="#Scrum" >Collaboration Approach: Scrum</h2>
 <p align="center">
