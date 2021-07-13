@@ -10,8 +10,6 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu';
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
 
-//note - currently cant figure out how to get the 'login/signup' text to display...
-
 
 const MenuButton = (props) => {
   return (
