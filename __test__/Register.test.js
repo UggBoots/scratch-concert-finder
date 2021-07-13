@@ -2,42 +2,43 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Typography from '@material-ui/core/Typography';
-import Login from '../client/components_refactored/Login'
+import Register from '../client/components_refactored/Register'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 configure({ adapter: new Adapter() });
 
-describe('Login React units tests', () => {
+describe('Register React units tests', () => {
   describe('components', () => {
     let wrapper;
-	const clickLogin = jest.fn();
+	const clickRegister = jest.fn();
 
     beforeAll(() => {
-      wrapper = shallow(<Login/>);
+      wrapper = shallow(<Register/>);
     });
-	it('Renders an h1 heading with the title of Log In', () => {
+	it('Renders an h1 heading with the title of Register', () => {
 		expect(wrapper.find(Typography)).toHaveLength(1);
-		expect(wrapper.find(Typography).text()).toEqual("Log In"); 
+		expect(wrapper.find(Typography).text()).toEqual("Register"); 
 	  });	
 
-	it('Renders both an email and password input field', () => {
-		expect(wrapper.find(TextField)).toHaveLength(2);
+	it('Renders a name, email,and password input field', () => {
+		expect(wrapper.find(TextField)).toHaveLength(3);
+		expect(wrapper.find('#email')).toHaveLength(1);
 		expect(wrapper.find('#email')).toHaveLength(1);
 		expect(wrapper.find('#password')).toHaveLength(1);
 	  });
 	
-    it('Renders a button with text of Log In', () => {
+    it('Renders a button with text of Register', () => {
 	  expect(wrapper.find(Button)).toHaveLength(1);
-	  expect(wrapper.find(Button).text()).toEqual("Log In"); 
+	  expect(wrapper.find(Button).text()).toEqual("Register"); 
 	  expect(wrapper.find(Button).props().type).toEqual("submit"); 
 	  expect(wrapper.find(Button).props('style').color).toBe('primary');
     });
 
-	it('Login button invokes a function on click', () => {
-		const wrapBtn = shallow(<Button onClick={clickLogin}/>)
+	it('Register button invokes a function on click', () => {
+		const wrapBtn = shallow(<Button onClick={clickRegister}/>)
 		expect(wrapBtn.simulate('click'));
-		expect(clickLogin.mock.calls.length).toBe(1)
+		expect(clickRegister.mock.calls.length).toBe(1)
 	  });
 
   });
