@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 app.use(session({
-  key: 'userId',
+  key: process.env.COOKIE_KEY,
   secret: config.sessionSecret,
   resave: true,
   saveUninitialized: false,

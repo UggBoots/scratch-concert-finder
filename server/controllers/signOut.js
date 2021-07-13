@@ -1,8 +1,8 @@
-const signOut = (req, res) => {
+const signOut = (req, res, next) => {
     req.session.destroy(error => {
         if (error) return console.log(error);//return res.redirect('/');
-        res.clearCookie('userid');
-        res.redirect('/');
+        res.clearCookie(process.env.COOKIE_KEY);
+        next();
     });
 }
 
