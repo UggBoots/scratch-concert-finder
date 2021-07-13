@@ -6,7 +6,7 @@ const { User } = require('../db/index');
 
 const verifyUser =  async (req, res, next) => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.body.params;
         const findUserInDB = await User.findOne({email: email});
         if (!findUserInDB) return res.status(400).json({message: 'User does not exist'});
         const validatePassword = await bcrypt.compare(password, findUserInDB.password);
