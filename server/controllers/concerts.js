@@ -10,7 +10,7 @@ const axios = require('axios');
 const pp = (stuff) => JSON.stringify(stuff, null, 2);
 
 const getConcerts = async (req, res, next) => {
-  console.log(`req.body = ${pp(req.body)}`)
+  // console.log(`req.body = ${pp(req.body)}`)
   // if (!(lng, lat, date in req.body)) {
     if (!('lng', 'lat', 'date' in req.body)) {
     next({

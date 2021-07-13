@@ -22,7 +22,7 @@ router.post('/location-search', controllers.sendPotentialLocations);
 router.post('/concerts', concerts, (req, res) => {
     // console.log(`res.locals.concerts length is ${res.locals.concerts.length}`)
     // console.log(`res.locals.concerts  ${res.locals.concerts}`)
-    res.status(200).json(res.locals.concerts);
+    res.status(200).json({resultsCount: res.locals.concerts.length, results: res.locals.concerts});
 });
 
 module.exports = router;
