@@ -68,6 +68,7 @@ const Login = React.forwardRef((props, ref) => {
           required
           fullWidth
           id="email"
+          className="logEmail"
           label="Email Address"
           name="email"
           autoComplete="email"
@@ -85,6 +86,7 @@ const Login = React.forwardRef((props, ref) => {
           label="Password"
           type="password"
           id="password"
+          className="logPW"
           autoComplete="current-password"
           onChange={(e) => {
             setPassword(e.target.value);
@@ -99,6 +101,7 @@ const Login = React.forwardRef((props, ref) => {
           fullWidth
           variant="contained"
           color="primary"
+          id="logClick"
         // className={classes.submit}
         >
           Log In

@@ -75,6 +75,7 @@ const Register = React.forwardRef((props, ref) => {
           id="name"
           label="name"
           name="name"
+          className="regName"
           autoComplete="Name"
           autoFocus
           onChange={(e) => {
@@ -90,6 +91,7 @@ const Register = React.forwardRef((props, ref) => {
           label="Email Address"
           name="email"
           autoComplete="email"
+          className="regEmail"
           autoFocus
           onChange={(e) => {
             setEmail(e.target.value);
@@ -104,6 +106,7 @@ const Register = React.forwardRef((props, ref) => {
           label="Password"
           type="password"
           id="password"
+          className="regPW"
           autoComplete="current-password"
           onChange={(e) => {
             setPassword(e.target.value);
@@ -118,6 +121,7 @@ const Register = React.forwardRef((props, ref) => {
           fullWidth
           variant="contained"
           color="primary"
+          id="regClick"
         // className={classes.submit}
         >
           Register
