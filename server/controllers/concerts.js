@@ -4,11 +4,15 @@ const axios = require('axios');
 // Grabs concert data from predictHQ and 
 
 //dependency injection
-const [lat, lng] = [40.730610, -73.935242];
-const date = '2021-08-01';
+// const [lat, lng] = [40.730610, -73.935242];
+// const date = '2021-08-01';
 
-const getConcerts = (req, res, next) => {
-  if (!(lng, lat, date in req.body)) {
+const pp = (stuff) => JSON.stringify(stuff, null, 2);
+
+const getConcerts = async (req, res, next) => {
+  console.log(`req.body = ${JSON.stringify(req.body, null, 2)}`)
+  // if (!(lng, lat, date in req.body)) {
+    if (!('lng', 'lat', 'date' in req.body)) {
     next({
       log: 'Malformed request received on getConcerts middleware function',
       status: 400,
@@ -16,19 +20,25 @@ const getConcerts = (req, res, next) => {
     })
   }
 
-  const concertsArray = [];
+  let concertsArray = [];
+  res.locals.concerts = [];
 
   const {lng, lat, date} = req.body;
   const radius = 5; // in miles (radius + 'mi')
   const limit = 50;
   
-  const api_call_query = `https://api.predicthq.com/v1/events?category=concerts&location_around.origin=${lat},${lng}&location_around.scale=${radius}mi&limit=${limit}&start.gte=${date}&start.lte=${date}`;
+  const apiCallQuery = `https://api.predicthq.com/v1/events?category=concerts&location_around.origin=${lat},${lng}&location_around.scale=${radius}mi&limit=${limit}&start.gte=${date}&start.lte=${date}`;
 
-  const concertQuery = async (url, resultsArr = concertsArray) => {
-    axios.get(url, headers : {
+  // console.log(apiCallQuery)
+  
+  const concertQuery = async function (url, resultsArr = concertsArray) {
+    
+    try {
+    const response = await axios.get(url, {headers: {
       'Authorization' : 'Bearer ' + process.env.PREDICT_HQ_TEMPORARY_TOKEN
-    })
-    .then(response => {
+    }});
+    
+      // console.log(`Received response.data keys: ${pp(Object.keys(response.data))}`)
       if (response.status !== 200) {
         return next({
           log: `getConcert middleware failed. External API call failure. Return status code is ${response.status} not 200.`,
@@ -36,15 +46,26 @@ const getConcerts = (req, res, next) => {
           message: `Backend functionality is currently down due to a failure in external dependencies. Please contact the site administrator.`
         })
       }
-      resultsArr.concat(response.results);
-      if (response.next) concertQuery(response.next, resultsArr);
-      res.locals.concerts = resultsArr;
-    })
-    .then(next())
-    .catch(err => console.log(err))
+      let results = response.data.results;
+
+      console.log(`Total results: ${results.data.}`)
+
+      resultsArr = resultsArr.concat(results);
+      // console.log(`length of resultsArr is ${resultsArr.length}`);
+      if (response.data.next) await concertQuery(response.data.next, resultsArr);
+      res.locals.concerts = res.locals.concerts.concat(resultsArr);
+      // console.log(res.locals.concerts)
+
+    } catch(err) {
+      next(err);
+    }
   }
+
+  let _ = await concertQuery(apiCallQuery);
+  return next();
+  // let _ = await concertQuery(apiCallQuery);
+  // console.log(`calling next in getConcerts`)
+  // return next();
 }
 
-module.exports = {
-  getConcerts,
-};
+module.exports = getConcerts;
