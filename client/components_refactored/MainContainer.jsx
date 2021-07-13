@@ -12,6 +12,7 @@ import { Grid, Box, Drawer, Modal } from '@material-ui/core';
 //importing dummy data
 import dummy from './dummyData';
 import { makeStyles } from '@material-ui/core/styles';
+import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
 
 //styling
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +37,7 @@ const MainContainer = () => {
   const [searchResultsOpen, showSearchResults] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [currUser, setUser] = useState({});
+  const [concerts, setConcerts] = useState([]);;
   
 
   //functions
@@ -44,6 +46,7 @@ const MainContainer = () => {
     //here - make async call to BE and set results in an array
     //below is using dummy data based on expected return (see dummy data component in this folder)
     setSearchResults(dummy)
+    //console.log('concerts:', concerts)
     showSearchResults(true)
   }
 
@@ -74,10 +77,22 @@ const MainContainer = () => {
     setUser(results);
   }
 
+  //getConcerts - makes call to BE to get the predictHQ results
+  const getConcerts = async (lat, long) => {
+    const latLong = `${lat},${long}`;
+    const predictHQResults = await getConcertsFromPredictHQ(latLong);
+    console.log(predictHQResults);
+    setConcerts(predictHQResults);
+    console.log('concerts:', concerts);
+  };
+
+
   return (
     <Box>
       <Map2 
       handleSearchForLocation={() => handleSearchForLocation()}
+      getConcerts={getConcerts}
+      concerts={concerts}
       />
       <MenuButton click={() => showDrawer(true)} />
       {/* <Search
@@ -119,7 +134,9 @@ const MainContainer = () => {
         onClose={() => showSearchResults(false)}
         BackdropProps={{ invisible: true }}
       >
-        <SearchResults searchResults={searchResults} />
+        <SearchResults 
+        searchResults={searchResults}
+        concerts={concerts} />
       </Drawer>
       <Modal
         className="signInModal"

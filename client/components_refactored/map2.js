@@ -19,17 +19,8 @@ const Map2 = (props) => {
     zoom: 10,
   });
 
-  const [concerts, setConcerts] = useState([]);
 
   const [selectedConcert, setSelectedConcert] = useState(null);
-
-  const getConcerts = async (lat, long) => {
-    const latLong = `${lat},${long}`;
-    // const predictHQResults = []; // some call to predictHQ
-    const predictHQResults = await getConcertsFromPredictHQ(latLong);
-    console.log(predictHQResults);
-    setConcerts(predictHQResults);
-  };
 
   const getCurrentLocation = (position) => {
     setViewport({
@@ -59,7 +50,7 @@ const Map2 = (props) => {
     const longitude = e.result.center[0];
     // console.log('Longitude: ', latitude);
     // console.log('Latitude: ', longitude);
-    getConcerts(latitude, longitude);
+    props.getConcerts(latitude, longitude);
     //below renders the table - need to work on this.
     props.handleSearchForLocation();
   };
@@ -116,7 +107,7 @@ const Map2 = (props) => {
           inputValue=""
           // collapsed={true}
         />
-        {concerts.map((concert) => (
+        {props.concerts.map((concert) => (
           <Marker
             key={concert.id}
             latitude={concert.location[1]}

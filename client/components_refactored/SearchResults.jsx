@@ -31,22 +31,22 @@ const SearchResults = (props) => {
       <Table size="small">
         <TableHead>
           <TableRow>
+            <TableCell>Show Name</TableCell>
             <TableCell>Date</TableCell>
-            <TableCell>Art</TableCell>
-            <TableCell>Artist</TableCell>
+            <TableCell>Time</TableCell>
             <TableCell>Venue</TableCell>
             <TableCell>Address</TableCell>
             <TableCell>Save!</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.searchResults.map((row, i) => (
+          {props.concerts.map((row, i) => (
             <TableRow key={i}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.art}</TableCell>
-              <TableCell>{row.artist}</TableCell>
-              <TableCell>{row.venue}</TableCell>
-              <TableCell>{row.address}</TableCell>
+              <TableCell>{row.title}</TableCell>
+              <TableCell>{row.start}</TableCell>
+              <TableCell>{row.start}</TableCell>
+              <TableCell>{row.entities[0] ? row.entities[0].name : 'n/a'}</TableCell>
+              <TableCell>{row.entities[0] ? row.entities[0].formatted_address : 'none found'}</TableCell>
               <TableCell>
                 <IconButton>
                   <MusicNoteIcon />
