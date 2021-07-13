@@ -6,6 +6,7 @@ import { TextField } from '@material-ui/core';
 import MapGL, { Marker, Popup } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
 import axios from 'axios';
+import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
 const MAPBOX_TOKEN =
@@ -22,9 +23,11 @@ const Map2 = () => {
 
   const [selectedConcert, setSelectedConcert] = useState(null);
 
-  const getConcerts = (lat, long) => {
+  const getConcerts = async (lat, long) => {
     const latLong = `${lat},${long}`;
-    const predictHQResults = []; // some call to predictHQ
+    // const predictHQResults = []; // some call to predictHQ
+    const predictHQResults = await getConcertsFromPredictHQ(latLong);
+    console.log(predictHQResults);
     setConcerts(predictHQResults);
   };
 
@@ -54,8 +57,8 @@ const Map2 = () => {
   const handleResult = (e) => {
     const latitude = e.result.center[1];
     const longitude = e.result.center[0];
-    console.log('Longitude: ', latitude);
-    console.log('Latitude: ', longitude);
+    // console.log('Longitude: ', latitude);
+    // console.log('Latitude: ', longitude);
     getConcerts(latitude, longitude);
   };
 
@@ -118,14 +121,14 @@ const Map2 = () => {
             longitude={concert.location[0]}
           >
             <button
-              style={{ border: 'none', background: 'none', cursor: 'pointer' }}
+              style={{ border: 'none', cursor: 'pointer' }}
               onClick={(e) => {
                 e.preventDefault();
                 setSelectedConcert(concert);
               }}
             >
               <img
-                src="../images/music-concert-hall-comments-concert-icon-11563061580gvxq0uuf6r.png"
+                src="../images/Universal Recycling Symbol (U+2672).svg"
                 alt="Concert Icon"
                 style={{ width: '20px', height: '20px' }}
               />
@@ -143,8 +146,8 @@ const Map2 = () => {
           >
             <div>
               <h4>{selectedConcert.title}</h4>
-              <h5>{selectedConcert.entities.name}</h5>
-              <h6>{selectedConcert.entities.formatted_address}</h6>
+              <h5>{selectedConcert.entities[0].name}</h5>
+              <h6>{selectedConcert.entities[0].formatted_address}</h6>
               <p>{selectedConcert.description}</p>
             </div>
           </Popup>
