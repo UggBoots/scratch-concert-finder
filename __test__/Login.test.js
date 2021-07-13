@@ -1,3 +1,11 @@
+/**
+ * ************************************
+ * @file  Login.test.js
+ * @description React testing for Login component using Jest/Enzyme
+ * ************************************
+ */
+
+
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

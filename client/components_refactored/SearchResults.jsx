@@ -1,3 +1,10 @@
+/**
+ * ************************************
+ * @module SearchResults
+ * @description React component houses search results that pop up after map search choice
+ * ************************************
+ */
+
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';

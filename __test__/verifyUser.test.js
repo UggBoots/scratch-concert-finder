@@ -1,7 +1,12 @@
+/**
+ * ************************************
+ * @file  verifyUser.test.js
+ * @description Express Route testing and Login Authentication testing
+ * ************************************
+ */
+
 const supertest = require('supertest');
 const request = supertest('http://localhost:3000');
-
-
 
 describe('Sign in tests', () => {
 
