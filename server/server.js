@@ -37,14 +37,18 @@ app.use(session({
   }
 }))
 
-app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));
+app.get('/', (req, res) =>
+  res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
+);
 
 app.use('/build', express.static(path.resolve(__dirname, '../build')));
 
 app.use('/api', routes);
 
 // Error Handlers
-app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
+app.use((req, res) =>
+  res.status(404).send("This is not the page you're looking for...")
+);
 
 app.use((err, req, res, next) => {
   const defaultErr = {

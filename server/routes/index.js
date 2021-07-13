@@ -25,4 +25,6 @@ router.post('/signout', isAlreadySignedOut, signOut ,(req, res) => {
 
 router.post('/location-search', controllers.sendPotentialLocations);
 
+router.post('/getConcerts', controllers.getPredictHQConcerts);
+
 module.exports = router;
