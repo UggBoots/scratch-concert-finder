@@ -18,7 +18,7 @@ router.post('/signup', isAlreadyLoggedIn, signUp, (req, res) => {
 router.post('/signin', isAlreadyLoggedIn, verifyUser, (req, res) => {
     return res.status(200).json({
         message:'You succesfully logged in!',
-        userid: req.session.userid
+        user: req.session.user
     });
 });
 
