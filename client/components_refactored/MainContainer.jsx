@@ -47,7 +47,9 @@ const MainContainer = () => {
   const [searchResultsOpen, showSearchResults] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [currUser, setUser] = useState({});
-  const [concerts, setConcerts] = useState([]);;
+  const [concerts, setConcerts] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false)
+
   
 
   //handleGetUser - gets user obj from BE
@@ -96,6 +98,11 @@ const MainContainer = () => {
     showSearchResults(true);
   };
 
+  const logOut = () => {
+    setUser({});
+    setLoggedIn(false)
+  }
+
 
   return (
     <Box>
@@ -122,6 +129,9 @@ const MainContainer = () => {
             showProfile(true);
             showDrawer(false);
           }}
+          loggedIn={loggedIn}
+          showDrawer={showDrawer}
+          logOut={() => logOut()}
         />
       </Drawer>
       <Drawer
@@ -154,7 +164,11 @@ const MainContainer = () => {
       >
         <Login
           currUser={currUser}
-          setUser={setUser} />
+          setUser={setUser}
+          showSignIn={showSignIn}
+          showDrawer={showDrawer}
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn} />
       </Modal>
       <Modal
         className="registerModal"
@@ -163,7 +177,8 @@ const MainContainer = () => {
       >
         <Register 
           currUser={currUser}
-          setUser={setUser}/>
+          setUser={setUser}
+          />
       </Modal>
     </Box>
   );

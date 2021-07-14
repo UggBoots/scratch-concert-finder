@@ -8,6 +8,8 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -34,6 +36,12 @@ const useStyles = makeStyles((theme) => ({
     top: '30%',
     left: '40%'
   },
+  snackbarContent: {
+    left: '50%',
+    backgroundColor: 'lightgreen',
+    color: 'black',
+    alignSelf: 'center'
+  }
 }));
 
 const Login = React.forwardRef((props, ref) => {
@@ -42,6 +50,8 @@ const Login = React.forwardRef((props, ref) => {
   //state to store input field values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [successMsg, displaySuccessMsg] = useState(false);
+
 
   //function to handle login request to BE
   const handleSubmit = (e) => {
@@ -52,9 +62,25 @@ const Login = React.forwardRef((props, ref) => {
         password
       }
     })
-      .then((response) => console.log(response))
+      .then((response) => {
+        //set user
+        console.log(response);
+        props.setUser(response.data.user);
+        console.log(props.currUser);
+      })
+      .then(displaySuccessMsg(true))
+      .then(setTimeout(()=>{
+        props.setLoggedIn(true);
+        props.showSignIn(false); 
+        props.showDrawer(false);
+      }, 1500))
       .catch((err) => console.log(err))
   };
+
+  //handle close for success msg
+  const handleClose = () => {
+    displaySuccessMsg(false)
+  }
 
   return (
     <div ref={ref} className={classes.paper}>
@@ -118,6 +144,15 @@ const Login = React.forwardRef((props, ref) => {
             </Link>
           </Grid>
         </Grid>
+        <Snackbar
+        open={successMsg}
+        onClose={handleClose}>
+          <SnackbarContent
+            message={'Login Success!  Redirecting to main page...'}
+            className={classes.snackbarContent}>
+          </SnackbarContent>
+        </Snackbar> 
+        
       </form>
     </div>
   );
