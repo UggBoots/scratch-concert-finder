@@ -34,6 +34,7 @@ module.exports = (req, res, next) => {
                 name: 'N/A'
             }],
             start: localizeTime(concert.start),
+            startUTC: concert.start,
             location: concert.location
         }
 
