@@ -2,7 +2,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 // import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import './map2styles.css';
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { TextField } from '@material-ui/core';
+import {
+  TextField,
+  Card,
+  CardActionArea,
+  CardContent,
+} from '@material-ui/core';
 import MapGL, { Marker, Popup } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
 import axios from 'axios';
@@ -25,7 +30,6 @@ const Map2 = () => {
 
   const getConcerts = async (lat, long) => {
     const latLong = `${lat},${long}`;
-    // const predictHQResults = []; // some call to predictHQ
     const predictHQResults = await getConcertsFromPredictHQ(latLong);
     console.log(predictHQResults);
     setConcerts(predictHQResults);
@@ -57,8 +61,6 @@ const Map2 = () => {
   const handleResult = (e) => {
     const latitude = e.result.center[1];
     const longitude = e.result.center[0];
-    // console.log('Longitude: ', latitude);
-    // console.log('Latitude: ', longitude);
     getConcerts(latitude, longitude);
   };
 
@@ -121,16 +123,16 @@ const Map2 = () => {
             longitude={concert.location[0]}
           >
             <button
-              style={{ border: 'none', cursor: 'pointer' }}
+              style={{ border: 'none', background: 'none', cursor: 'pointer' }}
               onClick={(e) => {
                 e.preventDefault();
                 setSelectedConcert(concert);
               }}
             >
               <img
-                src="../images/Universal Recycling Symbol (U+2672).svg"
+                src={require('../images/music-concert-hall-comments-concert-icon-11563061580gvxq0uuf6r.png')}
                 alt="Concert Icon"
-                style={{ width: '20px', height: '20px' }}
+                style={{ width: '40px', height: '40px' }}
               />
             </button>
           </Marker>
