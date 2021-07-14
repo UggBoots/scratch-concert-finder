@@ -13,27 +13,44 @@ import Geocoder from 'react-map-gl-geocoder';
 import axios from 'axios';
 import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
 import PopupCard from './PopupCard';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    marginLeft: theme.spacing(5),
+    marginRight: theme.spacing(1),
+    left: '345px',
+    top: '10px',
+    width: 200,
+  },
+}));
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoicHRyaTN1Z2dib290cyIsImEiOiJja3F1MTJxOXYwMDJrMndwbTUzN2Job3dqIn0._pOvjJBfdKTbopkvRX0Bhg';
 
-const Map2 = () => {
+const Map2 = (props) => {
+  const classes = useStyles();
+
   const [viewport, setViewport] = useState({
     latitude: 37.7577,
     longitude: -122.4376,
     zoom: 10,
   });
 
-  const [concerts, setConcerts] = useState([]);
-
   const [selectedConcert, setSelectedConcert] = useState(null);
 
   const getConcerts = async (lat, long) => {
-    const latLong = `${lat},${long}`;
-    const predictHQResults = await getConcertsFromPredictHQ(latLong);
+    // const latLong = `${lat},${long}`;
+    // data = year/month/day
+    const predictHQResults = await getConcertsFromPredictHQ({
+      lat: lat,
+      lng: long,
+      date: '2021/07/17',
+      radius: 50,
+    });
     console.log(predictHQResults);
-    setConcerts(predictHQResults);
+    setConcerts(predictHQResults.results);
   };
 
   const getCurrentLocation = (position) => {
@@ -62,7 +79,7 @@ const Map2 = () => {
   const handleResult = (e) => {
     const latitude = e.result.center[1];
     const longitude = e.result.center[0];
-    getConcerts(latitude, longitude);
+    props.getConcerts(latitude, longitude);
   };
 
   const handleViewportChange = useCallback((newViewport) => {
@@ -72,6 +89,7 @@ const Map2 = () => {
   const closePopUp = () => {
     setSelectedConcert(null);
   };
+  let today = new Date().toISOString().slice(0, 10);
 
   return (
     <div
@@ -86,7 +104,7 @@ const Map2 = () => {
       <div
         style={{
           position: 'absolute',
-          top: 200,
+          top: 50,
           width: '100%',
           zIndex: 1,
           margin: 'auto',
@@ -94,11 +112,23 @@ const Map2 = () => {
       >
         <div
           style={{
-            width: '80%',
+            width: '60%',
             margin: 'auto',
           }}
           ref={geocoderContainerRef}
         />
+        <div>
+          <TextField
+            id="date"
+            label="date"
+            type="date"
+            defaultValue={today}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </div>
       </div>
 
       <MapGL
@@ -121,7 +151,7 @@ const Map2 = () => {
           inputValue=""
           // collapsed={true}
         />
-        {concerts.map((concert) => (
+        {props.concerts.map((concert) => (
           <Marker
             key={concert.id}
             latitude={concert.location[1]}

@@ -17,11 +17,28 @@ import LogRegDrawer from './LogRegDrawer';
 import Login from './Login';
 import Register from './Register';
 import SearchResults from './SearchResults';
-import { Grid, Box, Drawer, Modal } from '@material-ui/core';
+import { Grid, Box, Drawer, Modal, Accordian } from '@material-ui/core';
 //importing dummy data
 import dummy from './dummyData';
+import { makeStyles } from '@material-ui/core/styles';
+import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
+import axios from 'axios';
+
+//styling
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+  },
+}));
 
 const MainContainer = () => {
+
+  const classes = useStyles();
+
   //hooks
   const [drawerOpen, showDrawer] = useState(false);
   const [signInOpen, showSignIn] = useState(false);
@@ -29,24 +46,68 @@ const MainContainer = () => {
   const [profileOpen, showProfile] = useState(false);
   const [searchResultsOpen, showSearchResults] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [currUser, setUser] = useState({});
+  const [concerts, setConcerts] = useState([]);;
+  
 
-  //functions
-  //handleSearchForLocation - invoked on enter in search component, currently just a test to render the search results
-  const handleSearchForLocation = () => {
-    //here - make async call to BE and set results in an array
-    //below is using dummy data based on expected return (see dummy data component in this folder)
-    setSearchResults(dummy);
+  //handleGetUser - gets user obj from BE
+  //when to invoke?
+  const handleGetUser = () => {
+    // const results = 
+    // {user: {
+    //   name: 'Bilbo Baggins',
+    //   email: 'bilbo@shirenet.com',
+    //   favorites: [{
+    //     artist: 'Rage Against the Machine',
+    //     art: 'temp',
+    //     date: '1 August, 2021',
+    //     venue: 'Madison Square Garden',
+    //     address: '4 Pennsylvania Plaza, New York, NY 10001'
+    //   },
+    //   {
+    //     artist: 'Gucci Mane',
+    //     art: 'temp',
+    //     date: '18 July, 2021',
+    //     venue: 'Music Hall of Williamsburg',
+    //     address: '66 N 6th St, Brooklyn, NY 11211'
+    //   }]
+    // }}
+    axios.post('/api/getUser', {
+      params: {
+        //user id goes here
+      }
+    })
+    .then((response) => setUser(response))
+    setUser(results);
+  }
+
+  //getConcerts - makes call to BE to get the predictHQ results
+  const getConcerts = async (lat, long) => {
+    // const latLong = `${lat},${long}`;
+    // data = year/month/day
+    const predictHQResults = await getConcertsFromPredictHQ({
+      lat: lat,
+      lng: long,
+      date: '2021/07/14',
+      radius: 25,
+    });
+    console.log(predictHQResults);
+    setConcerts(predictHQResults.results);
     showSearchResults(true);
   };
 
+
   return (
     <Box>
-      <Map2 />
+      <Map2 
+      getConcerts={getConcerts}
+      concerts={concerts}
+      />
       <MenuButton click={() => showDrawer(true)} />
-      <Search
+      {/* <Search
         testSearchResultsDisplay={() => testSearchResultsDisplay()}
         handleSearchForLocation={() => handleSearchForLocation()}
-      />
+      /> */}
       <Drawer
         className="logRegDrawer"
         anchor={'left'}
@@ -57,6 +118,7 @@ const MainContainer = () => {
           showSignIn={() => showSignIn(true)}
           showRegister={() => showRegister(true)}
           showProfile={() => {
+            handleGetUser();
             showProfile(true);
             showDrawer(false);
           }}
@@ -68,8 +130,11 @@ const MainContainer = () => {
         open={profileOpen}
         onClose={() => showProfile(false)}
         BackdropProps={{ invisible: true }}
+        classes={{paper : classes.paper}}
       >
-        <Profile />
+        <Profile 
+          currUser = {currUser}
+        />
       </Drawer>
       <Drawer
         className="searchResultsDrawer"
@@ -78,21 +143,27 @@ const MainContainer = () => {
         onClose={() => showSearchResults(false)}
         BackdropProps={{ invisible: true }}
       >
-        <SearchResults searchResults={searchResults} />
+        <SearchResults 
+        searchResults={searchResults}
+        concerts={concerts} />
       </Drawer>
       <Modal
         className="signInModal"
         open={signInOpen}
         onClose={() => showSignIn(false)}
       >
-        <Login />
+        <Login
+          currUser={currUser}
+          setUser={setUser} />
       </Modal>
       <Modal
         className="registerModal"
         open={registerOpen}
         onClose={() => showRegister(false)}
       >
-        <Register />
+        <Register 
+          currUser={currUser}
+          setUser={setUser}/>
       </Modal>
     </Box>
   );
