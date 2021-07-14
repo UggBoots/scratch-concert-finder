@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
     if (!(res.locals.concerts)) return next();
     
     res.locals.concerts = res.locals.concerts.map((concert) => {
-        console.log(`Processing concert: ${JSON.stringify(concert,null,2)}`)
+        // console.log(`Processing concert: ${JSON.stringify(concert,null,2)}`)
         const normalizedConcert = {
             id: concert.id,
             title: concert.title,
@@ -36,6 +36,13 @@ module.exports = (req, res, next) => {
             start: localizeTime(concert.start),
             location: concert.location
         }
+
+        // adding startDate and startTime properties.
+        const [startDate, startTime] = localizeTime(concert.start).split(', ');
+
+        normalizedConcert.startDate = startDate;
+        normalizedConcert.startTime = startTime;
+
         return normalizedConcert;
     });
     return next();
