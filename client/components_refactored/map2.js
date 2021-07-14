@@ -12,6 +12,7 @@ import MapGL, { Marker, Popup } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
 import axios from 'axios';
 import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
+import PopupCard from './PopupCard';
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
 const MAPBOX_TOKEN =
@@ -67,6 +68,10 @@ const Map2 = () => {
   const handleViewportChange = useCallback((newViewport) => {
     return setViewport(newViewport);
   });
+
+  const closePopUp = () => {
+    setSelectedConcert(null);
+  };
 
   return (
     <div
@@ -142,16 +147,24 @@ const Map2 = () => {
           <Popup
             latitude={selectedConcert.location[1]}
             longitude={selectedConcert.location[0]}
-            onClose={() => {
-              setSelectedConcert(null);
-            }}
+            // onClose={() => {
+            //   setSelectedConcert(null);
+            // }}
           >
-            <div>
+            <PopupCard
+              title={selectedConcert.title}
+              locationName={selectedConcert.entities[0].name}
+              address={selectedConcert.entities[0].formatted_address}
+              description={selectedConcert.description}
+              closePopUp={closePopUp}
+            />
+            {console.log(selectedConcert)}
+            {/* <div>
               <h4>{selectedConcert.title}</h4>
               <h5>{selectedConcert.entities[0].name}</h5>
               <h6>{selectedConcert.entities[0].formatted_address}</h6>
               <p>{selectedConcert.description}</p>
-            </div>
+            </div> */}
           </Popup>
         ) : null}
       </MapGL>
