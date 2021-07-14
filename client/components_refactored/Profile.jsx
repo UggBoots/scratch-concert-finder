@@ -18,16 +18,6 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  // paper: {
-  //   position: 'absolute',
-  //   width: 400,
-  //   backgroundColor: theme.palette.background.paper,
-  //   border: '2px solid #000',
-  //   boxShadow: theme.shadows[5],
-  //   padding: theme.spacing(2, 4, 3),
-  //   top: '30%',
-  //   left: '40%'
-  // },
   avatar: {
     width: 100,
     height: 100,

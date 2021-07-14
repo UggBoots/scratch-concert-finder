@@ -12,12 +12,26 @@ import MapGL, { Marker, Popup } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
 import axios from 'axios';
 import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    marginLeft: theme.spacing(5),
+    marginRight: theme.spacing(1),
+    left: "345px",
+    top: '10px',
+    width: 200,
+  }
+}));
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
 const MAPBOX_TOKEN =
   'pk.eyJ1IjoicHRyaTN1Z2dib290cyIsImEiOiJja3F1MTJxOXYwMDJrMndwbTUzN2Job3dqIn0._pOvjJBfdKTbopkvRX0Bhg';
 
 const Map2 = (props) => {
+
+  const classes = useStyles();
+
   const [viewport, setViewport] = useState({
     latitude: 37.7577,
     longitude: -122.4376,
@@ -61,6 +75,8 @@ const Map2 = (props) => {
     return setViewport(newViewport);
   });
 
+  let today = new Date().toISOString().slice(0, 10)
+
   return (
     <div
       style={{
@@ -82,11 +98,22 @@ const Map2 = (props) => {
       >
         <div
           style={{
-            width: '80%',
+            width: '60%',
             margin: 'auto',
           }}
           ref={geocoderContainerRef}
         />
+        <div>
+          <TextField
+           id="date"
+           label="date"
+           type="date"
+           defaultValue={today}
+           className={classes.textField}
+           InputLabelProps={{
+             shrink: true,
+           }} />
+        </div>
       </div>
 
       <MapGL

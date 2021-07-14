@@ -152,14 +152,18 @@ const MainContainer = () => {
         open={signInOpen}
         onClose={() => showSignIn(false)}
       >
-        <Login />
+        <Login
+          currUser={currUser}
+          setUser={setUser} />
       </Modal>
       <Modal
         className="registerModal"
         open={registerOpen}
         onClose={() => showRegister(false)}
       >
-        <Register />
+        <Register 
+          currUser={currUser}
+          setUser={setUser}/>
       </Modal>
     </Box>
   );
