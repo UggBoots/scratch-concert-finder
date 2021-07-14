@@ -6,6 +6,7 @@ const localizeTime = function(utcDate, timeZone) {
   // e.g. America/New_York
   const options = {
     timeZone: timeZone,
+    timeZoneName: 'short',
     year: 'numeric', month: 'numeric', day: 'numeric',
     hour: 'numeric', minute: 'numeric', second: 'numeric',
     hour12: false,
@@ -19,4 +20,4 @@ module exports = localizeTime;
 // let timestamp = '2021-07-31T23:30:00Z';
 // let timezone = 'America/New_York'
 
-// console.log(localizeTime(timestamp, timezone)); // expect: 7/31/2021, 19:30:00
+// console.log(localizeTime(timestamp, timezone)); // expect: 7/31/2021, 19:30:00 EDT
