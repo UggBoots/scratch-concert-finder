@@ -2,6 +2,7 @@ const router = require('express').Router();
 const controllers = require('../controllers');
 const signUp = require('../controllers/signUp');
 const verifyUser = require('../controllers/verifyUser');
+const concerts = require('../controllers/concerts');
 const signOut = require('../controllers/signOut');
 const isAlreadyLoggedIn = require('../controllers/isAlreadyLoggedIn');
 const isAlreadySignedOut = require('../controllers/isAlreadySignedOut');
@@ -35,6 +36,9 @@ router.get('/getFavorites', getFavorites, (req, res) => {
 
 router.post('/location-search', controllers.sendPotentialLocations);
 
-router.post('/getConcerts', controllers.getPredictHQConcerts);
+router.post('/concerts', concerts, (req, res) => {
+    res.status(200).json({resultsCount: res.locals.concerts.length, results: res.locals.concerts});
+});
+
 
 module.exports = router;
