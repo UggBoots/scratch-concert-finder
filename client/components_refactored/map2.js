@@ -34,8 +34,8 @@ const Map2 = () => {
     const predictHQResults = await getConcertsFromPredictHQ({
       lat: lat,
       lng: long,
-      date: '2021/07/14',
-      radius: 25,
+      date: '2021/07/17',
+      radius: 50,
     });
     console.log(predictHQResults);
     setConcerts(predictHQResults.results);
