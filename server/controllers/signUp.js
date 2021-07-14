@@ -7,8 +7,7 @@ const saltRounds = 10;
 
 const signUp = async (req, res, next) => {
     try {
-        const { name, email, password } = req.body.params;
-        
+        const { name, email, password } = req.body.params;    
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await User.create({
             'name': name, 

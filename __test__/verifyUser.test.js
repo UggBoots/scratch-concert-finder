@@ -1,59 +1,58 @@
-const request = require('supertest');
-const server = 'http://localhost:3000';
+/**
+ * ************************************
+ * @file  verifyUser.test.js
+ * @description Express Route testing and Login Authentication testing
+ * ************************************
+ */
+
+const supertest = require('supertest');
+const request = supertest('http://localhost:3000');
 
 describe('Sign in tests', () => {
 
   describe('/api/signin', () => {
 
     describe('POST', () => {
-      it('correct username and password responds with you have successfully logged in!', () => 
-      request(server)
-        .post('/api/signin')
-        .send({email: 'Dan@codesmith.com', password: '123123'})
-        .expect('Content-Type', /application\/json/)
-        .expect(200)
-        .then(response => {
-          console.log(response.message)
-          expect(response).toEqual('You succesfully logged in!');
-        })
-        .catch(err => err));
 
-        it('if email is not in the database then responds with User does not exist', () => 
-      request(server)
-        .post('/api/signin')
-        .send({email: 'eric@gmail.com', password: '123123'})
-        .expect('Content-Type', /application\/json/)
-        .expect(400)
-        .then(response => {
-          console.log(response.message)
-          expect(response).toEqual('User does not exist');
-        })
-        .catch(err => err));
+      it('If username and password are correct responds with a 200 status and you successfully logged in', async () => {
+        const res = await request.post('/api/signin')
+        .send({params:{email:'eric@gmail.com', password: '123'}});
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe('You succesfully logged in!');
+        return;
+      });
 
-        it('if email or password is incorrect then responds with Incorrect email/password combination', () => 
-        request(server)
-          .post('/api/signin')
-          .send({email: 'Dan@codesmith.com', password: 'apples'})
-          .expect('Content-Type', /application\/json/)
-          .expect(400)
-          .then(response => {
-            console.log(response.message)
-            expect(response).toEqual('Incorrect email/password combination');
-          })
-          .catch(err => err));
+      it('If username and password are incorrect respond with 400 status and Incorrect email/password combination', async () => {
+        const res = await request.post('/api/signin')
+        .send({params:{email:'eric@gmail.com', password: '123123'}});
+        expect(res.status).toBe(400);
+        expect(res.body.message).toBe('Incorrect email/password combination');
+        return;
+      });
 
-          it('if any other error or fields are blank will respond with unknown error', () => 
-        request(server)
-          .post('/api/signin')
-          .send({})
-          .expect('Content-Type', /application\/json/)
-          .expect(400)
-          .then(response => {
-            console.log(response.message)
-            expect(response).toEqual('unknown error');
-          })
-          .catch(err => err));
-        
+      it('If user does not exist respond with 400 status and user does not exist', async () => {
+        const res = await request.post('/api/signin')
+        .send({params:{email:'apples@gmail.com', password: '123123'}});
+        expect(res.status).toBe(400);
+        expect(res.body.message).toBe('User does not exist');
+        return;
+      });
+
+        it('If username field is blank respond with 400 status and user does not exist', async () => {
+          const res = await request.post('/api/signin')
+          .send({params:{password: '123123'}});
+          expect(res.status).toBe(400);
+          expect(res.body.message).toBe('User does not exist');
+          return;
+        });
+
+          it('If password field is blank respond with 500 status and unknown error', async () => {
+            const res = await request.post('/api/signin')
+            .send({params:{email:'cameron@gmail.com'}});
+            expect(res.status).toBe(500);
+            expect(res.body.message).toBe('unknown error');
+            return;
+          });  
     });
   });
-});
+})
