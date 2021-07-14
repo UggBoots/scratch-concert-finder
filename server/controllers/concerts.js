@@ -9,6 +9,8 @@ const axios = require('axios');
 
 const pp = (stuff) => JSON.stringify(stuff, null, 2);
 
+const slashToDash = (dateString) => dateString.split('/').join('-');
+
 
 
 const getConcerts = async (req, res, next) => {
@@ -33,11 +35,11 @@ const getConcerts = async (req, res, next) => {
   let endDate;
 
   if (req.body.date) {
-    startDate = req.body.date;
-    endDate = req.body.date;
+    startDate = slashToDash(req.body.date);
+    endDate = slashToDash(req.body.date);
   } else if ('startDate', 'endDate' in req.body) {
-    startDate = req.body.startDate;
-    endDate = req.body.endDate;
+    startDate = slashToDash(req.body.startDate);
+    endDate = slashToDash(req.body.endDate);
   } else {
     malformedRequestError();
   }
