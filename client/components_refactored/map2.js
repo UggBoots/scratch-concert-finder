@@ -27,6 +27,7 @@ const Map2 = (props) => {
 
   const [selectedConcert, setSelectedConcert] = useState(null);
 
+
   const getCurrentLocation = (position) => {
     setViewport({
       ...viewport,
