@@ -9,26 +9,46 @@ const axios = require('axios');
 
 const pp = (stuff) => JSON.stringify(stuff, null, 2);
 
+const slashToDash = (dateString) => dateString.split('/').join('-');
+
+
+
 const getConcerts = async (req, res, next) => {
+  const malformedRequestError = () => {next({
+    log: 'Malformed request received on getConcerts middleware function',
+    status: 400,
+    message: 'Malformed request - missing required parameters'
+  })};
+  
   // console.log(`req.body = ${pp(req.body)}`)
   // if (!(lng, lat, date in req.body)) {
-    if (!('lng', 'lat', 'date' in req.body)) {
-    next({
-      log: 'Malformed request received on getConcerts middleware function',
-      status: 400,
-      message: 'Malformed request - missing required parameters'
-    })
+    if (!('lng', 'lat' in req.body)) {
+    malformedRequestError();
   }
 
   let concertsArray = [];
   res.locals.concerts = [];
 
-  const {lng, lat, date} = req.body;
+  const {lng, lat} = req.body;
+
+  let startDate;
+  let endDate;
+
+  if (req.body.date) {
+    startDate = slashToDash(req.body.date);
+    endDate = slashToDash(req.body.date);
+  } else if ('startDate', 'endDate' in req.body) {
+    startDate = slashToDash(req.body.startDate);
+    endDate = slashToDash(req.body.endDate);
+  } else {
+    malformedRequestError();
+  }
+
   const radius = req.body.radius || 5; // in miles (radius + 'mi')
   const limit = req.body.limit || 100;
   
   // const apiCallQuery = `https://api.predicthq.com/v1/events?category=concerts&location_around.origin=${lat},${lng}&location_around.scale=${radius}mi&limit=${limit}&start.gte=${date}&start.lte=${date}`;
-  const apiCallQuery = `https://api.predicthq.com/v1/events?category=concerts&within=${radius}mi@${lat},${lng}&start.gte=${date}&start.lte=${date}&limit=${limit}`
+  const apiCallQuery = `https://api.predicthq.com/v1/events?category=concerts&within=${radius}mi@${lat},${lng}&start.gte=${startDate}&start.lte=${endDate}&limit=${limit}`
 
   // console.log(apiCallQuery)
   

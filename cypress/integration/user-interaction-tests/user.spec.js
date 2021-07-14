@@ -1,6 +1,6 @@
 import Chance from 'chance'
 
-describe('My first test', () => {
+describe('End to end testing for in the loop application', () => {
 	
 	const chance = new Chance()
 	const name = chance.name();
@@ -9,24 +9,21 @@ describe('My first test', () => {
 	
 
 	before(() => {
-		// Cypress starts out with a blank slate for each test
-		// so we must tell it to visit our website with the `cy.visit()` command.
-		// Since we want to visit the same URL at the start of all our tests,
-		// we include it in our beforeEach function so that it runs before each test
-		cy.visit('http://localhost:8080/')
-		
-	  })
+		cy.visit('http://localhost:8080/')		
+	  });
 	
 	
 
 	it('Find an infinity logo and click it', () => {
 		cy.get('.MenuButton').should('have.length', 1);
 		cy.get('.MenuButton').click();
-	})
+	});
+
 	it('Find a register button and click it', () => {
 		cy.get('[id^=register]').should('have.length', 1);
 		cy.get('[id^=register]').click();
-	})
+	});
+
 	it('Register a new user with a name, email, and password', () => {
 		cy.get('.regName').should('have.length', 1);
 		cy.get('.regName').click();
@@ -41,7 +38,7 @@ describe('My first test', () => {
 		cy.get('[id^=regC]').click();
 		cy.get('html').clickOutside();
 		cy.get('html').clickOutside();
-	})
+	});
 
 	it('Login with the user that just registered', () => {
 		cy.get('.MenuButton').click();
@@ -56,6 +53,15 @@ describe('My first test', () => {
 		cy.get('[id^=logC]').click();
 		cy.get('html').clickOutside();
 		cy.get('html').clickOutside();
-	})
+	});
+
+	it('Enter the city of New York and search for a concert', () => {
+		cy.get('.mapboxgl-ctrl-geocoder--input').should('have.length', 1);
+		cy.get('.mapboxgl-ctrl-geocoder--input').click();
+		cy.get('.mapboxgl-ctrl-geocoder--input').type('New York City');
+		cy.get('.mapboxgl-ctrl-geocoder--input').type('{enter}')
+		cy.get('img').click()
+		cy.get('.mapboxgl-popup-content').click();
+	});
 
 })
