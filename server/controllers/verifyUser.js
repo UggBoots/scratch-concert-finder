@@ -8,20 +8,15 @@ const verifyUser =  async (req, res, next) => {
     try {
         const { email, password } = req.body.params;
         const findUserInDB = await User.findOne({email: email});
-        if (!findUserInDB) return res.status(400).json({message: 'User does not exsist'});
+        if (!findUserInDB) return res.status(400).json({message: 'User does not exist'});
         const validatePassword = await bcrypt.compare(password, findUserInDB.password);
         if (validatePassword) {
-            req.session.user = {
-                id: findUserInDB._id,
-                name: findUserInDB.name,
-                email: findUserInDB.email
-            }
-            console.log(req.session.user);
+            req.session.userid = findUserInDB._id
             return next();
         } else return res.status(400).json({message: 'Incorrect email/password combination'});
     } catch (err) {
-        return res.status(500).json({message: 'unknow error'})
+        return res.status(500).json({message: 'unknown error'})
     }
 }
 
-module.exports = verifyUser
+module.exports = verifyUser;

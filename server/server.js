@@ -23,28 +23,33 @@ app.use((req, res, next) => {
 });
 
 app.use(session({
-  key: 'userId',
+  key: process.env.COOKIE_KEY,
   secret: config.sessionSecret,
-  resave: false,
+  resave: true,
   saveUninitialized: false,
   store: new mongoStore({
     uri: 'mongodb+srv://PRTI3UggBoots:Codesmith3@cluster0.1qtmd.mongodb.net',
     databaseName: 'inTheLoop',
-    collection: 'sessions'
+    collection: 'sessions',
+    expires: 60 * 60 * 24
   }),
   cookie: {
     maxAge: 900000
   }
 }))
 
-app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));
+app.get('/', (req, res) =>
+  res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
+);
 
 app.use('/build', express.static(path.resolve(__dirname, '../build')));
 
 app.use('/api', routes);
 
 // Error Handlers
-app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
+app.use((req, res) =>
+  res.status(404).send("This is not the page you're looking for...")
+);
 
 app.use((err, req, res, next) => {
   const defaultErr = {

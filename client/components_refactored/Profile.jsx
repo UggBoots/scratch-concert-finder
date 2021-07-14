@@ -1,3 +1,10 @@
+/**
+ * ************************************
+ * @module Profile
+ * @description React component houses user favorites from concert venue choices
+ * ************************************
+ */
+
 import React from 'react';
 import {
   Grid,
