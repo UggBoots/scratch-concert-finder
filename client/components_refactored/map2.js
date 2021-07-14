@@ -48,11 +48,7 @@ const Map2 = (props) => {
   const handleResult = (e) => {
     const latitude = e.result.center[1];
     const longitude = e.result.center[0];
-    // console.log('Longitude: ', latitude);
-    // console.log('Latitude: ', longitude);
-    props.getConcerts(latitude, longitude);
-    //below renders the table - need to work on this.
-    props.handleSearchForLocation();
+    props.getConcerts(latitude, longitude); 
   };
 
   const handleViewportChange = useCallback((newViewport) => {
