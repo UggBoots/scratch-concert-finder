@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { User } = require('../db/index');
+const { User } = require('../../db/index');
 
 // signup middleware 
 

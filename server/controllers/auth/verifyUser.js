@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { User } = require('../db/index');
+const { User } = require('../../db/index');
 
 // queries User table to check to see if the email provided exsists, if true, will check to make sure the client provided password
 // and password from User table are the same

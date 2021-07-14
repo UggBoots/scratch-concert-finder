@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const controllers = require('../controllers');
-const signUp = require('../controllers/signUp');
-const verifyUser = require('../controllers/verifyUser');
+const signUp = require('../controllers/auth/signUp');
+const verifyUser = require('../controllers/auth/verifyUser');
 const concerts = require('../controllers/concerts');
-const signOut = require('../controllers/signOut');
-const isAlreadyLoggedIn = require('../controllers/isAlreadyLoggedIn');
-const isAlreadySignedOut = require('../controllers/isAlreadySignedOut');
+const signOut = require('../controllers/auth/signOut');
+const isAlreadyLoggedIn = require('../controllers/auth/isAlreadyLoggedIn');
+const isAlreadySignedOut = require('../controllers/auth/isAlreadySignedOut');
 const addFavorite = require('../controllers/favorites/addFavorite');
 const getFavorites = require('../controllers/favorites/getFavorites');
 
