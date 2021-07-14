@@ -29,10 +29,16 @@ const Map2 = () => {
   const [selectedConcert, setSelectedConcert] = useState(null);
 
   const getConcerts = async (lat, long) => {
-    const latLong = `${lat},${long}`;
-    const predictHQResults = await getConcertsFromPredictHQ(latLong);
+    // const latLong = `${lat},${long}`;
+    // data = year/month/day
+    const predictHQResults = await getConcertsFromPredictHQ({
+      lat: lat,
+      lng: long,
+      date: '2021/07/14',
+      radius: 25,
+    });
     console.log(predictHQResults);
-    setConcerts(predictHQResults);
+    setConcerts(predictHQResults.results);
   };
 
   const getCurrentLocation = (position) => {
