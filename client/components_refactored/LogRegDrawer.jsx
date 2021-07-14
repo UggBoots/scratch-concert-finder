@@ -16,12 +16,12 @@ function LogRegDrawer(props) {
   return (
     <div>
       <List>
-        <ListItem button component="a" onClick={()=>props.showSignIn()}>
+        <ListItem button component="a" id="loginID" onClick={()=>props.showSignIn()}>
           <ListItemText primary={'Log In'} />
         </ListItem>
         <Divider />
-        <ListItem button component="a" onClick={()=>props.showRegister()}>
-          <ListItemText primary={'Sign Up'} />
+        <ListItem  button component="a"  onClick={()=>props.showRegister()}>
+          <ListItemText id="registerID" primary={'Sign Up'} />
         </ListItem>
         <Divider />
         <ListItem button component="a" onClick={()=>props.showProfile()}>

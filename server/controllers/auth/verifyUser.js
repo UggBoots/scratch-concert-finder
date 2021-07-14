@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { User } = require('../db/index');
+const { User } = require('../../db/index');
 
 // queries User table to check to see if the email provided exsists, if true, will check to make sure the client provided password
 // and password from User table are the same
@@ -11,7 +11,12 @@ const verifyUser =  async (req, res, next) => {
         if (!findUserInDB) return res.status(400).json({message: 'User does not exist'});
         const validatePassword = await bcrypt.compare(password, findUserInDB.password);
         if (validatePassword) {
-            req.session.userid = findUserInDB._id
+            req.session.user = {
+               userId: findUserInDB._id,
+               favorites: findUserInDB.favorites,
+               email: findUserInDB.email,
+               name: findUserInDB.name
+            }
             return next();
         } else return res.status(400).json({message: 'Incorrect email/password combination'});
     } catch (err) {
