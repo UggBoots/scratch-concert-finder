@@ -45,5 +45,7 @@ module.exports = (req, res, next) => {
 
         return normalizedConcert;
     });
+
+    res.locals.concerts = res.locals.concerts.reverse();
     return next();
 };
