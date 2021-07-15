@@ -82,7 +82,7 @@ const MainContainer = () => {
   }
 
   //getConcerts - makes call to BE to get the predictHQ results
-  const getConcerts = async (lat, long) => {
+  const getConcerts = async (lat, long, showSearchResultsBool=true) => {
     // const latLong = `${lat},${long}`;
     // data = year/month/day
     const predictHQResults = await getConcertsFromPredictHQ({
@@ -93,7 +93,7 @@ const MainContainer = () => {
     });
     console.log(predictHQResults);
     setConcerts(predictHQResults.results);
-    showSearchResults(true);
+    showSearchResults(showSearchResultsBool);
   };
 
 
