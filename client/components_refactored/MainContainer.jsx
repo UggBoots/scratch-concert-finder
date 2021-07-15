@@ -56,6 +56,7 @@ const MainContainer = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currUser, setUser] = useState({});
   const [concerts, setConcerts] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   //handleGetUser - gets user obj from BE
   //when to invoke?
@@ -110,6 +111,10 @@ const MainContainer = () => {
   // width:'100%',
   // background-color: '#393838',
   // opacity: 1,
+  const logOut = () => {
+    setUser({});
+    setLoggedIn(false);
+  };
 
   return (
     <Box>
@@ -157,6 +162,9 @@ const MainContainer = () => {
             showProfile(true);
             showDrawer(false);
           }}
+          loggedIn={loggedIn}
+          showDrawer={showDrawer}
+          logOut={() => logOut()}
         />
       </Drawer>
       <Drawer
@@ -183,7 +191,14 @@ const MainContainer = () => {
         open={signInOpen}
         onClose={() => showSignIn(false)}
       >
-        <Login currUser={currUser} setUser={setUser} />
+        <Login
+          currUser={currUser}
+          setUser={setUser}
+          showSignIn={showSignIn}
+          showDrawer={showDrawer}
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+        />
       </Modal>
       <Modal
         className="registerModal"

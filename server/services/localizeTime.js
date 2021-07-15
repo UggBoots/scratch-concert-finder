@@ -16,7 +16,7 @@ const localizeTime = function(utcDate, timeZone) {
   return new Intl.DateTimeFormat('en-US', options).format(new Date(utcDate));
 }
 
-module exports = localizeTime;
+module.exports = localizeTime;
 
 // unit test
 // let timestamp = '2021-07-31T23:30:00Z';

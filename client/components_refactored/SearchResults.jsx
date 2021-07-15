@@ -50,8 +50,8 @@ const SearchResults = (props) => {
           {props.concerts.map((row, i) => (
             <TableRow key={i}>
               <TableCell>{row.title}</TableCell>
-              <TableCell>{row.start}</TableCell>
-              <TableCell>{row.start}</TableCell>
+              <TableCell>{row.startDate}</TableCell>
+              <TableCell>{row.startTime}</TableCell>
               <TableCell>{row.entities[0] ? row.entities[0].name : 'n/a'}</TableCell>
               <TableCell>{row.entities[0] ? row.entities[0].formatted_address : 'none found'}</TableCell>
               <TableCell>
