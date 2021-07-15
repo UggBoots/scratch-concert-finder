@@ -21,17 +21,18 @@ import {
   Box,
   Drawer,
   Modal,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Fab,
 } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MenuIcon from '@material-ui/icons/Menu';
 //importing dummy data
 import dummy from './dummyData';
 import { makeStyles } from '@material-ui/core/styles';
 import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
 import axios from 'axios';
+import { GiHandheldFan } from 'react-icons/gi';
 
 //styling
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +57,6 @@ const MainContainer = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currUser, setUser] = useState({});
   const [concerts, setConcerts] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   //handleGetUser - gets user obj from BE
   //when to invoke?
@@ -111,14 +111,25 @@ const MainContainer = () => {
   // width:'100%',
   // background-color: '#393838',
   // opacity: 1,
-  const logOut = () => {
-    setUser({});
-    setLoggedIn(false);
+
+  const [drawerHeight, setDrawerHeight] = useState(0);
+
+  const handleResultsToggle = () => {
+    // console.log(document.getElementById('bottomDrawer').offsetHeight);
+    showSearchResults((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (searchResultsOpen) {
+      setDrawerHeight(document.getElementById('bottomDrawer').offsetHeight);
+    } else setDrawerHeight(0);
+  }, [searchResultsOpen]);
+
+  console.log('drawerHeight: ', drawerHeight);
 
   return (
     <Box>
-      <Accordion
+      {/* <div
         style={{
           height: '40px',
           position: 'fixed',
@@ -128,20 +139,32 @@ const MainContainer = () => {
           zIndex: 1000,
         }}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+        test
+      </div> */}
+
+      <AppBar
+        position="fixed"
+        color="primary"
+        style={{ top: 'auto', bottom: drawerHeight }}
+      >
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleResultsToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          <div
+            style={{
+              flexGrow: 1,
+            }}
+          />
+        </Toolbar>
+      </AppBar>
+
       <Map2 getConcerts={getConcerts} concerts={concerts} />
       <MenuButton click={() => showDrawer(true)} />
       {/* <Search
@@ -162,9 +185,6 @@ const MainContainer = () => {
             showProfile(true);
             showDrawer(false);
           }}
-          loggedIn={loggedIn}
-          showDrawer={showDrawer}
-          logOut={() => logOut()}
         />
       </Drawer>
       <Drawer
@@ -178,27 +198,27 @@ const MainContainer = () => {
         <Profile currUser={currUser} />
       </Drawer>
       <Drawer
+        variant="persistent"
         className="searchResultsDrawer"
         anchor={'bottom'}
         open={searchResultsOpen}
-        onClose={() => showSearchResults(false)}
+        style={{ height: '400px' }}
+        onClose={(e) => {
+          console.log(e);
+          showSearchResults(false);
+        }}
         BackdropProps={{ invisible: true }}
       >
-        <SearchResults searchResults={searchResults} concerts={concerts} />
+        <div id="bottomDrawer">
+          <SearchResults searchResults={searchResults} concerts={concerts} />
+        </div>
       </Drawer>
       <Modal
         className="signInModal"
         open={signInOpen}
         onClose={() => showSignIn(false)}
       >
-        <Login
-          currUser={currUser}
-          setUser={setUser}
-          showSignIn={showSignIn}
-          showDrawer={showDrawer}
-          loggedIn={loggedIn}
-          setLoggedIn={setLoggedIn}
-        />
+        <Login currUser={currUser} setUser={setUser} />
       </Modal>
       <Modal
         className="registerModal"
