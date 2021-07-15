@@ -3,6 +3,7 @@ const controllers = require('../controllers');
 const signUp = require('../controllers/auth/signUp');
 const verifyUser = require('../controllers/auth/verifyUser');
 const concerts = require('../controllers/concerts');
+const normalizeConcerts = require('../controllers/normalizeConcerts');
 const signOut = require('../controllers/auth/signOut');
 const isAlreadyLoggedIn = require('../controllers/auth/isAlreadyLoggedIn');
 const isAlreadySignedOut = require('../controllers/auth/isAlreadySignedOut');
@@ -36,7 +37,7 @@ router.get('/getFavorites', getFavorites, (req, res) => {
 
 router.post('/location-search', controllers.sendPotentialLocations);
 
-router.post('/concerts', concerts, (req, res) => {
+router.post('/concerts', concerts, normalizeConcerts, (req, res) => {
     res.status(200).json({resultsCount: res.locals.concerts.length, results: res.locals.concerts});
 });
 

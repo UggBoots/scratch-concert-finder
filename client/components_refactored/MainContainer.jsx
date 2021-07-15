@@ -2,10 +2,9 @@
  * ************************************
  * @module MainContainer
  * @description React component houses @modules Map, Search, Profile, Drawers, Login, Register, and Search Results
- * 
+ *
  * ************************************
  */
-
 
 import React, { useState, useEffect } from 'react';
 import Map from './Map';
@@ -17,7 +16,17 @@ import LogRegDrawer from './LogRegDrawer';
 import Login from './Login';
 import Register from './Register';
 import SearchResults from './SearchResults';
-import { Grid, Box, Drawer, Modal, Accordian } from '@material-ui/core';
+import {
+  Grid,
+  Box,
+  Drawer,
+  Modal,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 //importing dummy data
 import dummy from './dummyData';
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,12 +41,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 
 const MainContainer = () => {
-
   const classes = useStyles();
 
   //hooks
@@ -59,7 +67,7 @@ const MainContainer = () => {
   //handleGetUser - gets user obj from BE
   //when to invoke?
   const handleGetUser = () => {
-    // const results = 
+    // const results =
     // {user: {
     //   name: 'Bilbo Baggins',
     //   email: 'bilbo@shirenet.com',
@@ -78,14 +86,15 @@ const MainContainer = () => {
     //     address: '66 N 6th St, Brooklyn, NY 11211'
     //   }]
     // }}
-    axios.post('/api/getUser', {
-      params: {
-        //user id goes here
-      }
-    })
-    .then((response) => setUser(response))
+    axios
+      .post('/api/getUser', {
+        params: {
+          //user id goes here
+        },
+      })
+      .then((response) => setUser(response));
     setUser(results);
-  }
+  };
 
   //getConcerts - makes call to BE to get the predictHQ results
   const getConcerts = async (lat, long) => {
@@ -102,11 +111,16 @@ const MainContainer = () => {
     showSearchResults(true);
   };
 
+  //  height: '40px',
+  // position: 'fixed',
+  // bottom:'0%',
+  // width:'100%',
+  // background-color: '#393838',
+  // opacity: 1,
   const logOut = () => {
     setUser({});
-    setLoggedIn(false)
-  }
-
+    setLoggedIn(false);
+  };
 
   return (
     <Box>
@@ -118,6 +132,30 @@ const MainContainer = () => {
       startDate={startDate}
       endDate={endDate}
       />
+      <Accordion
+        style={{
+          height: '40px',
+          position: 'fixed',
+          bottom: '0%',
+          width: '100%',
+          backgroundColor: '#393838',
+          zIndex: 1000,
+        }}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>Accordion 1</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            malesuada lacus ex, sit amet blandit leo lobortis eget.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
       <MenuButton click={() => showDrawer(true)} />
       <Drawer
         className="logRegDrawer"
@@ -144,11 +182,9 @@ const MainContainer = () => {
         open={profileOpen}
         onClose={() => showProfile(false)}
         BackdropProps={{ invisible: true }}
-        classes={{paper : classes.paper}}
+        classes={{ paper: classes.paper }}
       >
-        <Profile 
-          currUser = {currUser}
-        />
+        <Profile currUser={currUser} />
       </Drawer>
       <Drawer
         className="searchResultsDrawer"
@@ -157,9 +193,7 @@ const MainContainer = () => {
         onClose={() => showSearchResults(false)}
         BackdropProps={{ invisible: true }}
       >
-        <SearchResults 
-        searchResults={searchResults}
-        concerts={concerts} />
+        <SearchResults searchResults={searchResults} concerts={concerts} />
       </Drawer>
       <Modal
         className="signInModal"
@@ -172,17 +206,15 @@ const MainContainer = () => {
           showSignIn={showSignIn}
           showDrawer={showDrawer}
           loggedIn={loggedIn}
-          setLoggedIn={setLoggedIn} />
+          setLoggedIn={setLoggedIn}
+        />
       </Modal>
       <Modal
         className="registerModal"
         open={registerOpen}
         onClose={() => showRegister(false)}
       >
-        <Register 
-          currUser={currUser}
-          setUser={setUser}
-          />
+        <Register currUser={currUser} setUser={setUser} />
       </Modal>
     </Box>
   );
