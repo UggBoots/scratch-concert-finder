@@ -47,7 +47,7 @@ const SearchResults = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.concerts.map((row, i) => (
+          {props.concerts.slice(0, 8).map((row, i) => (
             <TableRow key={i}>
               <TableCell>{row.title}</TableCell>
               <TableCell>{row.startDate}</TableCell>
@@ -55,7 +55,7 @@ const SearchResults = (props) => {
               <TableCell>{row.entities[0] ? row.entities[0].name : 'n/a'}</TableCell>
               <TableCell>{row.entities[0] ? row.entities[0].formatted_address : 'none found'}</TableCell>
               <TableCell>
-                <IconButton>
+                <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
                   <MusicNoteIcon />
                 </IconButton>
               </TableCell>

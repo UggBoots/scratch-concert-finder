@@ -51,12 +51,11 @@ const Register = React.forwardRef((props, ref) => {
     e.preventDefault();
     console.log(name, email, password)
     axios.post('/api/signup', {
-      params: {
         name: name,
         email: email,
         password: password
       }
-    })
+    )
       .then((response) => console.log(response))
       .catch((err) => console.log(err))
   };

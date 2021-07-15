@@ -32,7 +32,7 @@ router.post('/addFavoriteToUser', addFavorite, (req, res) => {
     return res.status(200).json(res.locals.favorite);
 });
 
-router.get('/getFavorites', getFavorites, (req, res) => {
+router.post('/getFavorites', getFavorites, (req, res) => {
     return res.status(200).json(res.locals.favorites);
 });
 
