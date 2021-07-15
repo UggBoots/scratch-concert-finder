@@ -72,6 +72,9 @@ const MainContainer = () => {
       lat: lat,
       lng: long,
       date: '2021/07/14',
+      //note - below needs to be parsed
+      // startDate: startDate,
+      // endDate: endDate,
       radius: 25,
     });
     console.log(predictHQResults);
