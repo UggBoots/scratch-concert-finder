@@ -60,7 +60,7 @@ const Map2 = (props) => {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     });
-    props.getConcerts(position.coords.latitude, position.coords.longitude, false)
+    props.getConcerts(position.coords.latitude, position.coords.longitude, false);
   };
 
   const locationUnavailable = () => {
@@ -85,7 +85,8 @@ const Map2 = (props) => {
   };
 
   const handleViewportChange = useCallback((newViewport) => {
-    return setViewport(newViewport);
+    setViewport(newViewport);
+    props.getConcerts(viewport.latitude, viewport.longitude, false);
   });
 
   let today = new Date().toISOString().slice(0, 10)
