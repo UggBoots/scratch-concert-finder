@@ -116,6 +116,7 @@ const Map2 = (props) => {
             margin: 'auto',
           }}
           ref={geocoderContainerRef}
+          id="red"
         />
         <div>
           <TextField
