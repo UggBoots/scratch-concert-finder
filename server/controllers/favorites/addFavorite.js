@@ -2,7 +2,7 @@ const { User } = require('../../db/index');
 
 const addFavorite = async (req, res, next) => {
     try {
-        const {userId, favorite} = req.body.params;
+        const {userId, favorite} = req.body;
         const addFavoriteQuery = await User.updateOne(
             {'_id': userId},
             {$push: {
