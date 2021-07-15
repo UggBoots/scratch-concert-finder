@@ -2,7 +2,7 @@ const { User } = require('../../db/index');
 
 const getFavorites = async (req, res, next) => {
     try {
-        const {userId} = req.query; 
+        const {userId} = req.body; 
         const getFavoritesQuery =  await User.findById(userId);
         res.locals.favorites = getFavoritesQuery.favorites;
         next();
