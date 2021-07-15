@@ -5,10 +5,11 @@ const { User } = require('../../db/index');
 // and password from User table are the same
 
 const verifyUser =  async (req, res, next) => {
+    console.log('test')
     try {
-        const { email, password } = req.body.params;
+        const { email, password } = req.body;
         const findUserInDB = await User.findOne({email: email});
-        if (!findUserInDB) return res.status(400).json({message: 'User does not exist'});
+        if (!findUserInDB) return res.status(209).send({message: 'User does not exist'});
         const validatePassword = await bcrypt.compare(password, findUserInDB.password);
         if (validatePassword) {
             req.session.user = {

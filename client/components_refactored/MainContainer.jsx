@@ -64,38 +64,6 @@ const MainContainer = () => {
 
   
 
-  //handleGetUser - gets user obj from BE
-  //when to invoke?
-  const handleGetUser = () => {
-    // const results =
-    // {user: {
-    //   name: 'Bilbo Baggins',
-    //   email: 'bilbo@shirenet.com',
-    //   favorites: [{
-    //     artist: 'Rage Against the Machine',
-    //     art: 'temp',
-    //     date: '1 August, 2021',
-    //     venue: 'Madison Square Garden',
-    //     address: '4 Pennsylvania Plaza, New York, NY 10001'
-    //   },
-    //   {
-    //     artist: 'Gucci Mane',
-    //     art: 'temp',
-    //     date: '18 July, 2021',
-    //     venue: 'Music Hall of Williamsburg',
-    //     address: '66 N 6th St, Brooklyn, NY 11211'
-    //   }]
-    // }}
-    axios
-      .post('/api/getUser', {
-        params: {
-          //user id goes here
-        },
-      })
-      .then((response) => setUser(response));
-    setUser(results);
-  };
-
   //getConcerts - makes call to BE to get the predictHQ results
   const getConcerts = async (lat, long) => {
     // const latLong = `${lat},${long}`;
@@ -111,16 +79,24 @@ const MainContainer = () => {
     showSearchResults(true);
   };
 
-  //  height: '40px',
-  // position: 'fixed',
-  // bottom:'0%',
-  // width:'100%',
-  // background-color: '#393838',
-  // opacity: 1,
+  //logout - sets current user to null, logged out to false
   const logOut = () => {
     setUser({});
     setLoggedIn(false);
   };
+
+  const addFav = () => {
+    let userId = currUser.userId;
+    let favorite = {temp: 'temporary favorite'}
+    axios.post('/api/addFavoriteToUser', 
+      {
+        userId,
+        favorite
+      }
+    )
+    .then(response => console.log(response))
+    .catch(err=>console.log(err))
+  }
 
   return (
     <Box>
@@ -167,13 +143,13 @@ const MainContainer = () => {
           showSignIn={() => showSignIn(true)}
           showRegister={() => showRegister(true)}
           showProfile={() => {
-            handleGetUser();
             showProfile(true);
             showDrawer(false);
           }}
           loggedIn={loggedIn}
           showDrawer={showDrawer}
           logOut={() => logOut()}
+          addFav={addFav}
         />
       </Drawer>
       <Drawer

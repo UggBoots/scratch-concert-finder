@@ -42,7 +42,7 @@ const Profile = (props) => {
         color='primary'
         variant='h4'
         > 
-        Welcome {props.currUser.user.name}!
+        Welcome {props.currUser.name}!
       </Typography>
       <Avatar 
         className={classes.avatar}
@@ -51,7 +51,7 @@ const Profile = (props) => {
       <Typography
         align='center'
         >
-        {props.currUser.user.email}
+        {props.currUser.email}
       </Typography>
       <hr />
       <Typography
@@ -63,7 +63,7 @@ const Profile = (props) => {
       <Card>
         <CardContent>
           <Typography color='primary'>
-            Lollapalooza 2021
+            {props.currUser.favorites[0].favorite.temp}
           </Typography>
           <Typography>
             Date: November 28, 2021 @ 7:00 PM
