@@ -23,6 +23,7 @@ import dummy from './dummyData';
 import { makeStyles } from '@material-ui/core/styles';
 import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
 import axios from 'axios';
+import DateBar from './DateBar';
 
 //styling
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +50,9 @@ const MainContainer = () => {
   const [currUser, setUser] = useState({});
   const [concerts, setConcerts] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false)
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [radius, setRadius] = useState('')
 
   
 
@@ -109,12 +113,12 @@ const MainContainer = () => {
       <Map2 
       getConcerts={getConcerts}
       concerts={concerts}
+      setStartDate={setStartDate}
+      setEndDate={setEndDate}
+      startDate={startDate}
+      endDate={endDate}
       />
       <MenuButton click={() => showDrawer(true)} />
-      {/* <Search
-        testSearchResultsDisplay={() => testSearchResultsDisplay()}
-        handleSearchForLocation={() => handleSearchForLocation()}
-      /> */}
       <Drawer
         className="logRegDrawer"
         anchor={'left'}
