@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+body {
+  margin: 0;
+  font-family: 'Work Sans';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.overlay{
+    z-index: 1;
+    position: fixed;
+    width: 47%;
+    max-width: 47%;
+    height: 20%;
+    max-height: 20%;
+    background-color: rgba(255, 255, 255, 0.7);
+    top: 0;
+    left: 0
+}
+
+.title{
+    margin-top: 10px;
+    margin-left: 40px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.header{
+    background-color: black;
+    /* opacity: .5; */
+    position:fixed;
+    top: 0;
+    left: 0
+  }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.placesPanel{
+  position:fixed;
+  width: 47%;
+  max-width:47%;
+  top: 85px;
+  left: 0px;
+  /* padding-left:10px; */
+  margin-top:10px;
+  margin-bottom:5px;
+  color: black;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.5;
+  z-index: 1
+}
+.places{
+    padding-left: 40px;
+    font-size: 22PX;
+    font-weight: 400;
+    margin-top:10px
+   
+}
+/* .place-item{
+    padding-left: 40px;
+} */
+p{
+    /* position: fixed; */
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.5;
+    z-index: 1;
+}
+.searchbar{
+  /* margin-top: 20px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: normal;
+}
+
+.place-item {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px 10px 10px 10px;
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
+  width: 100%;
+  /* max-width:47%; */
+}
+
+.place-item:hover{
+  background-color: blue;
+  color: white
+}
+
+.searchResults {  background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px 10px 10px 10px;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+    width: 100%}
+
+a:hover{
+    border-bottom: 1px solid white;
+}
+
+div#map{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%
+}
+.mapboxgl-ctrl button.mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon {
+    background-image: url("#{$image-path}/svg/mapboxgl-ctrl-zoom-out.svg");
+  }
+  
+  .mapboxgl-ctrl button.mapboxgl-ctrl-compass .mapboxgl-ctrl-icon {
+    background-image: url("#{$image-path}/svg/mapboxgl-ctrl-compass.svg");
+  }
+  
+  .mapboxgl-ctrl button.mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon {
+    background-image: url("#{$image-path}/svg/mapboxgl-ctrl-zoom-in.svg");
+  }
+
+  

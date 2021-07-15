@@ -13,6 +13,7 @@ const config = {
   predictHqClientId: process.env.PREDICT_HQ_CLIENT_ID,
   predictHqClientSecret: process.env.PREDICT_HQ_CLIENT_SECRET,
   predictHqClientTemporaryToken: process.env.PREDICT_HQ_TEMPORARY_TOKEN,
+  sessionSecret: process.env.SESSION_SECRET
 };
 
 module.exports = config;
