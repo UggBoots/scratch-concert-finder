@@ -5,6 +5,7 @@ const { User } = require('../../db/index');
 // and password from User table are the same
 
 const verifyUser =  async (req, res, next) => {
+    console.log('test')
     try {
         const { email, password } = req.body;
         const findUserInDB = await User.findOne({email: email});

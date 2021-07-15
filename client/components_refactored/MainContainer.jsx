@@ -32,6 +32,7 @@ import dummy from './dummyData';
 import { makeStyles } from '@material-ui/core/styles';
 import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
 import axios from 'axios';
+import DateBar from './DateBar';
 import { GiHandheldFan } from 'react-icons/gi';
 
 //styling
@@ -57,38 +58,12 @@ const MainContainer = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currUser, setUser] = useState({});
   const [concerts, setConcerts] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [startDate, setStartDate] = useState('01-01-2021');
+  const [endDate, setEndDate] = useState('01-02-2021');
+  const [radius, setRadius] = useState('')
 
-  //handleGetUser - gets user obj from BE
-  //when to invoke?
-  const handleGetUser = () => {
-    // const results =
-    // {user: {
-    //   name: 'Bilbo Baggins',
-    //   email: 'bilbo@shirenet.com',
-    //   favorites: [{
-    //     artist: 'Rage Against the Machine',
-    //     art: 'temp',
-    //     date: '1 August, 2021',
-    //     venue: 'Madison Square Garden',
-    //     address: '4 Pennsylvania Plaza, New York, NY 10001'
-    //   },
-    //   {
-    //     artist: 'Gucci Mane',
-    //     art: 'temp',
-    //     date: '18 July, 2021',
-    //     venue: 'Music Hall of Williamsburg',
-    //     address: '66 N 6th St, Brooklyn, NY 11211'
-    //   }]
-    // }}
-    axios
-      .post('/api/getUser', {
-        params: {
-          //user id goes here
-        },
-      })
-      .then((response) => setUser(response));
-    setUser(results);
-  };
+  
 
   //getConcerts - makes call to BE to get the predictHQ results
   const getConcerts = async (lat, long) => {
@@ -98,6 +73,9 @@ const MainContainer = () => {
       lat: lat,
       lng: long,
       date: '2021/07/14',
+      //note - below needs to be parsed
+      // startDate: startDate,
+      // endDate: endDate,
       radius: 25,
     });
     console.log(predictHQResults);
@@ -105,12 +83,24 @@ const MainContainer = () => {
     showSearchResults(true);
   };
 
-  //  height: '40px',
-  // position: 'fixed',
-  // bottom:'0%',
-  // width:'100%',
-  // background-color: '#393838',
-  // opacity: 1,
+  //logout - sets current user to null, logged out to false
+  const logOut = () => {
+    setUser({});
+    setLoggedIn(false);
+  };
+
+  const addFav = () => {
+    let userId = currUser.userId;
+    let favorite = {temp: 'temporary favorite'}
+    axios.post('/api/addFavoriteToUser', 
+      {
+        userId,
+        favorite
+      }
+    )
+    .then(response => console.log(response))
+    .catch(err=>console.log(err))
+  }
 
   const [drawerHeight, setDrawerHeight] = useState(0);
 
@@ -126,6 +116,26 @@ const MainContainer = () => {
   }, [searchResultsOpen]);
 
   console.log('drawerHeight: ', drawerHeight);
+
+  // return (
+  //   <Box>
+  //     <Map2 
+  //     getConcerts={getConcerts}
+  //     concerts={concerts}
+  //     setStartDate={setStartDate}
+  //     setEndDate={setEndDate}
+  //     startDate={startDate}
+  //     endDate={endDate}
+  //     />
+  //     <Accordion
+  // //  height: '40px',
+  // // position: 'fixed',
+  // // bottom:'0%',
+  // // width:'100%',
+  // // background-color: '#393838',
+  // // opacity: 1,
+
+  
 
   return (
     <Box>
@@ -165,12 +175,15 @@ const MainContainer = () => {
         </Toolbar>
       </AppBar>
 
-      <Map2 getConcerts={getConcerts} concerts={concerts} />
+      <Map2 
+      getConcerts={getConcerts}
+      concerts={concerts}
+      setStartDate={setStartDate}
+      setEndDate={setEndDate}
+      startDate={startDate}
+      endDate={endDate}
+      />
       <MenuButton click={() => showDrawer(true)} />
-      {/* <Search
-        testSearchResultsDisplay={() => testSearchResultsDisplay()}
-        handleSearchForLocation={() => handleSearchForLocation()}
-      /> */}
       <Drawer
         className="logRegDrawer"
         anchor={'left'}
@@ -181,10 +194,13 @@ const MainContainer = () => {
           showSignIn={() => showSignIn(true)}
           showRegister={() => showRegister(true)}
           showProfile={() => {
-            handleGetUser();
             showProfile(true);
             showDrawer(false);
           }}
+          loggedIn={loggedIn}
+          showDrawer={showDrawer}
+          logOut={() => logOut()}
+          addFav={addFav}
         />
       </Drawer>
       <Drawer
@@ -218,7 +234,12 @@ const MainContainer = () => {
         open={signInOpen}
         onClose={() => showSignIn(false)}
       >
-        <Login currUser={currUser} setUser={setUser} />
+        <Login 
+        currUser={currUser} 
+        setUser={setUser}
+        setLoggedIn={setLoggedIn}
+        showSignIn={showSignIn}
+        showDrawer={showDrawer} />
       </Modal>
       <Modal
         className="registerModal"
