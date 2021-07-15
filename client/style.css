@@ -3,9 +3,9 @@
   font-family: 'Work Sans', sans-serif;
 }
 
-/* p:hover{
+p:hover{
     border-bottom: 2px solid white;
-} */
+}
 
 #slide {
     position: absolute;
@@ -195,4 +195,3 @@ color: var(--gray)
     left: 0;
     margin-left: 10px
 }
-
