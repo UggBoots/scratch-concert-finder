@@ -50,8 +50,8 @@ const MainContainer = () => {
   const [currUser, setUser] = useState({});
   const [concerts, setConcerts] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false)
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState('01-01-2021');
+  const [endDate, setEndDate] = useState('01-02-2021');
   const [radius, setRadius] = useState('')
 
   
