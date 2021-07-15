@@ -12,8 +12,6 @@ describe('End to end testing for in the loop application', () => {
 		cy.visit('http://localhost:8080/')		
 	  });
 	
-	
-
 	it('Find an infinity logo and click it', () => {
 		cy.get('.MenuButton').should('have.length', 1);
 		cy.get('.MenuButton').click();
@@ -55,13 +53,19 @@ describe('End to end testing for in the loop application', () => {
 		cy.get('html').clickOutside();
 	});
 
-	it('Enter the city of New York and search for a concert', () => {
-		cy.get('.mapboxgl-ctrl-geocoder--input').should('have.length', 1);
+	it('Enter the city of New York and search for a concert',  () => {
+		cy.wait(1000);
 		cy.get('.mapboxgl-ctrl-geocoder--input').click();
 		cy.get('.mapboxgl-ctrl-geocoder--input').type('New York City');
-		cy.get('.mapboxgl-ctrl-geocoder--input').type('{enter}')
-		cy.get('img').click()
-		cy.get('.mapboxgl-popup-content').click();
+		cy.get('.mapboxgl-ctrl-geocoder--input').type('{enter}');
+		cy.wait(3000);
+		cy.get('html').clickOutsideFar();
+	});
+
+	it('Click a concert and favorite it',  () => {
+		cy.wait(1000);
+		cy.get('.overlays').first().click();
+		cy.get('html').clickOutsideFar();
 	});
 
 })
