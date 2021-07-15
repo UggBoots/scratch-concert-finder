@@ -57,12 +57,10 @@ const Login = React.forwardRef((props, ref) => {
   //function to handle login request to BE
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/signin', 
-      {
-        email,
-        password
-      }
-    )
+    axios.post('/api/signin', {
+      email,
+      password
+    })
       .then((response) => {
         if (!response.data.user) {
           displayFailMsg(true);
