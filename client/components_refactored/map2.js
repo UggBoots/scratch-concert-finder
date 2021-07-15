@@ -86,7 +86,7 @@ const Map2 = (props) => {
 
   const handleViewportChange = useCallback((newViewport) => {
     setViewport(newViewport);
-    props.getConcerts(viewport.latitude, viewport.longitude, false);
+    // props.getConcerts(viewport.latitude, viewport.longitude, false);
   });
 
   let today = new Date().toISOString().slice(0, 10)
