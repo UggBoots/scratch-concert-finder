@@ -91,7 +91,7 @@ const MainContainer = () => {
       date: '2021/07/14',
       radius: 25,
     });
-    console.log(predictHQResults);
+    // console.log(predictHQResults);
     setConcerts(predictHQResults.results);
     showSearchResults(showSearchResultsBool);
   };
