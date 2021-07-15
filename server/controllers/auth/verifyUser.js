@@ -8,7 +8,7 @@ const verifyUser =  async (req, res, next) => {
     try {
         const { email, password } = req.body;
         const findUserInDB = await User.findOne({email: email});
-        if (!findUserInDB) return res.status().json({message: 'User does not exist'});
+        if (!findUserInDB) return res.status(200).json({message: 'User does not exist'});
         const validatePassword = await bcrypt.compare(password, findUserInDB.password);
         if (validatePassword) {
             req.session.user = {

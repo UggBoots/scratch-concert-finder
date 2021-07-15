@@ -57,10 +57,8 @@ const Login = React.forwardRef((props, ref) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('/api/signin', {
-      params: {
-        email,
-        password
-      }
+      email,
+      password
     })
       .then((response) => {
         //set user
@@ -69,9 +67,9 @@ const Login = React.forwardRef((props, ref) => {
         console.log(props.currUser);
       })
       .then(displaySuccessMsg(true))
-      .then(setTimeout(()=>{
+      .then(setTimeout(() => {
         props.setLoggedIn(true);
-        props.showSignIn(false); 
+        props.showSignIn(false);
         props.showDrawer(false);
       }, 1500))
       .catch((err) => console.log(err))
@@ -145,14 +143,14 @@ const Login = React.forwardRef((props, ref) => {
           </Grid>
         </Grid>
         <Snackbar
-        open={successMsg}
-        onClose={handleClose}>
+          open={successMsg}
+          onClose={handleClose}>
           <SnackbarContent
             message={'Login Success!  Redirecting to main page...'}
             className={classes.snackbarContent}>
           </SnackbarContent>
-        </Snackbar> 
-        
+        </Snackbar>
+
       </form>
     </div>
   );
