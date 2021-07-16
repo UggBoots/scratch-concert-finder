@@ -55,16 +55,17 @@ const Map2 = (props) => {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     });
+    props.getConcerts(position.coords.latitude, position.coords.longitude, false);
   };
 
-  const locationUnavaliable = () => {
+  const locationUnavailable = () => {
     setViewport({ ...viewport, latitude: '40.7128', longitude: '-74.0060' });
   };
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       getCurrentLocation,
-      locationUnavaliable,
+      locationUnavailable,
       { enableHighAccuracy: true }
     );
   }, []);
@@ -79,7 +80,8 @@ const Map2 = (props) => {
   };
 
   const handleViewportChange = useCallback((newViewport) => {
-    return setViewport(newViewport);
+    setViewport(newViewport);
+    // props.getConcerts(viewport.latitude, viewport.longitude, false);
   });
 
   const closePopUp = () => {
@@ -112,6 +114,7 @@ const Map2 = (props) => {
             margin: 'auto',
           }}
           ref={geocoderContainerRef}
+          id="red"
         />
         <div className={classes.paper}
           style={{

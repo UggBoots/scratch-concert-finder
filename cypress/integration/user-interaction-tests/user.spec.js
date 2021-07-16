@@ -12,8 +12,6 @@ describe('End to end testing for in the loop application', () => {
 		cy.visit('http://localhost:8080/')		
 	  });
 	
-	
-
 	it('Find an infinity logo and click it', () => {
 		cy.get('.MenuButton').should('have.length', 1);
 		cy.get('.MenuButton').click();
@@ -39,8 +37,40 @@ describe('End to end testing for in the loop application', () => {
 		cy.get('html').clickOutside();
 		cy.get('html').clickOutside();
 	});
+	
+	it('Enter the city of New York and search for a concert',  () => {
+		cy.wait(1000);
+		cy.get('.mapboxgl-ctrl-geocoder--input').click();
+		cy.get('.mapboxgl-ctrl-geocoder--input').type('New York City');
+		cy.get('.mapboxgl-ctrl-geocoder--input').type('{enter}');
+		cy.wait(3000);
+		cy.get('html').clickOutsideFar();
+	});
 
-	it('Login with the user that just registered', () => {
+	it('Select concert menu, find a concert, and favorite it',  () => {
+		cy.wait(1000);
+		cy.get('.musicNoteBtn').parent().first().click();
+		cy.get('.MuiToolbar-root > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root > path').click();
+	});
+
+	it('Click favorites menu and view favorites',  () => {
+		cy.wait(1000);
+		cy.get('.MenuButton').should('have.length', 1);
+		cy.get('.MenuButton').click();
+		cy.get(':nth-child(3) > .MuiListItemText-root > .MuiTypography-root').click();
+		cy.wait(3000);
+		cy.get('body').clickOutside();
+	});
+
+it('Logout and log back in with registered user', () => {
+		cy.get('.MenuButton').click();
+		cy.get('[id^=logout]').should('have.length', 1);
+		cy.get('[id^=logout]').click();
+		cy.get('html').clickOutside();
+		cy.wait(3000);
+	});
+
+	it('Login with the user that was registered', () => {
 		cy.get('.MenuButton').click();
 		cy.get('[id^=login]').should('have.length', 1);
 		cy.get('[id^=login]').click();
@@ -51,17 +81,15 @@ describe('End to end testing for in the loop application', () => {
 		cy.get('.logPW').type(password);
 		cy.get('[id^=logC]').should('have.length', 1);
 		cy.get('[id^=logC]').click();
-		cy.get('html').clickOutside();
-		cy.get('html').clickOutside();
 	});
 
-	it('Enter the city of New York and search for a concert', () => {
-		cy.get('.mapboxgl-ctrl-geocoder--input').should('have.length', 1);
-		cy.get('.mapboxgl-ctrl-geocoder--input').click();
-		cy.get('.mapboxgl-ctrl-geocoder--input').type('New York City');
-		cy.get('.mapboxgl-ctrl-geocoder--input').type('{enter}')
-		cy.get('img').click()
-		cy.get('.mapboxgl-popup-content').click();
+	it('Last check to see if favorites are still there',  () => {
+		cy.wait(1000);
+		cy.get('.MenuButton').should('have.length', 1);
+		cy.get('.MenuButton').click();
+		cy.get(':nth-child(3) > .MuiListItemText-root > .MuiTypography-root').click();
+		cy.wait(3000);
+		cy.get('body').clickOutside();
 	});
 
 })
