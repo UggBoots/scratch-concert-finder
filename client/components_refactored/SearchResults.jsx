@@ -77,6 +77,7 @@ const SearchResults = (props) => {
                   <MusicNoteIcon />
                 </IconButton> */}
                 <IconButton
+                className="musicNoteBtn"
                   name={i} 
                   color='default'
                   onClick={(e) => {
