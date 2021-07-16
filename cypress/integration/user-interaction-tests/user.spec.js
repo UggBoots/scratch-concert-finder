@@ -9,7 +9,7 @@ describe('End to end testing for in the loop application', () => {
 	
 
 	before(() => {
-		cy.visit('http://localhost:8080/')		
+		cy.visit('http://localhost:8080/');		
 	  });
 	
 	it('Find an infinity logo and click it', () => {
@@ -37,6 +37,20 @@ describe('End to end testing for in the loop application', () => {
 		cy.get('html').clickOutside();
 		cy.get('html').clickOutside();
 	});
+
+	it('Change date range',  () => {
+		cy.wait(1000);
+		cy.get(':nth-child(1) > .MuiFormControl-root > .MuiInputBase-root > .MuiInputAdornment-root > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root').click();
+		cy.get(':nth-child(4) > :nth-child(1) > .MuiButtonBase-root > .MuiIconButton-label > .MuiTypography-root').click();
+		cy.get('html').clickOutsideFar();
+		cy.get(':nth-child(2) > .MuiFormControl-root > .MuiInputBase-root > .MuiInputAdornment-root > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root').click();
+		cy.get(':nth-child(4) > :nth-child(3) > .MuiButtonBase-root > .MuiIconButton-label > .MuiTypography-root').click();
+		cy.get('html').clickOutsideFar();
+	});
+
+	it('Changes the distance radius using the slider', () => {
+		cy.get('.MuiSlider-thumb').trigger('mousedown', 'left')
+	})
 	
 	it('Enter the city of New York and search for a concert',  () => {
 		cy.wait(1000);
@@ -48,6 +62,7 @@ describe('End to end testing for in the loop application', () => {
 	});
 
 	it('Select concert menu, find a concert, and favorite it',  () => {
+		cy.viewport('macbook-16')	
 		cy.wait(1000);
 		cy.get('.musicNoteBtn').parent().first().click();
 		cy.get('.MuiToolbar-root > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root > path').click();
@@ -90,6 +105,9 @@ it('Logout and log back in with registered user', () => {
 		cy.get(':nth-child(3) > .MuiListItemText-root > .MuiTypography-root').click();
 		cy.wait(3000);
 		cy.get('body').clickOutside();
+		cy.wait(1000);
+		cy.get('.mapboxgl-ctrl-geocoder--input').click();
+		cy.get('.mapboxgl-ctrl-geocoder--input').type('Thank you for watching the Cypress demo!');
 	});
 
 })
