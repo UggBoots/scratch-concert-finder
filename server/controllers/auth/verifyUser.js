@@ -1,11 +1,17 @@
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/index');
 
-// queries User table to check to see if the email provided exsists, if true, will check to make sure the client provided password
-// and password from User table are the same
+/**
+ * 
+ * @param {email, password} req.body 
+ * @description middleware that uses email and password from req.body to create a new session.
+ * @description the middleware will return a message saying user does not exist.  If user is found the hashed password from database will be 
+ * @description to password provided by the client.  If passwords match a session will be created in database
+ * 
+ * @returns message saying that user was signed in and req.session.user
+ */
 
 const verifyUser =  async (req, res, next) => {
-    console.log('test')
     try {
         const { email, password } = req.body;
         const findUserInDB = await User.findOne({email: email});

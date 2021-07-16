@@ -78,7 +78,7 @@ const MainContainer = () => {
   const [currFavs, setFavs] = useState([]);
 
   //getConcerts - makes call to BE to get the predictHQ results
-  const getConcerts = async (lat, long) => {
+  const getConcerts = async (lat, long, showSearchResultsBool=true) => {
     // const latLong = `${lat},${long}`;
     // data = year/month/day
     const predictHQResults = await getConcertsFromPredictHQ({
@@ -91,7 +91,7 @@ const MainContainer = () => {
       radius: radius,
     });
     setConcerts(predictHQResults.results);
-    showSearchResults(true);
+    showSearchResults(showSearchResultsBool);
   };
 
   //logout - sets current user to null, logged out to false

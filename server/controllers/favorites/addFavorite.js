@@ -1,5 +1,11 @@
 const { User } = require('../../db/index');
 
+/**
+ * 
+ * @param {userId, favorite} req 
+ * @description middleware that adds a favorite concert from client to the user on database
+ */
+
 const addFavorite = async (req, res, next) => {
     try {
         const {userId, favorite} = req.body;
