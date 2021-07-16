@@ -5,7 +5,7 @@
  * ************************************
  */
 
-import React from 'react';
+ import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Box,
@@ -16,6 +16,7 @@ import {
   CardContent
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+import FavCard from './FavCard'
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -24,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'center'
   }
 }));
+
+
 
 
 const Profile = (props) => {
@@ -42,7 +45,7 @@ const Profile = (props) => {
         color='primary'
         variant='h4'
         > 
-        Welcome {props.currUser.user.name}!
+        Welcome {props.currUser.name}!
       </Typography>
       <Avatar 
         className={classes.avatar}
@@ -51,7 +54,7 @@ const Profile = (props) => {
       <Typography
         align='center'
         >
-        {props.currUser.user.email}
+        {props.currUser.email}
       </Typography>
       <hr />
       <Typography
@@ -60,10 +63,11 @@ const Profile = (props) => {
         >
         Your upcoming shows:
       </Typography>
-      <Card>
+
+      {/* <Card>
         <CardContent>
           <Typography color='primary'>
-            Lollapalooza 2021
+            {props.currUser.favorites[0].favorite.description}
           </Typography>
           <Typography>
             Date: November 28, 2021 @ 7:00 PM
@@ -72,7 +76,16 @@ const Profile = (props) => {
             Location: Bowery Ballroom, 123 Bowery, New York, NY 11206
           </Typography>
         </CardContent>
-      </Card>
+      </Card> */}
+      <div>
+        {props.currFavs.map((card, i) => (
+          <FavCard 
+            currUser={props.currUser}
+            currFavs={props.currFavs}
+            key={i}
+            num={i}/>
+        ))}
+      </div>
     </Grid>
   );
 };
