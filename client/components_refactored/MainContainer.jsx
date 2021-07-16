@@ -63,7 +63,7 @@ const MainContainer = () => {
   const [loggedIn, setLoggedIn] = useState(false)
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
-  const [radius, setRadius] = useState('')
+  const [radius, setRadius] = useState(25)
   const [currFavs, setFavs] = useState([])
 
   
@@ -79,7 +79,7 @@ const MainContainer = () => {
       //note - below needs to be parsed
       startDate: startDate,
       endDate: endDate,
-      radius: 25,
+      radius: radius,
     });
     console.log(startDate)
     console.log(predictHQResults);
@@ -204,8 +204,10 @@ const MainContainer = () => {
       concerts={concerts}
       setStartDate={setStartDate}
       setEndDate={setEndDate}
+      setRadius={setRadius}
       startDate={startDate}
       endDate={endDate}
+      radius={radius}
       />
       <MenuButton click={() => showDrawer(true)} />
       <Drawer
@@ -278,7 +280,13 @@ const MainContainer = () => {
         open={registerOpen}
         onClose={() => showRegister(false)}
       >
-        <Register currUser={currUser} setUser={setUser} />
+        <Register 
+          currUser={currUser} 
+          setUser={setUser}
+          setLoggedIn={setLoggedIn}
+          showSignIn={showSignIn}
+          showRegister={showRegister}
+          showDrawer={showDrawer}  />
       </Modal>
     </Box>
   );
