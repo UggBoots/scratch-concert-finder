@@ -51,36 +51,44 @@ const Login = React.forwardRef((props, ref) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [successMsg, displaySuccessMsg] = useState(false);
+  const [failMsg, displayFailMsg] = useState(false);
 
 
   //function to handle login request to BE
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('/api/signin', {
-      params: {
-        email,
-        password
-      }
+      email,
+      password
     })
       .then((response) => {
-        //set user
-        console.log(response);
-        props.setUser(response.data.user);
-        console.log(props.currUser);
+        if (!response.data.user) {
+          displayFailMsg(true);
+          return;
+        }
+        else {
+          props.setUser(response.data.user);
+          displaySuccessMsg(true);
+          setTimeout(()=>{
+            props.setLoggedIn(true);
+            props.showSignIn(false); 
+            props.showDrawer(false);
+          }, 1500)
+        }   
       })
-      .then(displaySuccessMsg(true))
-      .then(setTimeout(()=>{
-        props.setLoggedIn(true);
-        props.showSignIn(false); 
-        props.showDrawer(false);
-      }, 1500))
       .catch((err) => console.log(err))
   };
 
   //handle close for success msg
-  const handleClose = () => {
+  const handleCloseS = () => {
     displaySuccessMsg(false)
   }
+
+  //handle close for fail msg
+  const handleCloseF = () => {
+    displayFailMsg(false)
+  }
+
 
   return (
     <div ref={ref} className={classes.paper}>
@@ -145,10 +153,18 @@ const Login = React.forwardRef((props, ref) => {
           </Grid>
         </Grid>
         <Snackbar
-        open={successMsg}
-        onClose={handleClose}>
+          open={successMsg}
+          onClose={handleCloseS}>
           <SnackbarContent
             message={'Login Success!  Redirecting to main page...'}
+            className={classes.snackbarContent}>
+          </SnackbarContent>
+        </Snackbar> 
+        <Snackbar
+          open={failMsg}
+          onClose={handleCloseF}>
+          <SnackbarContent
+            message={'Login failed, please try again'}
             className={classes.snackbarContent}>
           </SnackbarContent>
         </Snackbar> 

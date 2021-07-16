@@ -9,6 +9,7 @@ const isAlreadyLoggedIn = require('../controllers/auth/isAlreadyLoggedIn');
 const isAlreadySignedOut = require('../controllers/auth/isAlreadySignedOut');
 const addFavorite = require('../controllers/favorites/addFavorite');
 const getFavorites = require('../controllers/favorites/getFavorites');
+const removeFavorite = require('../controllers/favorites/removeFavorite');
 
 router.get('/location-search', controllers.sendPotentialLocations);
 
@@ -31,9 +32,13 @@ router.post('/addFavoriteToUser', addFavorite, (req, res) => {
     return res.status(200).json(res.locals.favorite);
 });
 
-router.get('/getFavorites', getFavorites, (req, res) => {
+router.post('/getFavorites', getFavorites, (req, res) => {
     return res.status(200).json(res.locals.favorites);
 });
+
+router.post('/removeFavorite', removeFavorite, getFavorites, (req, res) => {
+    return res.status(200).json(res.locals.favorites);
+})
 
 router.post('/location-search', controllers.sendPotentialLocations);
 

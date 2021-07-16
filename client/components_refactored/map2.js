@@ -14,6 +14,7 @@ import axios from 'axios';
 import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
 import PopupCard from './PopupCard';
 import { makeStyles } from '@material-ui/core/styles';
+import DateBar from './DateBar';
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -40,18 +41,6 @@ const Map2 = (props) => {
 
   const [selectedConcert, setSelectedConcert] = useState(null);
 
-  const getConcerts = async (lat, long) => {
-    // const latLong = `${lat},${long}`;
-    // data = year/month/day
-    const predictHQResults = await getConcertsFromPredictHQ({
-      lat: lat,
-      lng: long,
-      date: '2021/07/17',
-      radius: 50,
-    });
-    console.log(predictHQResults);
-    setConcerts(predictHQResults.results);
-  };
 
   const getCurrentLocation = (position) => {
     setViewport({
@@ -118,16 +107,19 @@ const Map2 = (props) => {
           ref={geocoderContainerRef}
           id="red"
         />
-        <div>
-          <TextField
-            id="date"
-            label="date"
-            type="date"
-            defaultValue={today}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
+        <div
+          style={{
+            width: '60%',
+            margin: 'auto',
+          }}>
+          <DateBar 
+            testProp={'test'}
+            setStartDate={props.setStartDate}
+            setEndDate={props.setEndDate}
+            setRadius={props.setRadius}
+            startDate={props.startDate}
+            endDate={props.endDate}
+            radius={props.radius}
           />
         </div>
       </div>
