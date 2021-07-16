@@ -92,14 +92,11 @@ const MainContainer = () => {
 
   const handleProfile = () => {
     let userId = currUser.userId;
-    console.log('before', currUser);
     axios
       .post('/api/getFavorites', {
         userId,
       })
       .then((response) => {
-        console.log('after', currUser);
-        console.log('profile response', response.data);
         setFavs(response.data.favorites);
       })
       .then(() => {
@@ -124,10 +121,6 @@ const MainContainer = () => {
 
   //addFav - adds fav in DB
   const addFav = (favorite) => {
-    //below 3 lines - update currUser state w/o calling backend (side effects???)
-    // let updatedUser = currUser;
-    // updatedUser.favorites.push({favorite: fav});
-    //setUser(updatedUser);
     let userId = currUser.userId;
     axios
       .post('/api/addFavoriteToUser', {

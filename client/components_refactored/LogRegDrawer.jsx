@@ -62,9 +62,6 @@ function LogRegDrawer(props) {
           <ListItem button component="a" onClick={()=>props.showProfile()}>
             <ListItemText primary={'Test - show profile'} />
           </ListItem>
-          <ListItem button component="a" onClick={()=>props.addFav()}>
-            <ListItemText primary={'Test - add fav'} />
-          </ListItem>
         </List>
         <Snackbar
         open={logOutMsg}

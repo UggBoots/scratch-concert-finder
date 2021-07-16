@@ -15,6 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import IconButton from '@material-ui/core/IconButton';
+import Row from './Row'
 
 /*
 TODO:
@@ -31,21 +32,12 @@ Location Name
 Location Address
 */
 
+
+
 const SearchResults = (props) => {
-  const [buttonArr, setArr] = useState([]);
 
-  // const toggleColor = (e) => {
-  //   e.preventDefault();
-  //   console.log(e.target.color)
-  //   e.target.color = 'default' ? 'primary' : 'default;'
-  // }
-
-  const toggleColor = (e, i) => {
-    console.log(e.target.name);
-  };
-
-  const handleClick = (i) => {
-    props.addFav(props.concerts[i]);
+  const handleClick = (row) => {
+    props.addFav(row);
   };
 
   return (
@@ -62,37 +54,7 @@ const SearchResults = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.concerts.map((row, i) => (
-            <TableRow key={i} onClick={() => console.log(row)}>
-              <TableCell>{row.title}</TableCell>
-              <TableCell>{row.startDate}</TableCell>
-              <TableCell>{row.startTime}</TableCell>
-              <TableCell>
-                {row.entities[0] ? row.entities[0].name : 'n/a'}
-              </TableCell>
-              <TableCell>
-                {row.entities[0]
-                  ? row.entities[0].formatted_address
-                  : 'none found'}
-              </TableCell>
-              <TableCell>
-                {/* <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
-                  <MusicNoteIcon />
-                </IconButton> */}
-                <IconButton
-                className="musicNoteBtn"
-                  name={i} 
-                  color='default'
-                  onClick={(e) => {
-                    handleClick(i);
-                    toggleColor(e);
-                  }}
-                >
-                  <MusicNoteIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
+        {props.concerts.map((row) => <Row key={row.id} row={row} handleClick={handleClick} />)}
         </TableBody>
       </Table>
       <div>
@@ -103,3 +65,43 @@ const SearchResults = (props) => {
 };
 
 export default SearchResults;
+
+
+// {props.concerts.map((row, i) => {
+//   row['isfav'] = false;
+//   return(
+//   <TableRow key={i} onClick={() => console.log(row)}>
+//     <TableCell>{row.title}</TableCell>
+//     <TableCell>{row.startDate}</TableCell>
+//     <TableCell>{row.startTime}</TableCell>
+//     <TableCell>
+//       {row.entities[0] ? row.entities[0].name : 'n/a'}
+//     </TableCell>
+//     <TableCell>
+//       {row.entities[0]
+//         ? row.entities[0].formatted_address
+//         : 'none found'}
+//     </TableCell>
+//     <TableCell>
+      {/* <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
+        <MusicNoteIcon />
+      </IconButton> */}
+      {/* <IconButton
+        name={i}
+        color={isFav ? 'primary' : 'default'}
+        onClick={(e) => {
+          handleClick(row);
+          row.isfav = true;
+          toggleColor(e);
+        }}
+      >
+        <MusicNoteIcon />
+      </IconButton>
+    </TableCell>
+  </TableRow>
+)})} */}
+
+
+
+
+
