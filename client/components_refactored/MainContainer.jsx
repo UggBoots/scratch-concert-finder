@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const MainContainer = () => {
   const classes = useStyles();
 
-  let today = new Date().toISOString().slice(0, 10)
+  let today = new Date().toISOString().slice(0, 10);
 
   //hooks
   const [drawerOpen, showDrawer] = useState(false);
@@ -60,13 +60,11 @@ const MainContainer = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currUser, setUser] = useState({});
   const [concerts, setConcerts] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
-  const [radius, setRadius] = useState(25)
-  const [currFavs, setFavs] = useState([])
-
-  
+  const [radius, setRadius] = useState(25);
+  const [currFavs, setFavs] = useState([]);
 
   //getConcerts - makes call to BE to get the predictHQ results
   const getConcerts = async (lat, long) => {
@@ -81,7 +79,7 @@ const MainContainer = () => {
       endDate: endDate,
       radius: radius,
     });
-    console.log(startDate)
+    console.log(startDate);
     console.log(predictHQResults);
     setConcerts(predictHQResults.results);
     showSearchResults(true);
@@ -95,36 +93,35 @@ const MainContainer = () => {
 
   const handleProfile = () => {
     let userId = currUser.userId;
-    console.log('before', currUser)
-    axios.post('/api/getFavorites', 
-      {
-        userId
-      }
-    )
-    .then(response => {
-      console.log('after', currUser)
-      console.log('profile response', response.data)
-      setFavs(response.data.favorites)
-    })
-    .then(()=>{
-      showDrawer(false) 
-      showProfile(true)})
-    .catch(err=>console.log(err))
-  }
+    console.log('before', currUser);
+    axios
+      .post('/api/getFavorites', {
+        userId,
+      })
+      .then((response) => {
+        console.log('after', currUser);
+        console.log('profile response', response.data);
+        setFavs(response.data.favorites);
+      })
+      .then(() => {
+        showDrawer(false);
+        showProfile(true);
+      })
+      .catch((err) => console.log(err));
+  };
 
   //get favs - grabs user obj and updates in state
   const getFavs = () => {
     let userId = currUser.userId;
-    axios.post('/api/getFavorites', 
-      {
-        userId
-      }
-    )
-    .then(response => {
-      setFavs(response.data.favorites)
-    })
-    .catch(err=>console.log(err))
-  }
+    axios
+      .post('/api/getFavorites', {
+        userId,
+      })
+      .then((response) => {
+        setFavs(response.data.favorites);
+      })
+      .catch((err) => console.log(err));
+  };
 
   //addFav - adds fav in DB
   const addFav = (favorite) => {
@@ -133,18 +130,15 @@ const MainContainer = () => {
     // updatedUser.favorites.push({favorite: fav});
     //setUser(updatedUser);
     let userId = currUser.userId;
-    axios.post('/api/addFavoriteToUser', 
-      {
+    axios
+      .post('/api/addFavoriteToUser', {
         userId,
-        favorite
-      }
-    )
-    .then(response => console.log(response))
-    //.then(getFavs())
-    .catch(err=>console.log(err))
-  }
-
-  
+        favorite,
+      })
+      .then((response) => console.log(response))
+      //.then(getFavs())
+      .catch((err) => console.log(err));
+  };
 
   const [drawerHeight, setDrawerHeight] = useState(0);
 
@@ -157,10 +151,28 @@ const MainContainer = () => {
     if (searchResultsOpen) {
       setDrawerHeight(document.getElementById('bottomDrawer').offsetHeight);
     } else setDrawerHeight(0);
-  }, [searchResultsOpen]);
+  }, [searchResultsOpen, concerts]);
+
+  // return (
+  //   <Box>
+  //     <Map2
+  //     getConcerts={getConcerts}
+  //     concerts={concerts}
+  //     setStartDate={setStartDate}
+  //     setEndDate={setEndDate}
+  //     startDate={startDate}
+  //     endDate={endDate}
+  //     />
+  //     <Accordion
+  // //  height: '40px',
+  // // position: 'fixed',
+  // // bottom:'0%',
+  // // width:'100%',
+  // // background-color: '#393838',
+  // // opacity: 1,
 
   console.log('drawerHeight: ', drawerHeight);
-  
+
   return (
     <Box>
       {/* <div
@@ -199,15 +211,15 @@ const MainContainer = () => {
         </Toolbar>
       </AppBar>
 
-      <Map2 
-      getConcerts={getConcerts}
-      concerts={concerts}
-      setStartDate={setStartDate}
-      setEndDate={setEndDate}
-      setRadius={setRadius}
-      startDate={startDate}
-      endDate={endDate}
-      radius={radius}
+      <Map2
+        getConcerts={getConcerts}
+        concerts={concerts}
+        setStartDate={setStartDate}
+        setEndDate={setEndDate}
+        setRadius={setRadius}
+        startDate={startDate}
+        endDate={endDate}
+        radius={radius}
       />
       <MenuButton click={() => showDrawer(true)} />
       <Drawer
@@ -221,9 +233,9 @@ const MainContainer = () => {
           showRegister={() => showRegister(true)}
           showProfile={() => {
             // getFavs()
-            // showDrawer(false) 
+            // showDrawer(false)
             // showProfile(true)
-            handleProfile()
+            handleProfile();
           }}
           loggedIn={loggedIn}
           showDrawer={showDrawer}
@@ -239,10 +251,7 @@ const MainContainer = () => {
         BackdropProps={{ invisible: true }}
         classes={{ paper: classes.paper }}
       >
-        <Profile 
-          currUser={currUser}
-          currFavs={currFavs}
-        />
+        <Profile currUser={currUser} currFavs={currFavs} />
       </Drawer>
       <Drawer
         variant="persistent"
@@ -257,10 +266,11 @@ const MainContainer = () => {
         BackdropProps={{ invisible: true }}
       >
         <div id="bottomDrawer">
-          <SearchResults 
-          searchResults={searchResults} 
-          concerts={concerts}
-          addFav={addFav} />
+          <SearchResults
+            searchResults={searchResults}
+            concerts={concerts}
+            addFav={addFav}
+          />
         </div>
       </Drawer>
       <Modal
@@ -268,25 +278,27 @@ const MainContainer = () => {
         open={signInOpen}
         onClose={() => showSignIn(false)}
       >
-        <Login 
-        currUser={currUser} 
-        setUser={setUser}
-        setLoggedIn={setLoggedIn}
-        showSignIn={showSignIn}
-        showDrawer={showDrawer} />
+        <Login
+          currUser={currUser}
+          setUser={setUser}
+          setLoggedIn={setLoggedIn}
+          showSignIn={showSignIn}
+          showDrawer={showDrawer}
+        />
       </Modal>
       <Modal
         className="registerModal"
         open={registerOpen}
         onClose={() => showRegister(false)}
       >
-        <Register 
-          currUser={currUser} 
+        <Register
+          currUser={currUser}
           setUser={setUser}
           setLoggedIn={setLoggedIn}
           showSignIn={showSignIn}
           showRegister={showRegister}
-          showDrawer={showDrawer}  />
+          showDrawer={showDrawer}
+        />
       </Modal>
     </Box>
   );

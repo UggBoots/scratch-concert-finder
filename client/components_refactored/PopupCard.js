@@ -10,16 +10,19 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const PopupCard = ({
+  selectedConcert,
   title,
   locationName,
   address,
   description,
   closePopUp,
 }) => {
-  console.log(description);
   return (
     <ClickAwayListener onClickAway={closePopUp}>
-      <Card style={{ maxWidth: '33vw' }}>
+      <Card
+        style={{ maxWidth: '33vw' }}
+        onClick={() => console.log(selectedConcert)}
+      >
         <CardHeader
           action={
             <IconButton
@@ -29,12 +32,12 @@ const PopupCard = ({
               <FavoriteIcon />
             </IconButton>
           }
-          title={title}
-          subheader={locationName}
+          title={selectedConcert.title}
+          subheader={selectedConcert.entities[0].name}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {description}
+            {selectedConcert.description}
           </Typography>
         </CardContent>
       </Card>
