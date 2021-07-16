@@ -12,16 +12,18 @@ import MapGL, { Marker, Popup } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
 import axios from 'axios';
 import getConcertsFromPredictHQ from '../api/getConcertsFromPredictHQ';
+import PopupCard from './PopupCard';
 import { makeStyles } from '@material-ui/core/styles';
+import DateBar from './DateBar';
 
 const useStyles = makeStyles((theme) => ({
   textField: {
     marginLeft: theme.spacing(5),
     marginRight: theme.spacing(1),
-    left: "345px",
+    left: '345px',
     top: '10px',
     width: 200,
-  }
+  },
 }));
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
@@ -29,7 +31,6 @@ const MAPBOX_TOKEN =
   'pk.eyJ1IjoicHRyaTN1Z2dib290cyIsImEiOiJja3F1MTJxOXYwMDJrMndwbTUzN2Job3dqIn0._pOvjJBfdKTbopkvRX0Bhg';
 
 const Map2 = (props) => {
-
   const classes = useStyles();
 
   const [viewport, setViewport] = useState({
@@ -38,21 +39,8 @@ const Map2 = (props) => {
     zoom: 10,
   });
 
-
   const [selectedConcert, setSelectedConcert] = useState(null);
 
-  const getConcerts = async (lat, long) => {
-    // const latLong = `${lat},${long}`;
-    // data = year/month/day
-    const predictHQResults = await getConcertsFromPredictHQ({
-      lat: lat,
-      lng: long,
-      date: '2021/07/17',
-      radius: 50,
-    });
-    console.log(predictHQResults);
-    setConcerts(predictHQResults.results);
-  };
 
   const getCurrentLocation = (position) => {
     setViewport({
@@ -81,7 +69,7 @@ const Map2 = (props) => {
   const handleResult = (e) => {
     const latitude = e.result.center[1];
     const longitude = e.result.center[0];
-    props.getConcerts(latitude, longitude); 
+    props.getConcerts(latitude, longitude);
   };
 
   const handleViewportChange = useCallback((newViewport) => {
@@ -89,7 +77,10 @@ const Map2 = (props) => {
     // props.getConcerts(viewport.latitude, viewport.longitude, false);
   });
 
-  let today = new Date().toISOString().slice(0, 10)
+  const closePopUp = () => {
+    setSelectedConcert(null);
+  };
+  let today = new Date().toISOString().slice(0, 10);
 
   return (
     <div
@@ -117,16 +108,21 @@ const Map2 = (props) => {
           }}
           ref={geocoderContainerRef}
         />
-        <div>
-          <TextField
-           id="date"
-           label="date"
-           type="date"
-           defaultValue={today}
-           className={classes.textField}
-           InputLabelProps={{
-             shrink: true,
-           }} />
+        <div
+          style={{
+            width: '60%',
+            margin: 'auto',
+          }}
+        >
+          <DateBar
+            testProp={'test'}
+            setStartDate={props.setStartDate}
+            setEndDate={props.setEndDate}
+            setRadius={props.setRadius}
+            startDate={props.startDate}
+            endDate={props.endDate}
+            radius={props.radius}
+          />
         </div>
       </div>
 
@@ -176,16 +172,25 @@ const Map2 = (props) => {
           <Popup
             latitude={selectedConcert.location[1]}
             longitude={selectedConcert.location[0]}
-            onClose={() => {
-              setSelectedConcert(null);
-            }}
+            // onClose={() => {
+            //   setSelectedConcert(null);
+            // }}
           >
-            <div>
+            <PopupCard
+              selectedConcert={selectedConcert}
+              title={selectedConcert.title}
+              locationName={selectedConcert.entities[0].name}
+              address={selectedConcert.entities[0].formatted_address}
+              description={selectedConcert.description}
+              closePopUp={closePopUp}
+            />
+            {/* {console.log(selectedConcert)} */}
+            {/* <div>
               <h4>{selectedConcert.title}</h4>
               <h5>{selectedConcert.entities[0].name}</h5>
               <h6>{selectedConcert.entities[0].formatted_address}</h6>
               <p>{selectedConcert.description}</p>
-            </div>
+            </div> */}
           </Popup>
         ) : null}
       </MapGL>
