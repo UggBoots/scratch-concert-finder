@@ -11,9 +11,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -31,10 +32,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'lightgreen',
     color: 'black',
     alignSelf: 'center'
+  },
+  test: {
+    width: 200,
+    boxShadow: theme.shadows[5],
+    backgroundColor: 'pink',
+    color: 'primary'
   }
 }));
 
 function LogRegDrawer(props) {
+  
   const [logOutMsg, displayLogOutMsg] = useState(false);
   const classes = useStyles();
 
@@ -85,9 +93,6 @@ function LogRegDrawer(props) {
           <ListItemText id="registerID" primary={'Sign Up'} />
         </ListItem>
         <Divider />
-        <ListItem button component="a" onClick={()=>props.showProfile()}>
-          <ListItemText primary={'Test - show profile'} />
-        </ListItem>
       </List>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Card,
   CardHeader,
@@ -10,6 +10,7 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const PopupCard = ({
+  addFav,
   selectedConcert,
   title,
   locationName,
@@ -17,6 +18,13 @@ const PopupCard = ({
   description,
   closePopUp,
 }) => {
+
+  const [isFav, setIsFav] = useState(false)
+
+  const handleClick = () => {
+    setIsFav(!isFav)
+  }
+
   return (
     <ClickAwayListener onClickAway={closePopUp}>
       <Card
@@ -27,7 +35,8 @@ const PopupCard = ({
           action={
             <IconButton
               // aria-label="settings"
-              onClick={() => console.log('favorate clicked')}
+              color={isFav ? 'primary' : 'default'}
+              onClick={()=>{addFav(selectedConcert); handleClick()}}
             >
               <FavoriteIcon />
             </IconButton>

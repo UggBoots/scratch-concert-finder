@@ -177,11 +177,9 @@ const Map2 = (props) => {
           <Popup
             latitude={selectedConcert.location[1]}
             longitude={selectedConcert.location[0]}
-            // onClose={() => {
-            //   setSelectedConcert(null);
-            // }}
           >
             <PopupCard
+              addFav={props.addFav}
               selectedConcert={selectedConcert}
               title={selectedConcert.title}
               locationName={selectedConcert.entities[0].name}
@@ -189,13 +187,6 @@ const Map2 = (props) => {
               description={selectedConcert.description}
               closePopUp={closePopUp}
             />
-            {/* {console.log(selectedConcert)} */}
-            {/* <div>
-              <h4>{selectedConcert.title}</h4>
-              <h5>{selectedConcert.entities[0].name}</h5>
-              <h6>{selectedConcert.entities[0].formatted_address}</h6>
-              <p>{selectedConcert.description}</p>
-            </div> */}
           </Popup>
         ) : null}
       </MapGL>
