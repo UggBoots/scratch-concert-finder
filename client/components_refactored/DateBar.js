@@ -35,7 +35,7 @@ const DateBar = (props) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justifyContent="space-between">
-        <Grid item xs={8}>
+        <Grid item xs={4}>
           <KeyboardDatePicker
             disableToolbar
             variant="inline"
@@ -50,7 +50,7 @@ const DateBar = (props) => {
             }}
           />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={4}>
           <KeyboardDatePicker
             disableToolbar
             variant="inline"
@@ -66,7 +66,7 @@ const DateBar = (props) => {
           />
         </Grid>
         
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Typography>
             {'Radius (Miles)'}
           </Typography>

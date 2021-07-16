@@ -24,6 +24,13 @@ const useStyles = makeStyles((theme) => ({
     top: '10px',
     width: 200,
   },
+  paper: {
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  }
 }));
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
@@ -99,14 +106,14 @@ const Map2 = (props) => {
           margin: 'auto',
         }}
       >
-        <div
+        <div className={classes.paper}
           style={{
             width: '60%',
             margin: 'auto',
           }}
           ref={geocoderContainerRef}
         />
-        <div
+        <div className={classes.paper}
           style={{
             width: '60%',
             margin: 'auto',
