@@ -122,8 +122,9 @@ const Map2 = (props) => {
           style={{
             width: '60%',
             margin: 'auto',
-          }}>
-          <DateBar 
+          }}
+        >
+          <DateBar
             testProp={'test'}
             setStartDate={props.setStartDate}
             setEndDate={props.setEndDate}
@@ -184,13 +185,14 @@ const Map2 = (props) => {
             // }}
           >
             <PopupCard
+              selectedConcert={selectedConcert}
               title={selectedConcert.title}
               locationName={selectedConcert.entities[0].name}
               address={selectedConcert.entities[0].formatted_address}
               description={selectedConcert.description}
               closePopUp={closePopUp}
             />
-            {console.log(selectedConcert)}
+            {/* {console.log(selectedConcert)} */}
             {/* <div>
               <h4>{selectedConcert.title}</h4>
               <h5>{selectedConcert.entities[0].name}</h5>

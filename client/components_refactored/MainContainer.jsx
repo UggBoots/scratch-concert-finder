@@ -58,12 +58,10 @@ const MainContainer = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currUser, setUser] = useState({});
   const [concerts, setConcerts] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
   const [startDate, setStartDate] = useState('01-01-2021');
   const [endDate, setEndDate] = useState('01-02-2021');
-  const [radius, setRadius] = useState('')
-
-  
+  const [radius, setRadius] = useState('');
 
   //getConcerts - makes call to BE to get the predictHQ results
   const getConcerts = async (lat, long) => {
@@ -78,7 +76,7 @@ const MainContainer = () => {
       // endDate: endDate,
       radius: 25,
     });
-    console.log(predictHQResults);
+    // console.log(predictHQResults);
     setConcerts(predictHQResults.results);
     showSearchResults(true);
   };
@@ -91,16 +89,15 @@ const MainContainer = () => {
 
   const addFav = () => {
     let userId = currUser.userId;
-    let favorite = {temp: 'temporary favorite'}
-    axios.post('/api/addFavoriteToUser', 
-      {
+    let favorite = { temp: 'temporary favorite' };
+    axios
+      .post('/api/addFavoriteToUser', {
         userId,
-        favorite
-      }
-    )
-    .then(response => console.log(response))
-    .catch(err=>console.log(err))
-  }
+        favorite,
+      })
+      .then((response) => console.log('response: ', response))
+      .catch((err) => console.log(err));
+  };
 
   const [drawerHeight, setDrawerHeight] = useState(0);
 
@@ -113,13 +110,11 @@ const MainContainer = () => {
     if (searchResultsOpen) {
       setDrawerHeight(document.getElementById('bottomDrawer').offsetHeight);
     } else setDrawerHeight(0);
-  }, [searchResultsOpen]);
-
-  console.log('drawerHeight: ', drawerHeight);
+  }, [searchResultsOpen, concerts]);
 
   // return (
   //   <Box>
-  //     <Map2 
+  //     <Map2
   //     getConcerts={getConcerts}
   //     concerts={concerts}
   //     setStartDate={setStartDate}
@@ -134,8 +129,6 @@ const MainContainer = () => {
   // // width:'100%',
   // // background-color: '#393838',
   // // opacity: 1,
-
-  
 
   return (
     <Box>
@@ -175,13 +168,13 @@ const MainContainer = () => {
         </Toolbar>
       </AppBar>
 
-      <Map2 
-      getConcerts={getConcerts}
-      concerts={concerts}
-      setStartDate={setStartDate}
-      setEndDate={setEndDate}
-      startDate={startDate}
-      endDate={endDate}
+      <Map2
+        getConcerts={getConcerts}
+        concerts={concerts}
+        setStartDate={setStartDate}
+        setEndDate={setEndDate}
+        startDate={startDate}
+        endDate={endDate}
       />
       <MenuButton click={() => showDrawer(true)} />
       <Drawer
@@ -234,12 +227,13 @@ const MainContainer = () => {
         open={signInOpen}
         onClose={() => showSignIn(false)}
       >
-        <Login 
-        currUser={currUser} 
-        setUser={setUser}
-        setLoggedIn={setLoggedIn}
-        showSignIn={showSignIn}
-        showDrawer={showDrawer} />
+        <Login
+          currUser={currUser}
+          setUser={setUser}
+          setLoggedIn={setLoggedIn}
+          showSignIn={showSignIn}
+          showDrawer={showDrawer}
+        />
       </Modal>
       <Modal
         className="registerModal"

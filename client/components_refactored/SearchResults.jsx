@@ -14,7 +14,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import IconButton from '@material-ui/core/IconButton'
+import IconButton from '@material-ui/core/IconButton';
 
 /*
 TODO:
@@ -32,7 +32,6 @@ Location Address
 */
 
 const SearchResults = (props) => {
-
   return (
     <React.Fragment>
       <Table size="small">
@@ -48,12 +47,18 @@ const SearchResults = (props) => {
         </TableHead>
         <TableBody>
           {props.concerts.map((row, i) => (
-            <TableRow key={i}>
+            <TableRow key={i} onClick={() => console.log(row)}>
               <TableCell>{row.title}</TableCell>
               <TableCell>{row.startDate}</TableCell>
               <TableCell>{row.startTime}</TableCell>
-              <TableCell>{row.entities[0] ? row.entities[0].name : 'n/a'}</TableCell>
-              <TableCell>{row.entities[0] ? row.entities[0].formatted_address : 'none found'}</TableCell>
+              <TableCell>
+                {row.entities[0] ? row.entities[0].name : 'n/a'}
+              </TableCell>
+              <TableCell>
+                {row.entities[0]
+                  ? row.entities[0].formatted_address
+                  : 'none found'}
+              </TableCell>
               <TableCell>
                 <IconButton>
                   <MusicNoteIcon />
@@ -64,9 +69,7 @@ const SearchResults = (props) => {
         </TableBody>
       </Table>
       <div>
-        <Link color="primary">
-          More results...
-        </Link>
+        <Link color="primary">More results...</Link>
       </div>
     </React.Fragment>
   );
