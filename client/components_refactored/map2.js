@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  }
+  },
 }));
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
@@ -48,14 +48,17 @@ const Map2 = (props) => {
 
   const [selectedConcert, setSelectedConcert] = useState(null);
 
-
   const getCurrentLocation = (position) => {
     setViewport({
       ...viewport,
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     });
-    props.getConcerts(position.coords.latitude, position.coords.longitude, false);
+    props.getConcerts(
+      position.coords.latitude,
+      position.coords.longitude,
+      false
+    );
   };
 
   const locationUnavailable = () => {
@@ -103,22 +106,25 @@ const Map2 = (props) => {
         style={{
           position: 'absolute',
           top: 50,
-          width: '100%',
+          left: '10%',
+          width: '80%',
           zIndex: 1,
           margin: 'auto',
         }}
       >
-        <div className={classes.paper}
+        <div
+          className={classes.paper}
           style={{
-            width: '60%',
+            width: '100%',
             margin: 'auto',
           }}
           ref={geocoderContainerRef}
           id="red"
         />
-        <div className={classes.paper}
+        <div
+          className={classes.paper}
           style={{
-            width: '60%',
+            width: '100%',
             margin: 'auto',
           }}
         >
