@@ -48,8 +48,10 @@ describe('End to end testing for in the loop application', () => {
 		cy.get('html').clickOutsideFar();
 	});
 
-	it('Changes the distance radius using the slider', () => {
-		cy.get('.MuiSlider-thumb').trigger('mousedown', 'left')
+	it('Changes the distance radius using the slider from 25 to 15', () => {
+		cy.get('.MuiSlider-thumb').should('have.attr','aria-valuenow', 25)
+		cy.get('[data-index="2"]').click();
+		cy.get('.MuiSlider-thumb').should('have.attr', 'aria-valuenow', 15)
 	})
 	
 	it('Enter the city of New York and search for a concert',  () => {
@@ -58,14 +60,12 @@ describe('End to end testing for in the loop application', () => {
 		cy.get('.mapboxgl-ctrl-geocoder--input').type('New York City');
 		cy.get('.mapboxgl-ctrl-geocoder--input').type('{enter}');
 		cy.wait(3000);
-		cy.get('html').clickOutsideFar();
 	});
 
 	it('Select concert menu, find a concert, and favorite it',  () => {
-		cy.viewport('macbook-16')	
 		cy.wait(1000);
-		cy.get('.musicNoteBtn').parent().first().click();
-		cy.get('.MuiToolbar-root > .MuiButtonBase-root > .MuiIconButton-label > .MuiSvgIcon-root > path').click();
+		cy.get(':nth-child(1) > :nth-child(6) > .MuiButtonBase-root').click();
+		cy.get('.MuiToolbar-root > .MuiButtonBase-root').click();
 	});
 
 	it('Click favorites menu and view favorites',  () => {
