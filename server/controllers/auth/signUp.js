@@ -1,7 +1,10 @@
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/index');
 
-// signup middleware 
+/**
+ * @params req.body receives name, email and password from client
+ * @description middleware that creates new user in database using bycrpt to hash password
+ */
 
 const saltRounds = 10;
 

@@ -48,16 +48,17 @@ const Map2 = (props) => {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     });
+    props.getConcerts(position.coords.latitude, position.coords.longitude, false);
   };
 
-  const locationUnavaliable = () => {
+  const locationUnavailable = () => {
     setViewport({ ...viewport, latitude: '40.7128', longitude: '-74.0060' });
   };
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       getCurrentLocation,
-      locationUnavaliable,
+      locationUnavailable,
       { enableHighAccuracy: true }
     );
   }, []);
@@ -72,7 +73,8 @@ const Map2 = (props) => {
   };
 
   const handleViewportChange = useCallback((newViewport) => {
-    return setViewport(newViewport);
+    setViewport(newViewport);
+    // props.getConcerts(viewport.latitude, viewport.longitude, false);
   });
 
   const closePopUp = () => {
@@ -111,8 +113,9 @@ const Map2 = (props) => {
           style={{
             width: '60%',
             margin: 'auto',
-          }}>
-          <DateBar 
+          }}
+        >
+          <DateBar
             testProp={'test'}
             setStartDate={props.setStartDate}
             setEndDate={props.setEndDate}
@@ -175,13 +178,14 @@ const Map2 = (props) => {
             // }}
           >
             <PopupCard
+              selectedConcert={selectedConcert}
               title={selectedConcert.title}
               locationName={selectedConcert.entities[0].name}
               address={selectedConcert.entities[0].formatted_address}
               description={selectedConcert.description}
               closePopUp={closePopUp}
             />
-            {console.log(selectedConcert)}
+            {/* {console.log(selectedConcert)} */}
             {/* <div>
               <h4>{selectedConcert.title}</h4>
               <h5>{selectedConcert.entities[0].name}</h5>
