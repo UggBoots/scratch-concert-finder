@@ -60,7 +60,7 @@ const getConcerts = async (req, res, next) => {
     }});
     
       // console.log(`Received response.data keys: ${pp(Object.keys(response.data))}`)
-      if (response.status === 429) next({log: 'Too many requests', status: 429, 'Too many requests sent.'});
+      if (response.status === 429) next({log: 'Too many requests', status: 429, message: 'Too many requests sent.'});
       if (response.status !== 200) {
         return next({
           log: `getConcert middleware failed. External API call failure. Return status code is ${response.status} not 200.`,
