@@ -28,6 +28,10 @@ const DateBar = (props) => {
     props.setEndDate(date);
   };
 
+  // const handleSliderChange = (e, val) => {
+  //   props.setRadius(val)
+  // }
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justifyContent="space-between">
@@ -67,13 +71,14 @@ const DateBar = (props) => {
             {'Radius (Miles)'}
           </Typography>
           <Slider
-          defaultValue={30}
+          value={props.radius}
           aria-labelledby="discrete-slider"
           valueLabelDisplay="auto"
-          step={10}
+          step={5}
           marks
-          min={10}
-          max={110}
+          min={5}
+          max={50}
+          onChange={(_, value) => props.setRadius(value)}
         />
       </Grid>
         

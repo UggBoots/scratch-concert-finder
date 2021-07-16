@@ -8,6 +8,8 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -34,6 +36,12 @@ const useStyles = makeStyles((theme) => ({
     top: '30%',
     left: '40%'
   },
+  snackbarContent: {
+    left: '50%',
+    backgroundColor: 'lightgreen',
+    color: 'black',
+    alignSelf: 'center'
+  }
 }));
 
 
@@ -45,21 +53,57 @@ const Register = React.forwardRef((props, ref) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [successMsg, displaySuccessMsg] = useState(false);
+  const [failMsg, displayFailMsg] = useState(false);
 
   //submit fxn to make http call to BE
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name, email, password)
     axios.post('/api/signup', {
-      params: {
         name: name,
         email: email,
         password: password
       }
+    )
+    .then((response) => {
+      if (!response.data.message) {
+        displayFailMsg(true);
+        return;
+      } else {
+        axios.post('/api/signin', {
+          email,
+          password
+        })
+          .then((response) => {
+            if (!response.data.user) {
+              displayFailMsg(true);
+              return;
+            } else {
+              props.setUser(response.data.user);
+              displaySuccessMsg(true);
+              setTimeout(()=>{
+                props.setLoggedIn(true);
+                props.showRegister(false); 
+                props.showDrawer(false);
+              }, 1500)
+            }   
+          })
+      }   
     })
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err))
+    .catch((err) => console.log(err))
   };
+
+    //handle close for success msg
+    const handleCloseS = () => {
+      displaySuccessMsg(false)
+    }
+  
+    //handle close for fail msg
+    const handleCloseF = () => {
+      displayFailMsg(false)
+    }
+  
 
   return (
     <div ref={ref} className={classes.paper}>
@@ -133,6 +177,22 @@ const Register = React.forwardRef((props, ref) => {
             </Link>
           </Grid>
         </Grid>
+        <Snackbar
+          open={successMsg}
+          onClose={handleCloseS}>
+          <SnackbarContent
+            message={'Registration Success!  Redirecting to main page...'}
+            className={classes.snackbarContent}>
+          </SnackbarContent>
+        </Snackbar> 
+        <Snackbar
+          open={failMsg}
+          onClose={handleCloseF}>
+          <SnackbarContent
+            message={'Registration failed, please try again'}
+            className={classes.snackbarContent}>
+          </SnackbarContent>
+        </Snackbar> 
       </form>
     </div>
   );

@@ -41,18 +41,6 @@ const Map2 = (props) => {
 
   const [selectedConcert, setSelectedConcert] = useState(null);
 
-  const getConcerts = async (lat, long) => {
-    // const latLong = `${lat},${long}`;
-    // data = year/month/day
-    const predictHQResults = await getConcertsFromPredictHQ({
-      lat: lat,
-      lng: long,
-      date: '2021/07/17',
-      radius: 50,
-    });
-    console.log(predictHQResults);
-    setConcerts(predictHQResults.results);
-  };
 
   const getCurrentLocation = (position) => {
     setViewport({
@@ -128,8 +116,10 @@ const Map2 = (props) => {
             testProp={'test'}
             setStartDate={props.setStartDate}
             setEndDate={props.setEndDate}
+            setRadius={props.setRadius}
             startDate={props.startDate}
             endDate={props.endDate}
+            radius={props.radius}
           />
         </div>
       </div>

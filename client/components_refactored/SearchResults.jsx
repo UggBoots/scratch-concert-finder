@@ -5,7 +5,7 @@
  * ************************************
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -32,6 +32,22 @@ Location Address
 */
 
 const SearchResults = (props) => {
+  const [buttonArr, setArr] = useState([]);
+
+  // const toggleColor = (e) => {
+  //   e.preventDefault();
+  //   console.log(e.target.color)
+  //   e.target.color = 'default' ? 'primary' : 'default;'
+  // }
+
+  const toggleColor = (e, i) => {
+    console.log(e.target.name);
+  };
+
+  const handleClick = (i) => {
+    props.addFav(props.concerts[i]);
+  };
+
   return (
     <React.Fragment>
       <Table size="small">
@@ -60,7 +76,17 @@ const SearchResults = (props) => {
                   : 'none found'}
               </TableCell>
               <TableCell>
-                <IconButton>
+                {/* <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
+                  <MusicNoteIcon />
+                </IconButton> */}
+                <IconButton
+                  name={i}
+                  color="default"
+                  onClick={(e) => {
+                    handleClick(i);
+                    toggleColor(e);
+                  }}
+                >
                   <MusicNoteIcon />
                 </IconButton>
               </TableCell>
