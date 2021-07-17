@@ -96,6 +96,9 @@ const MainContainer = () => {
   const logOut = () => {
     setUser({});
     setLoggedIn(false);
+    showSearchResults(false);
+    showProfile(false);
+    showDrawer(false);
   };
 
   const handleProfile = () => {

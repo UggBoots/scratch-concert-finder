@@ -43,7 +43,7 @@ const SearchResults = (props) => {
   return (
     <React.Fragment>
       <Table size="small">
-        <TableHead>
+        <TableHead fontWeight='bold'>
           <TableRow>
             <TableCell>Show Name</TableCell>
             <TableCell>Date</TableCell>
