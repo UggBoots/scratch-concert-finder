@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const controllers = require('../controllers');
 const signUp = require('../controllers/auth/signUp');
 const verifyUser = require('../controllers/auth/verifyUser');
 const concerts = require('../controllers/concerts');
@@ -10,8 +9,6 @@ const isAlreadySignedOut = require('../controllers/auth/isAlreadySignedOut');
 const addFavorite = require('../controllers/favorites/addFavorite');
 const getFavorites = require('../controllers/favorites/getFavorites');
 const removeFavorite = require('../controllers/favorites/removeFavorite');
-
-router.get('/location-search', controllers.sendPotentialLocations);
 
 router.post('/signup', isAlreadyLoggedIn, signUp, (req, res) => {
     return res.status(200).json({message: 'You successfully signed up!'});
@@ -39,8 +36,6 @@ router.post('/getFavorites', getFavorites, (req, res) => {
 router.post('/removeFavorite', removeFavorite, getFavorites, (req, res) => {
     return res.status(200).json(res.locals.favorites);
 })
-
-router.post('/location-search', controllers.sendPotentialLocations);
 
 router.post('/concerts', concerts, normalizeConcerts, (req, res) => {
     res.status(200).json({resultsCount: res.locals.concerts.length, results: res.locals.concerts});

@@ -21,16 +21,9 @@ const userSchema = new Schema({
   image: {type: String, required: false },
 });
 
-const tokenSchema = new Schema({
-    source: {type: String, required: true},
-    tokenId: {type: String, required: true, unique: true},
-    timestamp: {type: Date, required: true}
-  });
 
 const User = mongoose.model('users', userSchema);
-const Token = mongoose.model('tokens', tokenSchema);
 
 module.exports = {
-  User,
-  Token
+  User
 };
