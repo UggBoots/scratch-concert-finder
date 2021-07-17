@@ -9,17 +9,16 @@
 
 <h2 align="center">Table of Contents</h2>
 
-
-* [FolderStructure]()
-* [Wireframe]()
-* [Test Driven Development]()
-* [Collaboration Approach: Scrum]()
-* [Contributors]()
-* [License]()
+* [Wireframe](https://github.com/UggBoots/scratch-concert-finder/#Wireframe)
+* [Test Driven Development](https://github.com/UggBoots/scratch-concert-finder/#Testing)
+* [Collaboration Approach: Scrum](https://github.com/UggBoots/scratch-concert-finder/#Scrum)
+* [Contributors](https://github.com/UggBoots/scratch-concert-finder/#Contributors)
+* [License](https://github.com/UggBoots/scratch-concert-finder/#License)
 
 <h2 href="#Wireframe" >Wireframe</h2>
 <p align="center">
 <img src="./docs/ntheloopwireframe.png" width="800"/>
+<img src="./docs/Finalwireframe.png" width="800"/>
  </p>
  <h2 href="#Testing" >Test Driven Development</h2>
 <p align="center">
@@ -35,10 +34,10 @@
 <table align="center">
   <tr>
     <td valign="top"> <img src="./docs/eric git.jpeg" width="250"/></td>
-    <td valign="top"> <img src="./docs/charlie git.png" width="250"/></td>
+    <td valign="top"> <img src="./docs/sergeyprof.jpeg" width="250"/></td>
     <td valign="top"> <img src="./docs/camerongit.jpeg" width="250"/></td>
-    <td valign="top"> <img src="./docs/miklosgit.jpeg" width="250"/></td>
-    <td valign="top"> <img src="./docs/miklosgit.jpeg" width="250"/></td>
+    <td valign="top"> <img src="./docs/its raining.jpg" width="250"/></td>
+    <td valign="top"> <img src="./docs/Github_Profile_Pic.jpg" width="250"/></td>
   </tr>
   <tr>
       <td valign="top"><h2 align="center">Eric Saldivar</h2></td>
