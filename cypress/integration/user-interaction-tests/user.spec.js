@@ -64,6 +64,7 @@ describe('End to end testing for in the loop application', () => {
 
 	it('Select concert menu, find a concert, and favorite it',  () => {
 		cy.wait(1000);
+		cy.get('.MuiToolbar-root > .MuiButtonBase-root').click();
 		cy.get(':nth-child(1) > :nth-child(6) > .MuiButtonBase-root').click();
 		cy.get('.MuiToolbar-root > .MuiButtonBase-root').click();
 	});
