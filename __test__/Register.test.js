@@ -26,7 +26,7 @@ describe('Register React units tests', () => {
     });
 	it('Renders an h1 heading with the title of Register', () => {
 		expect(wrapper.find(Typography)).toHaveLength(1);
-		expect(wrapper.find(Typography).text()).toEqual("Register"); 
+		expect(wrapper.find(Typography).text()).toEqual("Sign Up"); 
 	  });	
 
 	it('Renders a name, email,and password input field', () => {
