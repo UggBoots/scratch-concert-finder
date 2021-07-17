@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardHeader,
@@ -18,12 +18,11 @@ const PopupCard = ({
   description,
   closePopUp,
 }) => {
-
-  const [isFav, setIsFav] = useState(false)
+  const [isFav, setIsFav] = useState(false);
 
   const handleClick = () => {
-    setIsFav(!isFav)
-  }
+    setIsFav(!isFav);
+  };
 
   return (
     <ClickAwayListener onClickAway={closePopUp}>
@@ -36,7 +35,10 @@ const PopupCard = ({
             <IconButton
               // aria-label="settings"
               color={isFav ? 'primary' : 'default'}
-              onClick={()=>{addFav(selectedConcert); handleClick()}}
+              onClick={() => {
+                addFav(selectedConcert);
+                handleClick();
+              }}
             >
               <FavoriteIcon />
             </IconButton>
@@ -47,6 +49,9 @@ const PopupCard = ({
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             {selectedConcert.description}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {selectedConcert.start}
           </Typography>
         </CardContent>
       </Card>
