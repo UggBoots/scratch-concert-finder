@@ -7,12 +7,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography'
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import IconButton from '@material-ui/core/IconButton';
 import Row from './Row'
@@ -43,14 +44,14 @@ const SearchResults = (props) => {
   return (
     <React.Fragment>
       <Table size="small">
-        <TableHead fontWeight='bold'>
+        <TableHead>
           <TableRow>
-            <TableCell>Show Name</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Time</TableCell>
-            <TableCell>Venue</TableCell>
-            <TableCell>Address</TableCell>
-            <TableCell>Save!</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Show Name</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Date</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Time</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Venue</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Address</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Save!</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
