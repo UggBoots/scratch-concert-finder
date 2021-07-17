@@ -154,6 +154,8 @@ const MainContainer = () => {
     } else setDrawerHeight(0);
   }, [searchResultsOpen, concerts]);
 
+  const [recenterAt, setRecenterAt] = useState(false);
+
   return (
     <Box>
       <AppBar
@@ -189,6 +191,7 @@ const MainContainer = () => {
         endDate={endDate}
         radius={radius}
         addFav={addFav}
+        recenterAt={recenterAt}
       />
       <MenuButton click={() => showDrawer(true)} />
 
@@ -221,8 +224,13 @@ const MainContainer = () => {
         onClose={() => showProfile(false)}
         BackdropProps={{ invisible: true }}
         classes={{ paper: classes.paper }}
+        setRecenterAt={setRecenterAt}
       >
-        <Profile currUser={currUser} currFavs={currFavs} />
+        <Profile
+          currUser={currUser}
+          currFavs={currFavs}
+          setRecenterAt={setRecenterAt}
+        />
       </Drawer>
       <Drawer
         variant="persistent"
@@ -241,6 +249,7 @@ const MainContainer = () => {
             searchResults={searchResults}
             concerts={concerts}
             addFav={addFav}
+            setRecenterAt={setRecenterAt}
           />
         </div>
       </Drawer>

@@ -13,10 +13,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import IconButton from '@material-ui/core/IconButton';
-import Row from './Row'
+import Row from './Row';
 
 /*
 TODO:
@@ -33,10 +33,7 @@ Location Name
 Location Address
 */
 
-
-
 const SearchResults = (props) => {
-
   const handleClick = (row) => {
     props.addFav(row);
   };
@@ -46,16 +43,23 @@ const SearchResults = (props) => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell style={{fontWeight: 'bold'}}>Show Name</TableCell>
-            <TableCell style={{fontWeight: 'bold'}}>Date</TableCell>
-            <TableCell style={{fontWeight: 'bold'}}>Time</TableCell>
-            <TableCell style={{fontWeight: 'bold'}}>Venue</TableCell>
-            <TableCell style={{fontWeight: 'bold'}}>Address</TableCell>
-            <TableCell style={{fontWeight: 'bold'}}>Save!</TableCell>
+            <TableCell style={{ fontWeight: 'bold' }}>Show Name</TableCell>
+            <TableCell style={{ fontWeight: 'bold' }}>Date</TableCell>
+            <TableCell style={{ fontWeight: 'bold' }}>Time</TableCell>
+            <TableCell style={{ fontWeight: 'bold' }}>Venue</TableCell>
+            <TableCell style={{ fontWeight: 'bold' }}>Address</TableCell>
+            <TableCell style={{ fontWeight: 'bold' }}>Save!</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        {props.concerts.map((row) => <Row key={row.id} row={row} handleClick={handleClick} />)}
+          {props.concerts.map((row) => (
+            <Row
+              key={row.id}
+              row={row}
+              handleClick={handleClick}
+              setRecenterAt={props.setRecenterAt}
+            />
+          ))}
         </TableBody>
       </Table>
       <div>
@@ -66,7 +70,6 @@ const SearchResults = (props) => {
 };
 
 export default SearchResults;
-
 
 // {props.concerts.map((row, i) => {
 //   row['isfav'] = false;
@@ -84,10 +87,13 @@ export default SearchResults;
 //         : 'none found'}
 //     </TableCell>
 //     <TableCell>
-      {/* <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
+{
+  /* <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
         <MusicNoteIcon />
-      </IconButton> */}
-      {/* <IconButton
+      </IconButton> */
+}
+{
+  /* <IconButton
         name={i}
         color={isFav ? 'primary' : 'default'}
         onClick={(e) => {
@@ -100,9 +106,5 @@ export default SearchResults;
       </IconButton>
     </TableCell>
   </TableRow>
-)})} */}
-
-
-
-
-
+)})} */
+}
