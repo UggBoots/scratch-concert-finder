@@ -7,14 +7,16 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography'
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import IconButton from '@material-ui/core/IconButton';
+import Row from './Row'
 
 /*
 TODO:
@@ -31,21 +33,12 @@ Location Name
 Location Address
 */
 
+
+
 const SearchResults = (props) => {
-  const [buttonArr, setArr] = useState([]);
 
-  // const toggleColor = (e) => {
-  //   e.preventDefault();
-  //   console.log(e.target.color)
-  //   e.target.color = 'default' ? 'primary' : 'default;'
-  // }
-
-  const toggleColor = (e, i) => {
-    console.log(e.target.name);
-  };
-
-  const handleClick = (i) => {
-    props.addFav(props.concerts[i]);
+  const handleClick = (row) => {
+    props.addFav(row);
   };
 
   return (
@@ -53,45 +46,16 @@ const SearchResults = (props) => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Show Name</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Time</TableCell>
-            <TableCell>Venue</TableCell>
-            <TableCell>Address</TableCell>
-            <TableCell>Save!</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Show Name</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Date</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Time</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Venue</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Address</TableCell>
+            <TableCell style={{fontWeight: 'bold'}}>Save!</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.concerts.map((row, i) => (
-            <TableRow key={i} onClick={() => console.log(row)}>
-              <TableCell>{row.title}</TableCell>
-              <TableCell>{row.startDate}</TableCell>
-              <TableCell>{row.startTime}</TableCell>
-              <TableCell>
-                {row.entities[0] ? row.entities[0].name : 'n/a'}
-              </TableCell>
-              <TableCell>
-                {row.entities[0]
-                  ? row.entities[0].formatted_address
-                  : 'none found'}
-              </TableCell>
-              <TableCell>
-                {/* <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
-                  <MusicNoteIcon />
-                </IconButton> */}
-                <IconButton
-                  name={i}
-                  color="default"
-                  onClick={(e) => {
-                    handleClick(i);
-                    toggleColor(e);
-                  }}
-                >
-                  <MusicNoteIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
+        {props.concerts.map((row) => <Row key={row.id} row={row} handleClick={handleClick} />)}
         </TableBody>
       </Table>
       <div>
@@ -102,3 +66,43 @@ const SearchResults = (props) => {
 };
 
 export default SearchResults;
+
+
+// {props.concerts.map((row, i) => {
+//   row['isfav'] = false;
+//   return(
+//   <TableRow key={i} onClick={() => console.log(row)}>
+//     <TableCell>{row.title}</TableCell>
+//     <TableCell>{row.startDate}</TableCell>
+//     <TableCell>{row.startTime}</TableCell>
+//     <TableCell>
+//       {row.entities[0] ? row.entities[0].name : 'n/a'}
+//     </TableCell>
+//     <TableCell>
+//       {row.entities[0]
+//         ? row.entities[0].formatted_address
+//         : 'none found'}
+//     </TableCell>
+//     <TableCell>
+      {/* <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
+        <MusicNoteIcon />
+      </IconButton> */}
+      {/* <IconButton
+        name={i}
+        color={isFav ? 'primary' : 'default'}
+        onClick={(e) => {
+          handleClick(row);
+          row.isfav = true;
+          toggleColor(e);
+        }}
+      >
+        <MusicNoteIcon />
+      </IconButton>
+    </TableCell>
+  </TableRow>
+)})} */}
+
+
+
+
+

@@ -24,6 +24,13 @@ const useStyles = makeStyles((theme) => ({
     top: '10px',
     width: 200,
   },
+  paper: {
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 // Ways to set Mapbox token: https://uber.github.io/react-map-gl/#/Documentation/getting-started/about-mapbox-tokens
@@ -41,14 +48,17 @@ const Map2 = (props) => {
 
   const [selectedConcert, setSelectedConcert] = useState(null);
 
-
   const getCurrentLocation = (position) => {
     setViewport({
       ...viewport,
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     });
-    props.getConcerts(position.coords.latitude, position.coords.longitude, false);
+    props.getConcerts(
+      position.coords.latitude,
+      position.coords.longitude,
+      false
+    );
   };
 
   const locationUnavailable = () => {
@@ -96,21 +106,25 @@ const Map2 = (props) => {
         style={{
           position: 'absolute',
           top: 50,
-          width: '100%',
+          left: '10%',
+          width: '80%',
           zIndex: 1,
           margin: 'auto',
         }}
       >
         <div
+          className={classes.paper}
           style={{
-            width: '60%',
+            width: '100%',
             margin: 'auto',
           }}
           ref={geocoderContainerRef}
+          id="red"
         />
         <div
+          className={classes.paper}
           style={{
-            width: '60%',
+            width: '100%',
             margin: 'auto',
           }}
         >
@@ -172,11 +186,9 @@ const Map2 = (props) => {
           <Popup
             latitude={selectedConcert.location[1]}
             longitude={selectedConcert.location[0]}
-            // onClose={() => {
-            //   setSelectedConcert(null);
-            // }}
           >
             <PopupCard
+              addFav={props.addFav}
               selectedConcert={selectedConcert}
               title={selectedConcert.title}
               locationName={selectedConcert.entities[0].name}
@@ -184,13 +196,6 @@ const Map2 = (props) => {
               description={selectedConcert.description}
               closePopUp={closePopUp}
             />
-            {/* {console.log(selectedConcert)} */}
-            {/* <div>
-              <h4>{selectedConcert.title}</h4>
-              <h5>{selectedConcert.entities[0].name}</h5>
-              <h6>{selectedConcert.entities[0].formatted_address}</h6>
-              <p>{selectedConcert.description}</p>
-            </div> */}
           </Popup>
         ) : null}
       </MapGL>

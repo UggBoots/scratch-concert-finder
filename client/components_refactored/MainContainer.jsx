@@ -44,6 +44,17 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  drawer: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    width: 150,
+  },
+  test: {
+    width: 500,
+    background: 'blue',
+  },
 }));
 
 const MainContainer = () => {
@@ -67,39 +78,36 @@ const MainContainer = () => {
   const [currFavs, setFavs] = useState([]);
 
   //getConcerts - makes call to BE to get the predictHQ results
-  const getConcerts = async (lat, long, showSearchResultsBool=true) => {
+  const getConcerts = async (lat, long) => {
     // const latLong = `${lat},${long}`;
     // data = year/month/day
     const predictHQResults = await getConcertsFromPredictHQ({
       lat: lat,
       lng: long,
-      // date: '2021/07/14',
-      //note - below needs to be parsed
       startDate: startDate,
       endDate: endDate,
       radius: radius,
     });
-
     setConcerts(predictHQResults.results);
-    showSearchResults(showSearchResultsBool);
+    // showSearchResults(showSearchResultsBool);
   };
 
   //logout - sets current user to null, logged out to false
   const logOut = () => {
     setUser({});
     setLoggedIn(false);
+    showSearchResults(false);
+    showProfile(false);
+    showDrawer(false);
   };
 
   const handleProfile = () => {
     let userId = currUser.userId;
-    console.log('before', currUser);
     axios
       .post('/api/getFavorites', {
         userId,
       })
       .then((response) => {
-        console.log('after', currUser);
-        console.log('profile response', response.data);
         setFavs(response.data.favorites);
       })
       .then(() => {
@@ -124,10 +132,6 @@ const MainContainer = () => {
 
   //addFav - adds fav in DB
   const addFav = (favorite) => {
-    //below 3 lines - update currUser state w/o calling backend (side effects???)
-    // let updatedUser = currUser;
-    // updatedUser.favorites.push({favorite: fav});
-    //setUser(updatedUser);
     let userId = currUser.userId;
     axios
       .post('/api/addFavoriteToUser', {
@@ -135,14 +139,12 @@ const MainContainer = () => {
         favorite,
       })
       .then((response) => console.log(response))
-      //.then(getFavs())
       .catch((err) => console.log(err));
   };
 
   const [drawerHeight, setDrawerHeight] = useState(0);
 
   const handleResultsToggle = () => {
-    // console.log(document.getElementById('bottomDrawer').offsetHeight);
     showSearchResults((prev) => !prev);
   };
 
@@ -152,41 +154,8 @@ const MainContainer = () => {
     } else setDrawerHeight(0);
   }, [searchResultsOpen, concerts]);
 
-  // return (
-  //   <Box>
-  //     <Map2
-  //     getConcerts={getConcerts}
-  //     concerts={concerts}
-  //     setStartDate={setStartDate}
-  //     setEndDate={setEndDate}
-  //     startDate={startDate}
-  //     endDate={endDate}
-  //     />
-  //     <Accordion
-  // //  height: '40px',
-  // // position: 'fixed',
-  // // bottom:'0%',
-  // // width:'100%',
-  // // background-color: '#393838',
-  // // opacity: 1,
-
-  console.log('drawerHeight: ', drawerHeight);
-
   return (
     <Box>
-      {/* <div
-        style={{
-          height: '40px',
-          position: 'fixed',
-          bottom: '0%',
-          width: '100%',
-          backgroundColor: '#393838',
-          zIndex: 1000,
-        }}
-      >
-        test
-      </div> */}
-
       <AppBar
         position="fixed"
         color="primary"
@@ -219,10 +188,12 @@ const MainContainer = () => {
         startDate={startDate}
         endDate={endDate}
         radius={radius}
+        addFav={addFav}
       />
       <MenuButton click={() => showDrawer(true)} />
+
       <Drawer
-        className="logRegDrawer"
+        classes={{ paper: classes.drawer }}
         anchor={'left'}
         open={drawerOpen}
         onClose={() => showDrawer(false)}
@@ -242,6 +213,7 @@ const MainContainer = () => {
           addFav={addFav}
         />
       </Drawer>
+
       <Drawer
         className="profileDrawer"
         anchor={'right'}
@@ -257,14 +229,14 @@ const MainContainer = () => {
         className="searchResultsDrawer"
         anchor={'bottom'}
         open={searchResultsOpen}
-        style={{ height: '400px' }}
+        // style={{ maxHeight: '200px' }}
         onClose={(e) => {
           console.log(e);
           showSearchResults(false);
         }}
         BackdropProps={{ invisible: true }}
       >
-        <div id="bottomDrawer">
+        <div id="bottomDrawer" style={{ maxHeight: '40vh' }}>
           <SearchResults
             searchResults={searchResults}
             concerts={concerts}

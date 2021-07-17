@@ -2,7 +2,9 @@ import React from 'react';
 import {
   Typography,
   Card,
-  CardContent
+  CardContent,
+  Divider,
+  Box
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
@@ -11,6 +13,11 @@ import axios from 'axios';
 
 const FavCard = (props) => {
 
+  const formatAddress = (add) => {
+    const str = add.replace('United States of America', '')
+    return str
+  }
+
 
   console.log('props', props)
   let currentFav = props.currFavs[props.num].favorite;
@@ -18,14 +25,20 @@ const FavCard = (props) => {
     <div>
       <Card>
         <CardContent>
-          <Typography color='primary' className='favTitle'>
+          <Typography color='primary' className='favTitle' fontWeight='fontWeightBold'>
             {currentFav.title}
           </Typography>
-          <Typography className='favDate'>
+          <Divider />
+          {/* <Typography className='favDate' fontWeight='fontWeightBold'>
             {currentFav.startDate, ', ', currentFav.startTime}
+          </Typography> */}
+          <Typography component='div'>
+            <Box fontWeight='fontWeightBold'>
+              {currentFav.startDate},  {currentFav.startTime}
+            </Box>
           </Typography>
           <Typography className='favLoc'>
-            {currentFav.entities[0].name, ', ', currentFav.entities[0].formatted_address}
+            {currentFav.entities[0].name, ', ', formatAddress(currentFav.entities[0].formatted_address)}
           </Typography>
         </CardContent>
       </Card>

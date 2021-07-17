@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardHeader,
@@ -10,6 +10,7 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const PopupCard = ({
+  addFav,
   selectedConcert,
   // title,
   // locationName,
@@ -17,9 +18,18 @@ const PopupCard = ({
   // description,
   closePopUp,
 }) => {
+<<<<<<< HEAD
   // if (selectedConcert.description) selectedConcert.description = selectedConcert.description.replace('\r\n', '&#10;').replace('\n', '&#10;');
   // console.log(`selectedConcert content: ${JSON.stringify(selectedConcert,null,2)}`)
   if (selectedConcert.description) selectedConcert.description = 'Details not available';
+=======
+  const [isFav, setIsFav] = useState(false);
+
+  const handleClick = () => {
+    setIsFav(!isFav);
+  };
+
+>>>>>>> main
   return (
     <ClickAwayListener onClickAway={closePopUp}>
       <Card
@@ -30,7 +40,11 @@ const PopupCard = ({
           action={
             <IconButton
               // aria-label="settings"
-              onClick={() => console.log('favorite clicked')}
+              color={isFav ? 'primary' : 'default'}
+              onClick={() => {
+                addFav(selectedConcert);
+                handleClick();
+              }}
             >
               <FavoriteIcon />
             </IconButton>
@@ -45,6 +59,9 @@ const PopupCard = ({
           <Typography variant="body2" color="textPrimary">
             {selectedConcert.description}
             
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {selectedConcert.start}
           </Typography>
         </CardContent>
       </Card>

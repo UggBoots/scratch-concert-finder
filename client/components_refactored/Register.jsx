@@ -108,7 +108,7 @@ const Register = React.forwardRef((props, ref) => {
   return (
     <div ref={ref} className={classes.paper}>
       <Typography component="h1" variant="h5">
-        Register
+        Sign Up
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField

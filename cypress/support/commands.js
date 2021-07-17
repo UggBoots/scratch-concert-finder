@@ -24,5 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 Cypress.Commands.add('clickOutside', function(){
-	return cy.get('body').click(700,0); //0,0 here are the x and y coordinates
+	return cy.get('body').click(400,0); //0,0 here are the x and y coordinates
+  });
+
+  Cypress.Commands.add('clickOutsideFar', function(){
+	return cy.get('body').click(500,0); //0,0 here are the x and y coordinates
   });
