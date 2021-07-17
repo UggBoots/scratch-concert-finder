@@ -147,6 +147,7 @@ const Map2 = (props) => {
         height="100%"
         onViewportChange={handleViewportChange}
         mapboxApiAccessToken={MAPBOX_TOKEN}
+        countries="US"
       >
         <Geocoder
           mapRef={mapRef}
@@ -154,10 +155,11 @@ const Map2 = (props) => {
           onResult={handleResult}
           onViewportChange={handleViewportChange}
           marker={false}
-          zoom={10}
+          // zoom={10}
           mapboxApiAccessToken={MAPBOX_TOKEN}
           placeholder="Search for an area..."
-          inputValue=""
+  
+          // inputValue=""
           // collapsed={true}
         />
         {props.concerts.map((concert) => (
