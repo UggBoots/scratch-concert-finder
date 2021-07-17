@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,25 +7,23 @@ import TableRow from '@material-ui/core/TableRow';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import IconButton from '@material-ui/core/IconButton';
 
-
-
-const Row = ({row, handleClick})=>{
-
-const [isFav, setIsFav] = useState(false);
-row['isFav'] = isFav;
+const Row = ({ row, handleClick, setRecenterAt }) => {
+  const [isFav, setIsFav] = useState(false);
+  row['isFav'] = isFav;
 
   return (
-    <TableRow key={row.id} onClick={() => console.log(row)}>
+    <TableRow
+      key={row.id}
+      onClick={() =>
+        setRecenterAt({ latitude: row.location[1], longitude: row.location[0] })
+      }
+    >
       <TableCell>{row.title}</TableCell>
       <TableCell>{row.startDate}</TableCell>
       <TableCell>{row.startTime}</TableCell>
+      <TableCell>{row.entities[0] ? row.entities[0].name : 'n/a'}</TableCell>
       <TableCell>
-        {row.entities[0] ? row.entities[0].name : 'n/a'}
-      </TableCell>
-      <TableCell>
-        {row.entities[0]
-          ? row.entities[0].formatted_address
-          : 'none found'}
+        {row.entities[0] ? row.entities[0].formatted_address : 'none found'}
       </TableCell>
       <TableCell>
         {/* <IconButton onClick = {()=>props.addFav(props.concerts[i])}>
@@ -35,7 +33,7 @@ row['isFav'] = isFav;
           color={isFav ? 'primary' : 'default'}
           onClick={() => {
             handleClick(row);
-            setIsFav(prev=>!prev);
+            setIsFav((prev) => !prev);
             row.isfav = isFav;
           }}
         >
@@ -43,9 +41,7 @@ row['isFav'] = isFav;
         </IconButton>
       </TableCell>
     </TableRow>
-  )
-}
+  );
+};
 
-
-
-export default Row
+export default Row;

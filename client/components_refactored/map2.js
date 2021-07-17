@@ -92,6 +92,17 @@ const Map2 = (props) => {
   };
   let today = new Date().toISOString().slice(0, 10);
 
+  useEffect(() => {
+    if (props.recenterAt) {
+      setViewport({
+        ...viewport,
+        latitude: props.recenterAt.latitude,
+        longitude: props.recenterAt.longitude,
+        zoom: 14,
+      });
+    }
+  }, [props.recenterAt]);
+
   return (
     <div
       style={{
