@@ -8,12 +8,14 @@ import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
+import Typography from '@material-ui/core/Typography'
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import axios from 'axios';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import { VpnKey, Edit, ExitToApp, Face } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,11 +66,17 @@ function LogRegDrawer(props) {
       <div>
         <List>
           <ListItem button component="a" id="logoutID" onClick={()=>handleLogout()}>
+          <ListItemIcon>
+            <ExitToApp />
+          </ListItemIcon>
             <ListItemText primary={'Log Out'} />
           </ListItem>
           <Divider />
           <ListItem button component="a" onClick={()=>props.showProfile()}>
-            <ListItemText primary={'Test - show profile'} />
+          <ListItemIcon>
+            <Face />
+          </ListItemIcon>
+            <ListItemText primary={'Profile'} />
           </ListItem>
         </List>
         <Snackbar
@@ -85,11 +93,20 @@ function LogRegDrawer(props) {
   else return (
     <div>
       <List>
-        <ListItem button component="a" id="loginID" onClick={()=>props.showSignIn()}>
-          <ListItemText primary={'Log In'} />
+        <ListItem button 
+          component="a" 
+          id="loginID" 
+          onClick={()=>props.showSignIn()}>
+          <ListItemIcon>
+            <VpnKey />
+          </ListItemIcon>
+          <ListItemText  primary={'Log In'} /> 
         </ListItem>
         <Divider />
         <ListItem  button component="a"  onClick={()=>props.showRegister()}>
+          <ListItemIcon>
+            <Edit />
+          </ListItemIcon>
           <ListItemText id="registerID" primary={'Sign Up'} />
         </ListItem>
         <Divider />

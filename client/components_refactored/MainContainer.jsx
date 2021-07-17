@@ -84,8 +84,6 @@ const MainContainer = () => {
     const predictHQResults = await getConcertsFromPredictHQ({
       lat: lat,
       lng: long,
-      // date: '2021/07/14',
-      //note - below needs to be parsed
       startDate: startDate,
       endDate: endDate,
       radius: radius,
@@ -98,6 +96,9 @@ const MainContainer = () => {
   const logOut = () => {
     setUser({});
     setLoggedIn(false);
+    showSearchResults(false);
+    showProfile(false);
+    showDrawer(false);
   };
 
   const handleProfile = () => {
