@@ -49,12 +49,12 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-    width: 150
+    width: 150,
   },
   test: {
     width: 500,
-    background: 'blue'
-  }
+    background: 'blue',
+  },
 }));
 
 const MainContainer = () => {
@@ -89,7 +89,7 @@ const MainContainer = () => {
       radius: radius,
     });
     setConcerts(predictHQResults.results);
-    showSearchResults(true);
+    // showSearchResults(showSearchResultsBool);
   };
 
   //logout - sets current user to null, logged out to false
@@ -153,7 +153,6 @@ const MainContainer = () => {
 
   return (
     <Box>
-
       <AppBar
         position="fixed"
         color="primary"
@@ -189,13 +188,14 @@ const MainContainer = () => {
         addFav={addFav}
       />
       <MenuButton click={() => showDrawer(true)} />
-    
-      <Drawer classes={{paper: classes.drawer}}
+
+      <Drawer
+        classes={{ paper: classes.drawer }}
         anchor={'left'}
         open={drawerOpen}
         onClose={() => showDrawer(false)}
       >
-        <LogRegDrawer 
+        <LogRegDrawer
           showSignIn={() => showSignIn(true)}
           showRegister={() => showRegister(true)}
           showProfile={() => {
@@ -210,7 +210,7 @@ const MainContainer = () => {
           addFav={addFav}
         />
       </Drawer>
-      
+
       <Drawer
         className="profileDrawer"
         anchor={'right'}
@@ -226,14 +226,14 @@ const MainContainer = () => {
         className="searchResultsDrawer"
         anchor={'bottom'}
         open={searchResultsOpen}
-        style={{ height: '400px' }}
+        // style={{ maxHeight: '200px' }}
         onClose={(e) => {
           console.log(e);
           showSearchResults(false);
         }}
         BackdropProps={{ invisible: true }}
       >
-        <div id="bottomDrawer">
+        <div id="bottomDrawer" style={{ maxHeight: '40vh' }}>
           <SearchResults
             searchResults={searchResults}
             concerts={concerts}
