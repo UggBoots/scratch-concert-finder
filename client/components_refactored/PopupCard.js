@@ -18,18 +18,15 @@ const PopupCard = ({
   // description,
   closePopUp,
 }) => {
-<<<<<<< HEAD
   // if (selectedConcert.description) selectedConcert.description = selectedConcert.description.replace('\r\n', '&#10;').replace('\n', '&#10;');
   // console.log(`selectedConcert content: ${JSON.stringify(selectedConcert,null,2)}`)
   if (selectedConcert.description) selectedConcert.description = 'Details not available';
-=======
   const [isFav, setIsFav] = useState(false);
 
   const handleClick = () => {
     setIsFav(!isFav);
   };
 
->>>>>>> main
   return (
     <ClickAwayListener onClickAway={closePopUp}>
       <Card
