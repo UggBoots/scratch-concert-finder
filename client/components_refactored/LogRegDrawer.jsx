@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     backgroundColor: 'pink',
     color: 'primary'
+  },
+  iconButton: {
+    backgroundColor: 'pink'
   }
 }));
 
@@ -94,6 +97,7 @@ function LogRegDrawer(props) {
     <div>
       <List>
         <ListItem button 
+          classes={{selected: classes.iconButton}}
           component="a" 
           id="loginID" 
           onClick={()=>props.showSignIn()}>
