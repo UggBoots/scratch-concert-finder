@@ -79,9 +79,13 @@ const MainContainer = () => {
       endDate: endDate,
       radius: radius,
     });
+<<<<<<< HEAD
     // console.log(predictHQResults);
     // console.log(startDate);
     // console.log(predictHQResults);
+=======
+
+>>>>>>> 34572c0553e3a382c810f215032013a797c9b91a
     setConcerts(predictHQResults.results);
     showSearchResults(showSearchResultsBool);
   };
